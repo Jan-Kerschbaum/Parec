@@ -37,6 +37,7 @@
 	<!-- Third div has graph image and paper list-->
 	<div style="display:flex; flex-direction: row; justify-content: space-between">
 		<img src="test-image.jpg" alt="graph size tester" width="1024" height="720">
+    <!-- Kind of hacky but it makes the spacing work for the minute. Might rework later -->
     <span style="display:inline-block; width: 2cm;"></span>
 		<dl class="dl-horizontal text-muted">
 			<dt>Paper one - Authors</dt>
