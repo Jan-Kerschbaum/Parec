@@ -7,6 +7,8 @@ App routes:
         For quick testing that the app is indeed running
     /query
         Main access point for intended functionality
+
+Required packages: fastapi, python-multipart
 """
 
 from fastapi import FastAPI, Response, Form
@@ -15,7 +17,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import json
 
-origins = ["http://localhost:8080", "http://localhost:8000/query"]
+origins = ["http://localhost:5173", "http://localhost:8000/query"]
 
 app = FastAPI()
 app.add_middleware(

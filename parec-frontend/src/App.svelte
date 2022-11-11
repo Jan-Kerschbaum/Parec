@@ -1,45 +1,92 @@
 <script>
-  import svelteLogo from './assets/svelte.svg'
-  import Counter from './lib/Counter.svelte'
+  import jQuery from "jquery"
+	let result_text = "None"
+	const search_bar = '<form id="form" role="search"> <input type="search" id="query" name="q" placeholder="Query", aria-label="Query here"> </form>'
+	// role and aria-label are for screen reader accessibility
+	/**
+	 * Handle click on Search Button, sending POST request with query to Python code, recieving and handling response
+	 * @returns {void}
+	 */
+	function onClick(){
+		let user_query = String(document.getElementById('query').value)
+		let payload = {
+			"query": user_query,
+		}
+		jQuery.post('//localhost:8000/query', payload, function(data){
+			data = JSON.parse(data)
+			let function_result = String(data.result)
+			result_text = function_result
+			//ToDo: Other stuff with response
+		}).fail(function(data){
+			//ToDo: Add more specific error messages based on errors recieved from backend
+			alert("Failed")
+		})
+	}
 </script>
 
 <main>
-  <div>
-    <a href="https://vitejs.dev" target="_blank" rel="noreferrer"> 
-      <img src="/vite.svg" class="logo" alt="Vite Logo" />
-    </a>
-    <a href="https://svelte.dev" target="_blank" rel="noreferrer"> 
-      <img src={svelteLogo} class="logo svelte" alt="Svelte Logo" />
-    </a>
-  </div>
-  <h1>Vite + Svelte</h1>
-
-  <div class="card">
-    <Counter />
-  </div>
-
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme" target="_blank" rel="noreferrer">SvelteKit</a>, the official Svelte app framework powered by Vite!
-  </p>
-
-  <p class="read-the-docs">
-    Click on the Vite and Svelte logos to learn more
-  </p>
+  <!-- First div handles search bar and button -->
+	<div style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+		{@html search_bar}
+		<button on:click="{onClick}">Search</button>
+	</div>
+	<!-- Second div is spacing -->
+	<div>
+		<p class="space"></p>
+	</div>
+	<!-- Third div has graph image and paper list-->
+	<div style="display:flex; flex-direction: row; justify-content: space-between">
+		<img src="test-image.jpg" alt="graph size tester" width="1024" height="720">
+    <span style="display:inline-block; width: 2cm;"></span>
+		<dl class="dl-horizontal text-muted">
+			<dt>Paper one - Authors</dt>
+			<dd class="link">https://arxiv.org/abs/id</dd>
+			<dt>Paper two - Authors</dt>
+			<dd class="link">https://arxiv.org/abs/id</dd>
+			<dt>Paper three - Authors</dt>
+			<dd class="link">https://arxiv.org/abs/id<dd>
+			<dt>Paper four - Authors</dt>
+			<dd class="link">https://arxiv.org/abs/id</dd>
+			<dt>Paper five (very long title) - Authors</dt>
+			<dd class="link">https://arxiv.org/abs/id</dd>
+			<dt>Paper six - Authors</dt>
+			<dd class="link">https://arxiv.org/abs/id</dd>
+			<dt>Paper seven - Authors</dt>
+			<dd class="link">https://arxiv.org/abs/id</dd>
+			<dt>Paper eight - Authors</dt>
+			<dd class="link">https://arxiv.org/abs/id</dd>
+			<dt>Paper nine - Authors</dt>
+			<dd class="link">https://arxiv.org/abs/id</dd>
+			<dt>Paper ten - Authors</dt>
+			<dd class="link">https://arxiv.org/abs/id</dd>
+		</dl>
+	</div>
+	<p>{result_text}</p>
 </main>
 
 <style>
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-  }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
-  }
-  .logo.svelte:hover {
-    filter: drop-shadow(0 0 2em #ff3e00aa);
-  }
-  .read-the-docs {
-    color: #888;
-  }
+  main {
+		text-align: center;
+		padding: 1em;
+		max-width: 240px;
+		margin: 0 auto;
+	}
+
+	@media (min-width: 640px) {
+		main {
+			max-width: none;
+		}
+	}
+
+	.space{
+		margin-bottom: 1.2cm;
+	}
+
+	.dl-horizontal dt {
+		text-align: left; 
+	}
+
+	.link {
+		font-size: small;
+	}
 </style>
