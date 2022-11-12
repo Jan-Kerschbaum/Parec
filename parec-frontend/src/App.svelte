@@ -1,8 +1,26 @@
 <script>
-  import jQuery from "jquery"
+    import jQuery from "jquery"
+    import vis from "vis"
+	import { onMount } from 'svelte'
 	let result_text = "None"
 	const search_bar = '<form id="form" role="search"> <input type="search" id="query" name="q" placeholder="Query", aria-label="Query here"> </form>'
 	// role and aria-label are for screen reader accessibility
+	//Generate initial graph
+	let container
+	onMount(() => {
+		var nodes_array, nodes, edges_array, edges, network
+		nodes_array = [{ id: 0, label: "Node 0" }, { id: 1, label: "Node 1" }, { id: 2, label: "Node 2" }]
+		nodes = new vis.DataSet(nodes_array)
+		edges_array = [{ from: 0, to: 1 },{ from: 0, to: 2 }]
+    	edges = new vis.DataSet(edges_array)
+		//var container = document.getElementById('graph')
+    	var data = {
+      		nodes: nodes,
+      		edges: edges,
+    	};
+    	var options = {}
+    	network = new vis.Network(container, data, options)
+	})
 	/**
 	 * Handle click on Search Button, sending POST request with query to Python code, recieving and handling response
 	 * @returns {void}
@@ -17,6 +35,7 @@
 			let function_result = String(data.result)
 			result_text = function_result
 			//ToDo: Other stuff with response
+			//ToDo: Change graph here by adjusting nodes and edges
 		}).fail(function(data){
 			//ToDo: Add more specific error messages based on errors recieved from backend
 			alert("Failed")
@@ -36,7 +55,7 @@
 	</div>
 	<!-- Third div has graph image and paper list-->
 	<div style="display:flex; flex-direction: row; justify-content: space-between">
-		<img src="test-image.jpg" alt="graph size tester" width="1024" height="720">
+		<div id="graph" bind:this={container}></div>
     <!-- Kind of hacky but it makes the spacing work for the minute. Might rework later -->
     <span style="display:inline-block; width: 2cm;"></span>
 		<dl class="dl-horizontal text-muted">
@@ -89,5 +108,11 @@
 
 	.link {
 		font-size: small;
+	}
+
+	#graph {
+		width: 1024px;
+		height: 720px;
+		border: 1px solid lightgray;
 	}
 </style>
