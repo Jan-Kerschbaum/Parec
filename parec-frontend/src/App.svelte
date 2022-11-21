@@ -3,7 +3,6 @@
     import vis from "vis"
 	import { onMount } from 'svelte'
 	let result_text = "None"
-	const search_bar = '<form id="form" role="search"> <input type="search" id="query" name="q" placeholder="Query", aria-label="Query here"> </form>'
 	// role and aria-label are for screen reader accessibility
 	//Generate initial graph
 	let container
@@ -30,7 +29,7 @@
 		let payload = {
 			"query": user_query,
 		}
-		jQuery.post('//localhost:8000/query', payload, function(data){
+		jQuery.post('api/query', payload, function(data){
 			data = JSON.parse(data)
 			let function_result = String(data.result)
 			result_text = function_result
@@ -46,8 +45,10 @@
 <main>
   <!-- First div handles search bar and button -->
 	<div style="display:flex; flex-direction: row; justify-content: center; align-items: center">
-		{@html search_bar}
-		<button on:click="{onClick}">Search</button>
+		<form id="form" role="search">
+			<input type="search" id="query" name="q" placeholder="Query" aria-label="Query here">
+		</form>
+		<button on:click={onClick}>Search</button>
 	</div>
 	<!-- Second div is spacing -->
 	<div>
