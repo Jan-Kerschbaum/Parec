@@ -1,0 +1,18 @@
+#Ignore logs directory
+logs/
+
+#Ignore the git and cache folders
+.git
+.cache
+
+#Ingore all markdown and class files
+*.md
+**/*.class
+!README*.md
+README-secret.md
+
+#Ignore ISO images
+*.iso
+
+
+
