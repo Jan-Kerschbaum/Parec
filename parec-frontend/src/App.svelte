@@ -6,8 +6,10 @@
 	// role and aria-label are for screen reader accessibility
 	//Generate initial graph
 	let container
+	let nodes_array, nodes, edges_array, edges, network
 	onMount(() => {
-		var nodes_array, nodes, edges_array, edges, network
+		//var nodes_array, nodes, edges_array, edges, network
+		//var nodes_array, edges_array, network
 		nodes_array = [{ id: 0, label: "Node 0" }, { id: 1, label: "Node 1" }, { id: 2, label: "Node 2" }]
 		nodes = new vis.DataSet(nodes_array)
 		edges_array = [{ from: 0, to: 1 },{ from: 0, to: 2 }]
@@ -46,7 +48,7 @@
 					var val = graph_response[key]
 					//alert(String(key) + ": " + String(val.from) + "  " + String(val.to))
 					var from_node = String(val.from)
-					var to_node  String(val.to)
+					var to_node = String(val.to)
 					if(!found_nodes.includes(from_node)){
 						found_nodes.push(from_node)
 						nodesArray.push({id: current_node_num, label: from_node})
@@ -60,6 +62,12 @@
 						current_node_num += 1
 					}
 					edgesArray.push({from: ids[from_node], to: ids[to_node]})
+					//nodes = new vis.DataSet(nodesArray)
+					//edges = new vis.DataSet(edgesArray)
+					nodes.clear()
+					edges.clear()
+					nodes.add(nodesArray)
+					edges.add(edgesArray)
 				}
 			}
 			
