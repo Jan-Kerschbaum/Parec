@@ -35,6 +35,34 @@
 			result_text = function_result
 			//ToDo: Other stuff with response
 			//ToDo: Change graph here by adjusting nodes and edges
+			var graph_response = JSON.parse(data.graph)
+			var nodesArray = []
+			var edgesArray = []
+			var current_node_num = 0
+			var found_nodes = []
+			var ids = {}
+			for(var key in graph_response){
+				if(graph_response.hasOwnProperty(key)){
+					var val = graph_response[key]
+					//alert(String(key) + ": " + String(val.from) + "  " + String(val.to))
+					var from_node = String(val.from)
+					var to_node  String(val.to)
+					if(!found_nodes.includes(from_node)){
+						found_nodes.push(from_node)
+						nodesArray.push({id: current_node_num, label: from_node})
+						ids[from_node] = current_node_num
+						current_node_num += 1
+					}
+					if(!found_nodes.includes(to_node)){
+						found_nodes.push(to_node)
+						nodesArray.push({id: current_node_num, label: to_node})
+						ids[to_node] = current_node_num
+						current_node_num += 1
+					}
+					edgesArray.push({from: ids[from_node], to: ids[to_node]})
+				}
+			}
+			
 		}).fail(function(data){
 			//ToDo: Add more specific error messages based on errors recieved from backend
 			alert("Failed")

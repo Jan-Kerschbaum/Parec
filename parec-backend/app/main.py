@@ -46,11 +46,11 @@ def query_handler(query: str = Form(...)):
     """
     function_result = test_function(query)
     graph = json.dumps({
-        "0":{"from": "t0", "to": "t1"},
-        "1":{"from": "t0", "to": "t2"},
-        "2":{"from": "t0", "to": "t3"},
-        "3":{"from": "t1", "to": "t4"},
-        "4":{"from": "t1", "to": "t5"},
+        0:{"from": "t0", "to": "t1"},
+        1:{"from": "t0", "to": "t2"},
+        2:{"from": "t0", "to": "t3"},
+        3:{"from": "t1", "to": "t4"},
+        4:{"from": "t1", "to": "t5"},
     })
     return Response(content=json.dumps({"result": function_result, "graph": graph}), status_code=200)
 
