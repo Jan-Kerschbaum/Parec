@@ -17,7 +17,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import json
 
-origins = ["http://localhost:5173", "http://localhost:8000/query"]
+origins = ["http://localhost:5173", "http://localhost:8000/query", "http://localhost:81"]
 
 app = FastAPI()
 app.add_middleware(
