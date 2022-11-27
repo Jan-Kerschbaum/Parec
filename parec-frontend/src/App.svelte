@@ -6,13 +6,13 @@
 	// role and aria-label are for screen reader accessibility
 	//Generate initial graph
 	let container
+	let nodes_array, nodes, edges_array, edges, network
 	onMount(() => {
-		var nodes_array, nodes, edges_array, edges, network
+		// ToDo: Do somthing with the initial graph to show it's a placeholder
 		nodes_array = [{ id: 0, label: "Node 0" }, { id: 1, label: "Node 1" }, { id: 2, label: "Node 2" }]
 		nodes = new vis.DataSet(nodes_array)
 		edges_array = [{ from: 0, to: 1 },{ from: 0, to: 2 }]
     	edges = new vis.DataSet(edges_array)
-		//var container = document.getElementById('graph')
     	var data = {
       		nodes: nodes,
       		edges: edges,
@@ -29,16 +29,52 @@
 		let payload = {
 			"query": user_query,
 		}
-		jQuery.post('api/query', payload, function(data){
-			data = JSON.parse(data)
-			let function_result = String(data.result)
-			result_text = function_result
-			//ToDo: Other stuff with response
-			//ToDo: Change graph here by adjusting nodes and edges
-		}).fail(function(data){
-			//ToDo: Add more specific error messages based on errors recieved from backend
-			alert("Failed")
-		})
+		jQuery.ajax('//localhost:8000/query', {
+			data : JSON.stringify(payload),
+			contentType : 'application/json',
+			type : 'POST',
+			success: function(data){
+				data = JSON.parse(data)
+				let function_result = String(data.result)
+				result_text = function_result
+				// Update graph based on edge list returned from backend
+				var graph_response = JSON.parse(data.graph)
+				var nodesArray = []
+				var edgesArray = []
+				var current_node_num = 0
+				var found_nodes = []
+				var ids = {}
+				for(var key in graph_response){
+					// Note: If the element we're currently looking at is 0:{"from": "a", "to": "b"}, then key is 0, from_node = "a", to_node = "b"
+					if(graph_response.hasOwnProperty(key)){
+						var val = graph_response[key]
+						var from_node = String(val.from)
+						var to_node = String(val.to)
+						if(!found_nodes.includes(from_node)){
+							found_nodes.push(from_node)
+							nodesArray.push({id: current_node_num, label: from_node})
+							ids[from_node] = current_node_num
+							current_node_num += 1
+						}
+						if(!found_nodes.includes(to_node)){
+							found_nodes.push(to_node)
+							nodesArray.push({id: current_node_num, label: to_node})
+							ids[to_node] = current_node_num
+							current_node_num += 1
+						}
+						edgesArray.push({from: ids[from_node], to: ids[to_node]})
+						nodes.clear()
+						edges.clear()
+						nodes.add(nodesArray)
+						edges.add(edgesArray)
+					}
+				}
+			},
+			error: function(data){
+					//ToDo: Add more specific error messages based on errors recieved from backend
+					alert("Failed")
+				}
+		});
 	}
 </script>
 

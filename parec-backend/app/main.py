@@ -17,7 +17,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import json
 
-origins = ["http://localhost:5173", "http://localhost:8000/query"]
+#origins = ["http://localhost:81"]  # origin for deployment in docker
+origins=["*", "http://localhost:5173"]  # origins for testing locally
 
 app = FastAPI()
 app.add_middleware(
@@ -39,13 +40,25 @@ def test_function(input: str):
         return "works"
     return "non-test input"
 
+@app.post('/test/')
+async def backend_reachable(data: Data):
+    print("Hi from backend")
+    print(data.query)
+
 @app.post('/query')
-def query_handler(query: str = Form(...)):
+def query_handler(data: Data):
     """
     Method to handle POST requests from frontend for main functionality. In the body, query should contain the search term.
     """
-    function_result = test_function(query)
-    return Response(content=json.dumps({"result": function_result}), status_code=200)
+    function_result = test_function(data.query)
+    graph = json.dumps({
+        0:{"from": "t0", "to": "t1"},
+        1:{"from": "t0", "to": "t2"},
+        2:{"from": "t0", "to": "t3"},
+        3:{"from": "t1", "to": "t4"},
+        4:{"from": "t1", "to": "t5"},
+    })
+    return Response(content=json.dumps({"result": function_result, "graph": graph}), status_code=200)
 
 @app.get('/')
 def base_test():
