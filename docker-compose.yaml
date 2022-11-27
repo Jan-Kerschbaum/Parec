@@ -1,23 +1,21 @@
 version: "3.9"
 
 services:
-  api:
+  backend:
     build: /parec-backend/.
     container_name: backend
-    ports:
-      - 8080:8000
     networks:
       - backend_net
 
-  web:
+  frontend:
     build: /parec-frontend/.
     container_name: frontend
     ports:
-      - 81:4173
+      - 80:80
     networks:
       - backend_net
     depends_on:
-      - api   #frontend only workes if backend already deployed
+      - backend   #frontend only works if backend already deployed
 
 networks:
   backend_net:
