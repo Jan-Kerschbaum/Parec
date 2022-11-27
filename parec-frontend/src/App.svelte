@@ -29,7 +29,7 @@
 		let payload = {
 			"query": user_query,
 		}
-		jQuery.ajax('//localhost:8000/query', {
+		jQuery.ajax('api/query', {
 			data : JSON.stringify(payload),
 			contentType : 'application/json',
 			type : 'POST',
