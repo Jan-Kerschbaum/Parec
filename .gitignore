@@ -12,6 +12,9 @@ lerna-debug.log*
 **/dist-ssr/*
 *.local
 
+#python
+__pycache__
+
 # Editor directories and files
 **/.vscode/*
 **/.idea/*
