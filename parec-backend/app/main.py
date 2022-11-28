@@ -17,7 +17,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import json
 
-origins = ["http://localhost:5173", "http://localhost:8000/query", "http://localhost:81"]
+origins = ["http://frontend:80"]  # origin for deployment in docker
+#origins=["*", "http://localhost:5173"]  # origins for testing locally
 
 app = FastAPI()
 app.add_middleware(
