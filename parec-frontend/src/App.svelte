@@ -29,7 +29,52 @@
 		let payload = {
 			"query": user_query,
 		}
-
+		jQuery.ajax('api/query', {
+			data : JSON.stringify(payload),
+			contentType : 'application/json',
+			type : 'POST',
+			success: function(data){
+				data = JSON.parse(data)
+				let function_result = String(data.result)
+				result_text = function_result
+				// Update graph based on edge list returned from backend
+				var graph_response = JSON.parse(data.graph)
+				var nodesArray = []
+				var edgesArray = []
+				var current_node_num = 0
+				var found_nodes = []
+				var ids = {}
+				for(var key in graph_response){
+					// Note: If the element we're currently looking at is 0:{"from": "a", "to": "b"}, then key is 0, from_node = "a", to_node = "b"
+					if(graph_response.hasOwnProperty(key)){
+						var val = graph_response[key]
+						var from_node = String(val.from)
+						var to_node = String(val.to)
+						if(!found_nodes.includes(from_node)){
+							found_nodes.push(from_node)
+							nodesArray.push({id: current_node_num, label: from_node})
+							ids[from_node] = current_node_num
+							current_node_num += 1
+						}
+						if(!found_nodes.includes(to_node)){
+							found_nodes.push(to_node)
+							nodesArray.push({id: current_node_num, label: to_node})
+							ids[to_node] = current_node_num
+							current_node_num += 1
+						}
+						edgesArray.push({from: ids[from_node], to: ids[to_node]})
+						nodes.clear()
+						edges.clear()
+						nodes.add(nodesArray)
+						edges.add(edgesArray)
+					}
+				}
+			},
+			error: function(data){
+					//ToDo: Add more specific error messages based on errors recieved from backend
+					alert("Failed")
+				}
+		});
 	}
 </script>
 
