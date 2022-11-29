@@ -91,25 +91,35 @@
     <!-- Kind of hacky but it makes the spacing work for the minute. Might rework later -->
     <span style="display:inline-block; width: 2cm;"></span>
 		<dl class="dl-horizontal text-muted">
-			<dt>Paper one - Authors</dt>
+			<dt>Paper one</dt>
+			<dd class="authors">Authors</dd>
 			<dd class="link">https://arxiv.org/abs/id</dd>
-			<dt>Paper two - Authors</dt>
+			<dt>Paper two</dt>
+			<dd class="authors">Authors</dd>
 			<dd class="link">https://arxiv.org/abs/id</dd>
-			<dt>Paper three - Authors</dt>
+			<dt>Paper three</dt>
+			<dd class="authors">Authors</dd>
 			<dd class="link">https://arxiv.org/abs/id<dd>
-			<dt>Paper four - Authors</dt>
+			<dt>Paper four</dt>
+			<dd class="authors">Authors</dd>
 			<dd class="link">https://arxiv.org/abs/id</dd>
-			<dt>Paper five (very long title) - Authors</dt>
+			<dt>Paper five (very long title)</dt>
+			<dd class="authors">Authors</dd>
 			<dd class="link">https://arxiv.org/abs/id</dd>
-			<dt>Paper six - Authors</dt>
+			<dt>Paper six</dt>
+			<dd class="authors">Authors</dd>
 			<dd class="link">https://arxiv.org/abs/id</dd>
-			<dt>Paper seven - Authors</dt>
+			<dt>Paper seven</dt>
+			<dd class="authors">Authors</dd>
 			<dd class="link">https://arxiv.org/abs/id</dd>
-			<dt>Paper eight - Authors</dt>
+			<dt>Paper eight</dt>
+			<dd class="authors">Authors</dd>
 			<dd class="link">https://arxiv.org/abs/id</dd>
-			<dt>Paper nine - Authors</dt>
+			<dt>Paper nine</dt>
+			<dd class="authors">Authors</dd>
 			<dd class="link">https://arxiv.org/abs/id</dd>
-			<dt>Paper ten - Authors</dt>
+			<dt>Paper ten</dt>
+			<dd class="authors">Authors</dd>
 			<dd class="link">https://arxiv.org/abs/id</dd>
 		</dl>
 	</div>
@@ -139,6 +149,11 @@
 	}
 
 	.link {
+		font-size: small;
+	}
+
+	.authors{
+		text-align: left;
 		font-size: small;
 	}
 
