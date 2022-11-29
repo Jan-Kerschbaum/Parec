@@ -93,34 +93,54 @@
 		<dl class="dl-horizontal text-muted">
 			<dt>Paper one</dt>
 			<dd class="authors">Authors</dd>
-			<dd class="link">https://arxiv.org/abs/id</dd>
+			<dd class="link">
+				<a href="https://arxiv.org/abs/id">Link</a>
+			</dd>
 			<dt>Paper two</dt>
 			<dd class="authors">Authors</dd>
-			<dd class="link">https://arxiv.org/abs/id</dd>
+			<dd class="link">
+				<a href="https://arxiv.org/abs/id">Link</a>
+			</dd>
 			<dt>Paper three</dt>
 			<dd class="authors">Authors</dd>
-			<dd class="link">https://arxiv.org/abs/id<dd>
+			<dd class="link">
+				<a href="https://arxiv.org/abs/id">Link</a>
+			</dd>
 			<dt>Paper four</dt>
 			<dd class="authors">Authors</dd>
-			<dd class="link">https://arxiv.org/abs/id</dd>
+			<dd class="link">
+				<a href="https://arxiv.org/abs/id">Link</a>
+			</dd>
 			<dt>Paper five (very long title)</dt>
 			<dd class="authors">Authors</dd>
-			<dd class="link">https://arxiv.org/abs/id</dd>
+			<dd class="link">
+				<a href="https://arxiv.org/abs/id">Link</a>
+			</dd>
 			<dt>Paper six</dt>
 			<dd class="authors">Authors</dd>
-			<dd class="link">https://arxiv.org/abs/id</dd>
+			<dd class="link">
+				<a href="https://arxiv.org/abs/id">Link</a>
+			</dd>
 			<dt>Paper seven</dt>
 			<dd class="authors">Authors</dd>
-			<dd class="link">https://arxiv.org/abs/id</dd>
+			<dd class="link">
+				<a href="https://arxiv.org/abs/id">Link</a>
+			</dd>
 			<dt>Paper eight</dt>
 			<dd class="authors">Authors</dd>
-			<dd class="link">https://arxiv.org/abs/id</dd>
+			<dd class="link">
+				<a href="https://arxiv.org/abs/id">Link</a>
+			</dd>
 			<dt>Paper nine</dt>
 			<dd class="authors">Authors</dd>
-			<dd class="link">https://arxiv.org/abs/id</dd>
+			<dd class="link">
+				<a href="https://arxiv.org/abs/id">Link</a>
+			</dd>
 			<dt>Paper ten</dt>
 			<dd class="authors">Authors</dd>
-			<dd class="link">https://arxiv.org/abs/id</dd>
+			<dd class="link">
+				<a href="https://arxiv.org/abs/id">Link</a>
+			</dd>
 		</dl>
 	</div>
 	<p>{result_text}</p>
@@ -150,6 +170,7 @@
 
 	.link {
 		font-size: small;
+		text-align: left;
 	}
 
 	.authors{
