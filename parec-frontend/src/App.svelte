@@ -67,8 +67,11 @@
 			}
 			
 		}).fail(function(data){
-			//ToDo: Add more specific error messages based on errors recieved from backend
-			alert("Failed")
+			//Should only fail from API implementation on a 422 code (unprocessable entity)
+			result_text = "Empty Query Field"
+			nodes.clear()
+			edges.clear()
+			//ToDo: Set List Bindings to empty strings once we do that on success
 		})
 	}
 </script>
