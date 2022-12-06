@@ -94,26 +94,56 @@
     <!-- Kind of hacky but it makes the spacing work for the minute. Might rework later -->
     <span style="display:inline-block; width: 2cm;"></span>
 		<dl class="dl-horizontal text-muted">
-			<dt>Paper one - Authors</dt>
-			<dd class="link">https://arxiv.org/abs/id</dd>
-			<dt>Paper two - Authors</dt>
-			<dd class="link">https://arxiv.org/abs/id</dd>
-			<dt>Paper three - Authors</dt>
-			<dd class="link">https://arxiv.org/abs/id<dd>
-			<dt>Paper four - Authors</dt>
-			<dd class="link">https://arxiv.org/abs/id</dd>
-			<dt>Paper five (very long title) - Authors</dt>
-			<dd class="link">https://arxiv.org/abs/id</dd>
-			<dt>Paper six - Authors</dt>
-			<dd class="link">https://arxiv.org/abs/id</dd>
-			<dt>Paper seven - Authors</dt>
-			<dd class="link">https://arxiv.org/abs/id</dd>
-			<dt>Paper eight - Authors</dt>
-			<dd class="link">https://arxiv.org/abs/id</dd>
-			<dt>Paper nine - Authors</dt>
-			<dd class="link">https://arxiv.org/abs/id</dd>
-			<dt>Paper ten - Authors</dt>
-			<dd class="link">https://arxiv.org/abs/id</dd>
+			<dt>Paper one</dt>
+			<dd class="authors">Authors</dd>
+			<dd class="link">
+				<a href="https://arxiv.org/abs/id">Link</a>
+			</dd>
+			<dt>Paper two</dt>
+			<dd class="authors">Authors</dd>
+			<dd class="link">
+				<a href="https://arxiv.org/abs/id">Link</a>
+			</dd>
+			<dt>Paper three</dt>
+			<dd class="authors">Authors</dd>
+			<dd class="link">
+				<a href="https://arxiv.org/abs/id">Link</a>
+			</dd>
+			<dt>Paper four</dt>
+			<dd class="authors">Authors</dd>
+			<dd class="link">
+				<a href="https://arxiv.org/abs/id">Link</a>
+			</dd>
+			<dt>Paper five (very long title)</dt>
+			<dd class="authors">Authors</dd>
+			<dd class="link">
+				<a href="https://arxiv.org/abs/id">Link</a>
+			</dd>
+			<dt>Paper six</dt>
+			<dd class="authors">Authors</dd>
+			<dd class="link">
+				<a href="https://arxiv.org/abs/id">Link</a>
+			</dd>
+			<dt>Paper seven</dt>
+			<dd class="authors">Authors</dd>
+			<dd class="link">
+				<a href="https://arxiv.org/abs/id">Link</a>
+			</dd>
+			<dt>Paper eight</dt>
+			<dd class="authors">Authors</dd>
+			<dd class="link">
+				<a href="https://arxiv.org/abs/id">Link</a>
+			</dd>
+			<dt>Paper nine</dt>
+			<dd class="authors">Authors</dd>
+			<dd class="link">
+				<a href="https://arxiv.org/abs/id">Link</a>
+			</dd>
+			<dt>Paper ten</dt>
+			<dd class="authors">Authors</dd>
+			<dd class="link">
+				<a href="https://arxiv.org/abs/id">Link</a>
+			</dd>
 		</dl>
 	</div>
 	<p>{result_text}</p>
@@ -142,6 +172,12 @@
 	}
 
 	.link {
+		font-size: small;
+		text-align: left;
+	}
+
+	.authors{
+		text-align: left;
 		font-size: small;
 	}
 
