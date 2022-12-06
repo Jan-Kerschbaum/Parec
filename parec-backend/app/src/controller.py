@@ -12,6 +12,6 @@ SEARCH_DEPTH = 5
 def run_backend(query: str):
     # Get term graph for query
     term_graph = get_term_graph(query, SEARCH_DEPTH)
-    papers = run_paper_search(term_graph)
+    papers = run_paper_search(term_graph, query)
     # ToDo: Construct edges from term graph
     return edges, papers
