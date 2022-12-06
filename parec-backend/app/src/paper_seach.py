@@ -1,4 +1,5 @@
 #File to implement the search for papers based on found related terms
+from math import log as ln
 
 # Constants
 MAX_RELEVANCE = 10 #Placeholder, ToDo: Find good value experimentally
@@ -40,7 +41,21 @@ def construct_relevance_metric(term_graph, query):
 
 #Function to calculate relevance value for given paper based on precomputed relevance_list
 #Return values:
-#   relevance_value: Integer, representing relevance of paper according to metric
-def get_paper_relevance(relevance_list, paper):
-    ...
-    return relevance_value
+#   score: Integer, representing relevance of paper according to metric
+def get_paper_relevance(relevance_list, paper: str):
+    # Score per word = relevance * (ln(amount of times it appears) + 1); except with 0 for 0 appearances
+    # Rationale:  First appearance gives full relevance score, later appearances still benefit score but give diminishing returns
+    # Especially, the discount from the nth appearance to the (n+1)th grows with n
+    # So we have a big score difference between the term being mentioned 2 (~1.7 * relevance) and 5 (~2.6 * relevance), but less between 102 (~5.62 * r) and 105 (5.65 * r)
+    # This seems a reasonable compromise between giving a higher score for a term being mentioned more often, and potentially overvaluing a single term 
+    #
+    # Consider using bases other than e for the logarithm to scale score for repeats fo the word
+    score = 0
+    for term in relevance_list.keys():
+        # We're only counting exact matches here, we'll either have to adjust this later or preprocess papers
+        appearances = paper.count(term)
+        if appearances == 0:
+            continue
+        term_score = ln(appearances) + 1
+        score += term_score * relevance_list[term]
+    return score
