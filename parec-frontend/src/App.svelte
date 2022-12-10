@@ -3,8 +3,8 @@
     import vis from "vis"
 	import { onMount } from 'svelte'
 	let result_text = "None"
-	// role and aria-label are for screen reader accessibility
 	//Generate initial graph
+	//Note: Variables are declared outside the context like this because they need to be accessible later for rebuilding the network
 	let container
 	let nodes_array, nodes, edges_array, edges, network
 	onMount(() => {
@@ -46,18 +46,21 @@
 					var val = graph_response[key]
 					var from_node = String(val.from)
 					var to_node = String(val.to)
+					// If the from_node of this particular edge is not one we've seen before, we'll add it to the list of nodes
 					if(!found_nodes.includes(from_node)){
 						found_nodes.push(from_node)
 						nodesArray.push({id: current_node_num, label: from_node})
 						ids[from_node] = current_node_num
 						current_node_num += 1
 					}
+					// Same for to_node
 					if(!found_nodes.includes(to_node)){
 						found_nodes.push(to_node)
 						nodesArray.push({id: current_node_num, label: to_node})
 						ids[to_node] = current_node_num
 						current_node_num += 1
 					}
+					// In any case, we add the edge to our list of edges
 					edgesArray.push({from: ids[from_node], to: ids[to_node]})
 					nodes.clear()
 					edges.clear()
@@ -71,7 +74,7 @@
 			result_text = "Empty Query Field"
 			nodes.clear()
 			edges.clear()
-			//ToDo: Set List Bindings to empty strings once we do that on success
+			//ToDo: Set List Bindings to empty strings (once we do that) on success
 		})
 	}
 </script>
@@ -93,6 +96,7 @@
 		<div id="graph" bind:this={container}></div>
     <!-- Kind of hacky but it makes the spacing work for the minute. Might rework later -->
     <span style="display:inline-block; width: 2cm;"></span>
+	<!-- As of current, none of these are tied to the data returned from the backend. Once that is set up, we just bind to str vars here -->
 		<dl class="dl-horizontal text-muted">
 			<dt>Paper one</dt>
 			<dd class="authors">Authors</dd>
@@ -146,6 +150,7 @@
 			</dd>
 		</dl>
 	</div>
+	<!-- Note: This originally came about as a debugging tool, might repurpose as quasi-status bar type thing in the end product -->
 	<p>{result_text}</p>
 </main>
 
@@ -164,6 +169,7 @@
 	}
 
 	.space{
+		/*Vertical space between search div and results div implemented as bottom margin*/
 		margin-bottom: 1.2cm;
 	}
 
@@ -172,16 +178,23 @@
 	}
 
 	.link {
+		/*Formatting for the links in the paper list*/
 		font-size: small;
 		text-align: left;
 	}
 
 	.authors{
+		/*Formatting for the authors lines in the paper list*/
 		text-align: left;
 		font-size: small;
 	}
 
 	#graph {
+		/*
+		Formatting for the graph
+		Note that this formats ONLY the container div, not the network itself
+		Changes to node shape/color/etc need to be passed as options to the network on creation  
+		*/
 		width: 1024px;
 		height: 720px;
 		border: 1px solid lightgray;
