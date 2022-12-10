@@ -8,7 +8,6 @@ App routes:
     /query
         Main access point for intended functionality
 
-Required packages: fastapi, python-multipart
 """
 
 from fastapi import FastAPI, Response, Form
@@ -21,6 +20,7 @@ origins = ["http://frontend:80"]  # origin for deployment in docker
 #origins=["*", "http://localhost:5173"]  # origins for testing locally
 
 app = FastAPI()
+# Adding middleware and setting allowed origins to ensure we don't get problems because both ports are on the same machine
 app.add_middleware(
     CORSMiddleware,
     allow_origins = origins,
