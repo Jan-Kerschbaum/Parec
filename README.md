@@ -40,7 +40,7 @@ Immediate priorities include the implementation of the function to find terms re
 
 ### Architecture Description
 
-(Preprocessing?)
+First, we filter stop words from and apply a lemmatizer to the abstracts of the papers in our data.
 
 Before runtime, the papers in the dataset are clustered using BERTopics topic modeling function in order to limit the search space later on.
 
@@ -52,7 +52,7 @@ Major deviations include if the user sends an empty query (in which case we clea
 
 ### Preprocessing
 
-(Preprocessing)
+The extent of our preprocessing is limited, since we rely in large part on the intrinsic structure of the abstracts in our dataset. We filter out stop words and lemmatize the abstracts in our dataset to enhance the quality of the result both when clustering the abstracts and when searching for related terms. We do not apply further preprocessing of the text, in order to keep the subtextual relations between the words intact, as well as because we employ a BERTopic model at several points, which, to some extent, implements its own preprocessing.
 
 ### Statistics
 
