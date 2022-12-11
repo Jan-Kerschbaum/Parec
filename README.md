@@ -38,7 +38,7 @@ The frontend is largely finished, though it may be reworked should issues arise 
 
 The implementation of the backend has begun on other branches, but is in a partial stage. A structure for the backend has been established, and certain helper functions implemented, on other branches.
 
-In terms of the dataset, test runs have been executed with the dataset without any preprocessing. The results clearly indicate that the data needs to be preprocessed, as the currently identified topics are full of stop words.
+In terms of the dataset, test runs have been executed with the dataset without any preprocessing. The results clearly indicate that the data needs to be preprocessed, as the currently identified topics are full of stop words, and therefore unusable.
 
 ### Future Planning
 
@@ -51,7 +51,7 @@ The report should be finished by begin of march.
 
 ### High-level Architecture Description
 
-First, we filter stop words from and apply a lemmatizer to the abstracts of the papers in our data. This is still a work in process.
+First, we want to filter stop words from the abstracts of the papers, and apply a lemmatizer to them. Unfortunately, this is still a work in process.
 
 Before runtime, the papers in the dataset are clustered using BERTopics topic modeling function in order to limit the search space later on.
 
@@ -74,7 +74,7 @@ As a result, we got the following topics:
 | 6 | 5     |601    | 5_language_word_translation_the |
 | 7 | 6     |402    | 6_robot_robots_the_control |
 | 8 | 7     |348    | 7_social_media_of_news |
-| 9 | 8     |308    | 8_workshop_volume_processings_international |
+| 9 | 8     |308    | 8_workshop_volume_processings_international 
 
 ## Data Analysis
 ### Data Sources
