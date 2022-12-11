@@ -59,6 +59,24 @@ At runtime, a typical query is handeled as follows: It is sent from the frontend
 
 Major deviations include if the user sends an empty query (in which case we clear both the graph and the list and show an error message), if the backend is not initialised or unreachable due to some error (error message only), or the initial state of the application prior to any query being sent, which uses example data.
 
+### Experiments
+As mentioned before, test runs with BERTtopic have been executed without preprocessed data.
+As a result, we got the following topics:
+
+|   | Topic | Count | Name |
+--------------------------
+| 0 | -1    | 7644  | -1_the_of_and_to
+--------------------------------------
+| 1 | 0     | 1920  | 0_the_of_and_channel
+| 2 | 1     |882    | 1_security_the_and_of
+| 3 | 2     |828    | 2_of_the_we_is
+| 4 | 3     |667    | 3_software_of_and-to
+| 5 | 4     |640    | 4_the_neural_of_deep
+| 6 | 5     |601    | 5_language_word_translation_the
+| 7 | 6     |402    | 6_robot_robots_the_control
+| 8 | 7     |348    | 7_social_media_of_news
+| 9 | 8     |308    | 8_workshop_volume_processings_international
+
 ## Data Analysis
 ### Data Sources
 The dataset that we use is provided by https://www.kaggle.com/datasets/Cornell-University/arxiv?resource=download 
@@ -74,6 +92,7 @@ During experimenting with the dataset, we included all papers which were publish
 ### Example
 
 Example is taken as-is from data source (https://www.kaggle.com/datasets/Cornell-University/arxiv?resource=download), though we only use certain keys (id, authors, title and abstract), allowing us to de facto reduce the dataset to the data for those keys. Each datapoint is available as a JSON object in the following format.
+Unfortunaltely, due to the size of the dataset, we can not have a look at it directly, as when opening in it throws an error stating that it needs more memory to be opened.
 
 "root":{
     "id":"0704.0001"
