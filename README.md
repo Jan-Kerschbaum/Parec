@@ -74,7 +74,7 @@ As a result, we got the following topics:
 | 6 | 5     |601    | 5_language_word_translation_the |
 | 7 | 6     |402    | 6_robot_robots_the_control |
 | 8 | 7     |348    | 7_social_media_of_news |
-| 9 | 8     |308    | 8_workshop_volume_processings_international 
+| 9 | 8     |308    | 8_workshop_volume_processings_international |
 
 ## Data Analysis
 ### Data Sources
