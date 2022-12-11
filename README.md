@@ -60,4 +60,51 @@ The extent of our preprocessing is limited, since we rely in large part on the i
 
 ### Example
 
+Example is taken as-is from data source (https://www.kaggle.com/datasets/Cornell-University/arxiv?resource=download), though we only use certain keys (id, authors, title and abstract), allowing us to de facto reduce the dataset to the data for those keys. Each datapoint is available as a JSON object in the following format.
 
+"root":{
+    "id":"0704.0001"
+    "submitter":"Pavel Nadolsky"
+    "authors":"C. Bal\'azs, E. L. Berger, P. M. Nadolsky, C.-P. Yuan"
+    "title":"Calculation of prompt diphoton production cross sections at Tevatron and LHC energies"
+    "comments":"37 pages, 15 figures; published version"
+    "journal-ref":"Phys.Rev.D76:013009,2007"
+    "doi":"10.1103/PhysRevD.76.013009"
+    "report-no":"ANL-HEP-PR-07-12"
+    "categories":"hep-ph"
+    "license":NULL
+    "abstract":" A fully differential calculation in perturbative quantum chromodynamics is presented for the production of massive photon pairs at hadron colliders. All next-to-leading order perturbative contributions from quark-antiquark, gluon-(anti)quark, and gluon-gluon subprocesses are included, as well as all-orders resummation of initial-state gluon radiation valid at next-to-next-to-leading logarithmic accuracy. The region of phase space is specified in which the calculation is most reliable. Good agreement is demonstrated with data from the Fermilab Tevatron, and predictions are made for more detailed tests with CDF and DO data. Predictions are shown for distributions of diphoton pairs produced at the energy of the Large Hadron Collider (LHC). Distributions of the diphoton pairs from the decay of a Higgs boson are contrasted with those produced from QCD processes at the LHC, showing that enhanced sensitivity to the signal can be obtained with judicious selection of events. "
+    "versions":[
+        0:{
+            "version":string"v1"
+            "created":string"Mon, 2 Apr 2007 19:18:42 GMT"
+        }
+        1:{
+            "version":string"v2"
+            "created":string"Tue, 24 Jul 2007 20:10:27 GMT"
+        }
+    ]
+    "update_date":"2008-11-26"
+    "authors_parsed":[
+        0:[
+            0:"Balázs"
+            1:"C."
+            2:""
+        ]
+        1:[
+            0:"Berger"
+            1:"E. L."
+            2:""
+        ]
+        2:[
+            0:"Nadolsky"
+            1:"P. M."
+            2:""
+        ]
+        3:[
+            0:"Yuan"
+            1:"C. -P."
+            2:""
+        ]
+    ]
+}
