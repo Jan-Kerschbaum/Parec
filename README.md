@@ -64,18 +64,17 @@ As mentioned before, test runs with BERTtopic have been executed without preproc
 As a result, we got the following topics:
 
 |   | Topic | Count | Name |
---------------------------
-| 0 | -1    | 7644  | -1_the_of_and_to
---------------------------------------
-| 1 | 0     | 1920  | 0_the_of_and_channel
-| 2 | 1     |882    | 1_security_the_and_of
-| 3 | 2     |828    | 2_of_the_we_is
-| 4 | 3     |667    | 3_software_of_and-to
-| 5 | 4     |640    | 4_the_neural_of_deep
-| 6 | 5     |601    | 5_language_word_translation_the
-| 7 | 6     |402    | 6_robot_robots_the_control
-| 8 | 7     |348    | 7_social_media_of_news
-| 9 | 8     |308    | 8_workshop_volume_processings_international
+----|-------|------|-----  |
+| 0 | -1    | 7644  | -1_the_of_and_to |
+| 1 | 0     | 1920  | 0_the_of_and_channel |
+| 2 | 1     |882    | 1_security_the_and_of |
+| 3 | 2     |828    | 2_of_the_we_is |
+| 4 | 3     |667    | 3_software_of_and-to |
+| 5 | 4     |640    | 4_the_neural_of_deep |
+| 6 | 5     |601    | 5_language_word_translation_the |
+| 7 | 6     |402    | 6_robot_robots_the_control |
+| 8 | 7     |348    | 7_social_media_of_news |
+| 9 | 8     |308    | 8_workshop_volume_processings_international |
 
 ## Data Analysis
 ### Data Sources
