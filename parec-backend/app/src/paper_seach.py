@@ -1,4 +1,5 @@
 #File to implement the search for papers based on found related terms
+from app.data.data_access import get_dataset #ToDo: Adjust depending on implementation of data access
 from math import log as ln
 
 # Constants
@@ -8,6 +9,12 @@ MAX_RELEVANCE = 10 #Placeholder, ToDo: Find good value experimentally
 #Return values:
 #   papers: List of lists, each element is a list containing the name, authors and id of a specific paper
 def run_paper_search(term_graph, query):
+    relevance_metric = construct_relevance_metric(term_graph, query)
+    dataset = get_dataset()
+    paper_relevances = {}
+    for datapoint in dataset:
+        paper_relevances[datapoint.abstract] = get_paper_relevance(relevance_metric, datapoint.abstract) #Use ID for key?
+    #Todo: Sort by values, return metadata of those papers
     ...
     return papers
 
