@@ -31,7 +31,7 @@ def get_data_from_elastic():
     result = list(rel)
     temp = []
     # need only '_source', which has all the fields required.
-    # elimnates the elasticsearch metadata like _id, _type, _index.
+    # eliminates the elasticsearch metadata like _id, _type, _index.
     for hit in result:
         temp.append(hit['_source'])
     #create dataframe
