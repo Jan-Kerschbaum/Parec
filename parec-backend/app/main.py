@@ -16,6 +16,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import json
+from app.src.controller import run_backend
 
 origins = ["http://frontend:80"]  # origin for deployment in docker
 #origins=["*", "http://localhost:5173"]  # origins for testing locally
