@@ -3,6 +3,36 @@
     import vis from "vis"
 	import { onMount } from 'svelte'
 	let result_text = "None"
+	let PaperOneName = "Paper One"
+	let PaperOneAuthors = "Authors"
+	let PaperOneID = "id"
+	let PaperTwoName = "Paper Two"
+	let PaperTwoAuthors = "Author"
+	let PaperTwoID = "id"
+	let PaperThreeName = "Paper Three"
+	let PaperThreeAuthors = "Authors"
+	let PaperThreeID = "id"
+	let PaperFourName = "Paper Four"
+	let PaperFourAuthors = "Authors"
+	let PaperFourID = "id"
+	let PaperFiveName = "Paper Five"
+	let PaperFiveAuthors = "Authors"
+	let PaperFiveID = "id"
+	let PaperSixName = "Paper Six"
+	let PaperSixAuthors = "Authors"
+	let PaperSixID = "id"
+	let PaperSevenName = "Paper Seven"
+	let PaperSevenAuthors = "Authors"
+	let PaperSevenID = "id"
+	let PaperEightName = "Paper Eight"
+	let PaperEightAuthors = "Authors"
+	let PaperEightID ="id"
+	let PaperNineName = "Paper Nine"
+	let PaperNineAuthors = "Authors"
+	let PaperNineID = "id"
+	let PaperTenName = "Paper Ten"
+	let PaperTenAuthors = "Authors"
+	let PaperTenID = "id"
 	// role and aria-label are for screen reader accessibility
 	//Generate initial graph
 	let container
@@ -94,55 +124,55 @@
     <!-- Kind of hacky but it makes the spacing work for the minute. Might rework later -->
     <span style="display:inline-block; width: 2cm;"></span>
 		<dl class="dl-horizontal text-muted">
-			<dt>Paper one</dt>
-			<dd class="authors">Authors</dd>
+			<dt>{PaperOneName}</dt>
+			<dd class="authors">{PaperOneAuthors}</dd>
 			<dd class="link">
-				<a href="https://arxiv.org/abs/id">Link</a>
+				<a href="https://arxiv.org/abs/{PaperOneID}">Link</a>
 			</dd>
-			<dt>Paper two</dt>
-			<dd class="authors">Authors</dd>
+			<dt>{PaperTwoName}</dt>
+			<dd class="authors">{PaperTwoAuthors}</dd>
 			<dd class="link">
-				<a href="https://arxiv.org/abs/id">Link</a>
+				<a href="https://arxiv.org/abs/{PaperTwoID}">Link</a>
 			</dd>
-			<dt>Paper three</dt>
-			<dd class="authors">Authors</dd>
+			<dt>{PaperThreeName}</dt>
+			<dd class="authors">{PaperThreeAuthors}</dd>
 			<dd class="link">
-				<a href="https://arxiv.org/abs/id">Link</a>
+				<a href="https://arxiv.org/abs/{PaperThreeID}">Link</a>
 			</dd>
-			<dt>Paper four</dt>
-			<dd class="authors">Authors</dd>
+			<dt>{PaperFourName}</dt>
+			<dd class="authors">{PaperFourAuthors}</dd>
 			<dd class="link">
-				<a href="https://arxiv.org/abs/id">Link</a>
+				<a href="https://arxiv.org/abs/{PaperFourID}">Link</a>
 			</dd>
-			<dt>Paper five (very long title)</dt>
-			<dd class="authors">Authors</dd>
+			<dt>{PaperFiveName}</dt>
+			<dd class="authors">{PaperFiveAuthors}</dd>
 			<dd class="link">
-				<a href="https://arxiv.org/abs/id">Link</a>
+				<a href="https://arxiv.org/abs/{PaperFiveID}">Link</a>
 			</dd>
-			<dt>Paper six</dt>
-			<dd class="authors">Authors</dd>
+			<dt>{PaperSixName}</dt>
+			<dd class="authors">{PaperSixAuthors}</dd>
 			<dd class="link">
-				<a href="https://arxiv.org/abs/id">Link</a>
+				<a href="https://arxiv.org/abs/{PaperSixID}">Link</a>
 			</dd>
-			<dt>Paper seven</dt>
-			<dd class="authors">Authors</dd>
+			<dt>{PaperSevenName}</dt>
+			<dd class="authors">{PaperSevenAuthors}</dd>
 			<dd class="link">
-				<a href="https://arxiv.org/abs/id">Link</a>
+				<a href="https://arxiv.org/abs/{PaperSevenID}">Link</a>
 			</dd>
-			<dt>Paper eight</dt>
-			<dd class="authors">Authors</dd>
+			<dt>{PaperEightName}</dt>
+			<dd class="authors">{PaperEightAuthors}</dd>
 			<dd class="link">
-				<a href="https://arxiv.org/abs/id">Link</a>
+				<a href="https://arxiv.org/abs/{PaperEightID}">Link</a>
 			</dd>
-			<dt>Paper nine</dt>
-			<dd class="authors">Authors</dd>
+			<dt>{PaperNineName}</dt>
+			<dd class="authors">{PaperNineAuthors}</dd>
 			<dd class="link">
-				<a href="https://arxiv.org/abs/id">Link</a>
+				<a href="https://arxiv.org/abs/{PaperNineID}">Link</a>
 			</dd>
-			<dt>Paper ten</dt>
-			<dd class="authors">Authors</dd>
+			<dt>{PaperTenName}</dt>
+			<dd class="authors">{PaperTenAuthors}</dd>
 			<dd class="link">
-				<a href="https://arxiv.org/abs/id">Link</a>
+				<a href="https://arxiv.org/abs/{PaperTenID}">Link</a>
 			</dd>
 		</dl>
 	</div>
