@@ -9,6 +9,16 @@ MAX_RELEVANCE = 10 #Placeholder, ToDo: Find good value experimentally
 #Return values:
 #   papers: List of lists, each element is a list containing the name, authors and id of a specific paper
 def run_paper_search(term_graph, query):
+    '''
+        Function that searches through all papers and calculates their relevance
+
+        Keyword arguments:
+            term_graph:
+            query: Key term given by the user
+
+        Return values:
+            papers: List of lists, each element in the list contains a name, authors and id of a paper
+    '''
     relevance_metric = construct_relevance_metric(term_graph, query)
     dataset = get_dataset()
     paper_relevances = {}
@@ -23,6 +33,16 @@ def run_paper_search(term_graph, query):
 #Return values:
 #   relevance_dict: Dictionary, key = term (str), value = relevance value (int) for that term
 def construct_relevance_metric(term_graph, query):
+    """
+        Function to construct a relevance metric from the term graph and the user input
+
+        Keyword arguments:
+            term_graph:
+            query: Input of the user
+
+        Return values:
+            relevance_dict: Dictionary that contains the term and a belonging relevance value
+    """
     relevance_dict = {} # Keys are terms as strings, values are single integers representing the terms relevance rating
     relevance_dict[query] = MAX_RELEVANCE
     # Initialising, both so that each term is definitely in the dict, and so that we can track if a (non-negative) relevance has been assigned to each term  
@@ -50,6 +70,16 @@ def construct_relevance_metric(term_graph, query):
 #Return values:
 #   score: Integer, representing relevance of paper according to metric
 def get_paper_relevance(relevance_list, paper: str):
+    """
+        Function that calculates the relevance for a given paper based on the precomputed relevance_list
+
+        Keyword arguments:
+            relevance_list: Precomputed list of relevances
+            paper: List of lists, each element in the list consists out of a name, author and ID of a paper
+
+        Return values:
+            score: Integer, represents the relevance of a paper
+    """
     # Score per word = relevance * (ln(amount of times it appears) + 1); except with 0 for 0 appearances
     # Rationale:  First appearance gives full relevance score, later appearances still benefit score but give diminishing returns
     # Especially, the discount from the nth appearance to the (n+1)th grows with n
