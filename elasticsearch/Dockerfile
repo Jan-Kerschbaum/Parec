@@ -10,4 +10,4 @@ FROM elasticsearch:8.6.1
 #RUN init_data.py
 
 # copy data to es data path
-COPY ./data.json usr/share/elasticsearch/data
+COPY ./data/arxiv_reduced.json usr/share/elasticsearch/data/arxiv_reduced.json
