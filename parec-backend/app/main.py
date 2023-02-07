@@ -17,8 +17,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import json
 from app.src.controller import run_backend
-from index_documents import *
-from get_data_from_es import *
+from app.data.index_documents import *
+from app.data.get_data_from_es import *
 
 
 origins = ["http://frontend:80"]  # origin for deployment in docker
