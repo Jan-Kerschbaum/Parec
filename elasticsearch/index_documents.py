@@ -11,7 +11,9 @@ data_file = './data/arxiv-metadata-oai-snapshot.json'       #load original data 
 indexname = "arxiv_data_reduced"    #choose ES index name
 print(indexname)
 
-url = "http://localhost:9200/{}/_doc".format(indexname)
+#url = "http://localhost:9200/{}/_doc".format(indexname) 
+url = "es/{}/_doc".format(indexname) 
+
 #cafile = 'ca.crt'
 headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
 # username = "elastic"
