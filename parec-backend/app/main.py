@@ -77,3 +77,7 @@ def base_test():
     """
     return HTMLResponse(content=html_content, status_code=200)
 
+
+load_to_ES('arxiv-metadata-oai-snapshot.json')
+reduced_data  = get_data_from_elastic()
+
