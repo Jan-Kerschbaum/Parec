@@ -17,6 +17,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import json
 from app.src.controller import run_backend
+from index_documents import *
+from get_data_from_es import *
+
 
 origins = ["http://frontend:80"]  # origin for deployment in docker
 #origins=["*", "http://localhost:5173"]  # origins for testing locally
@@ -73,3 +76,4 @@ def base_test():
     </html>
     """
     return HTMLResponse(content=html_content, status_code=200)
+
