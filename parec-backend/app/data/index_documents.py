@@ -77,7 +77,7 @@ def filter_dataset(path_to_dataset):
         ref = paper_dict.get('journal-ref')
         try:
             year = int(ref[-4:]) 
-            if 2000 < year <= 2021:
+            if 2016 < year <= 2022:
                 categories.append(category_map[paper_dict.get('categories').split(" ")[0]])
                 authors.append(paper_dict.get('authors'))
                 years.append(year)
