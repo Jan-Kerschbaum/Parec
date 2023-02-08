@@ -78,6 +78,6 @@ def base_test():
     return HTMLResponse(content=html_content, status_code=200)
 
 
-load_to_ES('arxiv-metadata-oai-snapshot.json')
+load_to_ES('arxiv_reduced.json')
 reduced_data  = get_data_from_elastic()
 
