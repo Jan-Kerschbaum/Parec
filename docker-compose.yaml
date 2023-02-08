@@ -1,11 +1,22 @@
 version: "3.9"
 
 services:
+  es:
+    image: elasticsearch:8.6.1
+    container_name: es
+    ports:
+      - 9200:9200
+    networks:
+      - es_net
+
   backend:
     build: /parec-backend/.
     container_name: backend
     networks:
       - backend_net
+      - es_net
+    depends_on:
+      - es
 
   frontend:
     build: /parec-frontend/.
@@ -19,6 +30,4 @@ services:
 
 networks:
   backend_net:
-    
- 
-  
+  es_net: 
