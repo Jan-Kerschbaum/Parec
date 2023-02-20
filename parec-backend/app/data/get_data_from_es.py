@@ -41,5 +41,7 @@ def get_data_from_elastic():
     df = pd.DataFrame(temp)
     return df
 
-# df = get_data_from_elastic()
-# print(df.head())
+df = get_data_from_elastic()
+print(df.head())
+
+df.to_csv('parec-backend/app/data/reduced_data_from_es.csv ', index=False)
