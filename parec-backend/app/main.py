@@ -33,6 +33,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Initialize ES data
+load_to_ES('arxiv_reduced.json')
+
 class Data(BaseModel):
     query: str
 
@@ -50,6 +53,10 @@ def query_handler(query: str = Form(...)):
     Method to handle POST requests from frontend for main functionality. In the body, query should contain the search term.
     """
     function_result = test_function(query)
+
+    # Send query to ES
+    #reduced_data  = get_data_from_elastic(query)
+
     graph = json.dumps({
         0:{"from": "t0", "to": "t1"},
         1:{"from": "t0", "to": "t2"},
@@ -78,6 +85,5 @@ def base_test():
     return HTMLResponse(content=html_content, status_code=200)
 
 
-load_to_ES('arxiv_reduced.json')
-reduced_data  = get_data_from_elastic()
+
 
