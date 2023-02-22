@@ -3,7 +3,7 @@ from elasticsearch.helpers import scan
 import pandas as pd
 
 
-def get_data_from_elastic():
+def get_data_from_elastic(query):
     # Instantiate a client instance
     es = Elasticsearch("http://localhost:9200")
 
@@ -12,14 +12,14 @@ def get_data_from_elastic():
     resp = es.info()
     #print(resp)
 
-    # query: The elasticsearch query.
-    query = {
-        "query": {
-            "match": {
-                "category.keyword": "Artificial Intelligence"   #insert query here
-            }     
-        }
-    }
+    # # query: The elasticsearch query.
+    # query = {
+    #     "query": {
+    #         "match": {
+    #             "category.keyword": "Artificial Intelligence"   #insert query here
+    #         }     
+    #     }
+    # }
 
     # Scan function to get all the data. 
     rel = scan(client=es,             
@@ -41,5 +41,7 @@ def get_data_from_elastic():
     df = pd.DataFrame(temp)
     return df
 
-# df = get_data_from_elastic()
-# print(df.head())
+df = get_data_from_elastic()
+print(df.head())
+
+df.to_csv('parec-backend/app/data/reduced_data_from_es.csv ', index=False)
