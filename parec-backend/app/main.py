@@ -17,8 +17,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import json
 from app.src.controller import run_backend
-from app.data.index_documents import *
-from app.data.get_data_from_es import *
+#from app.data.index_documents import *
+#from app.data.get_data_from_es import *
 
 
 origins = ["http://frontend:80"]  # origin for deployment in docker
@@ -90,6 +90,6 @@ def base_test():
     return HTMLResponse(content=html_content, status_code=200)
 
 
-load_to_ES('arxiv_reduced.json')
-reduced_data  = get_data_from_elastic()
+#load_to_ES('arxiv_reduced.json')
+#reduced_data  = get_data_from_elastic()
 
