@@ -10,7 +10,7 @@ services:
       - es_net
 
   backend:
-    build: /parec-backend/.
+    build: ./parec-backend/.
     container_name: backend
     networks:
       - backend_net
@@ -19,7 +19,7 @@ services:
       - es
 
   frontend:
-    build: /parec-frontend/.
+    build: ./parec-frontend/.
     container_name: frontend
     ports:
       - 80:80
