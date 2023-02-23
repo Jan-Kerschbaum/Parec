@@ -3,7 +3,7 @@ from elasticsearch.helpers import scan
 import pandas as pd
 
 
-def get_data_from_elastic(query):
+def get_data_from_elastic():
     # Instantiate a client instance
     es = Elasticsearch("http://localhost:9200")
 
@@ -12,7 +12,7 @@ def get_data_from_elastic(query):
     resp = es.info()
     #print(resp)
 
-    # # query: The elasticsearch query.
+    # query: The elasticsearch query.
     # query = {
     #     "query": {
     #         "match": {
@@ -20,6 +20,12 @@ def get_data_from_elastic(query):
     #         }     
     #     }
     # }
+
+    query = {
+    "query": {
+        "match_all": {}
+        }
+    }
 
     # Scan function to get all the data. 
     rel = scan(client=es,             
