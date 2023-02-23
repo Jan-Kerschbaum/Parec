@@ -30,9 +30,9 @@ def run_paper_search(term_graph, query):
     paper_tupels.sort(key=lambda x: x[1], reverse=True)
     for i in range(10):
         p_id = paper_tupels[i][0]
-        p_abstract = dataset.loc[dataset["id"] == p_id][0]["abstract"]
+        p_title = dataset.loc[dataset["id"] == p_id][0]["title"]
         p_authors = dataset.loc[dataset["id"] == p_id][0]["authors"]
-        papers.append((p_id, p_abstract, p_authors))
+        papers.append((p_id, p_title, p_authors))
     return papers
 
 
