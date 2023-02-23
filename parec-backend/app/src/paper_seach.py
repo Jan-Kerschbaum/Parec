@@ -1,5 +1,5 @@
 #File to implement the search for papers based on found related terms
-from app.data.data_access import get_dataset #ToDo: Adjust depending on implementation of data access
+from app.data.get_data_from_es import get_data_from_elastic as get_dataset
 from math import log as ln
 
 # Constants
@@ -22,10 +22,17 @@ def run_paper_search(term_graph, query):
     relevance_metric = construct_relevance_metric(term_graph, query)
     dataset = get_dataset()
     paper_relevances = {}
-    for datapoint in dataset:
-        paper_relevances[datapoint.abstract] = get_paper_relevance(relevance_metric, datapoint.abstract) #Use ID for key?
+    for index, datapoint in dataset.iterrows():
+        paper_relevances[datapoint["id"]] = get_paper_relevance(relevance_metric, datapoint["abstract"]) #Use ID for key?
     #Todo: Sort by values, return metadata of those papers
-    ...
+    papers = []
+    paper_tupels = list(paper_relevances.items())
+    paper_tupels.sort(key=lambda x: x[1], reverse=True)
+    for i in range(10):
+        p_id = paper_tupels[i][0]
+        p_abstract = dataset.loc[dataset["id"] == p_id][0]["abstract"]
+        p_authors = dataset.loc[dataset["id"] == p_id][0]["authors"]
+        papers.append((p_id, p_abstract, p_authors))
     return papers
 
 
