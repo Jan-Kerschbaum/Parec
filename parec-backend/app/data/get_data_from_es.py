@@ -9,7 +9,7 @@ def get_data_from_elastic():
 
 
     #call API
-    resp = es.info()
+    #resp = es.info()
     #print(resp)
 
     # query: The elasticsearch query.

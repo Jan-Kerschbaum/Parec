@@ -61,7 +61,9 @@ def construct_relevance_metric(term_graph, query):
     # Iterate over the dictionary until all terms have a relevance assigned to them
     # Note that this doesn't necessarily mean that we have found the lowest possible relevance (~ shortest possible path) for lower relevances,
     # though chances are good for higher ones
-    while -1 in relevance_dict.values():
+    counter = 0
+    while -1 in relevance_dict.values() and counter < 10:
+        counter += 1
         for term in relevance_dict.keys():
             parent_relevances = []
             for key in term_graph.keys():
@@ -73,6 +75,9 @@ def construct_relevance_metric(term_graph, query):
             # (Realistically this probably shouldn't happen, but given the complecity of the function, this little check isn't relevant for time-complexity)
             if new_relevance > 0 and new_relevance > relevance_dict[term]:
                 relevance_dict[term] = new_relevance
+    for k in relevance_dict.keys():
+        if relevance_dict[k] == -1:
+            relevance_dict[k] = 0
     return relevance_dict
 
 
