@@ -15,7 +15,9 @@ def get_term_graph(query: str, depth: int):
     term_graph[query] = find_related_terms_query(query)
     for i in range(depth):
         # Flattening the list of values in the dicitonary for all keys. Each present term is a candidate for a potential search
-        candidate_terms = set(sum(term_graph.values(), []))
+        #candidate_terms = set(sum(term_graph.values(), []))
+        candidate_terms = list(term_graph.values())
+        candidate_terms = [item for sublist in candidate_terms for item in sublist]
         for term in candidate_terms:
             # No need to search for terms whose results we already have
             if not term in term_graph.keys():
@@ -28,7 +30,7 @@ def find_related_terms_query(query: str):
     load_model(False)
     related_words = []
     try:
-        related_words, _ = MODEL.similar_words(keywords=[query], num_words=WORDS_PER_SEARCH, use_index=True)
+        related_words, _ = MODEL.similar_words(keywords=[query], num_words=WORDS_PER_SEARCH)
     except:
         topic_words, _, _, _ = MODEL.query_topics(query=query, num_topics=1)
         #ToDo: Take topic words over several topics?
@@ -42,7 +44,7 @@ def find_related_terms_query(query: str):
 def find_related_terms(source: str):
     load_model(False)
     # Model is Top2Vec model used for clustering in preprcessing
-    related_words, _ = MODEL.similar_words(keywords=[source], num_words=WORDS_PER_SEARCH, use_index=True)
+    related_words, _ = MODEL.similar_words(keywords=[source], num_words=WORDS_PER_SEARCH)
     #Todo: Set ef?
     return related_words
 
