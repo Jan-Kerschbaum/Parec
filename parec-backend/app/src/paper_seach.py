@@ -1,5 +1,6 @@
 #File to implement the search for papers based on found related terms
-from app.data.get_data_from_es import get_data_from_elastic as get_dataset
+#from app.data.get_data_from_es import get_data_from_elastic as get_dataset
+from app.data.dummy_load import load_data_dummy as get_dataset
 from math import log as ln
 
 # Constants
@@ -12,15 +13,15 @@ def run_paper_search(term_graph, query):
     '''
         Function that searches through all papers and calculates their relevance
 
-        Keyword arguments:
+        Keyword Arguments:
             term_graph:
-            query: Key term given by the user
+            query (string): Key term given by the user
 
-        Return values:
-            papers: List of lists, each element in the list contains a name, authors and id of a paper
+        Return Values:
+            papers (list): List of lists, each element in the list contains a name, authors and id of a paper
     '''
     relevance_metric = construct_relevance_metric(term_graph, query)
-    dataset = get_dataset()
+    dataset = get_dataset("arxiv_data_modified")
     paper_relevances = {}
     for index, datapoint in dataset.iterrows():
         paper_relevances[datapoint["id"]] = get_paper_relevance(relevance_metric, datapoint["abstract"]) #Use ID for key?
@@ -30,8 +31,11 @@ def run_paper_search(term_graph, query):
     paper_tupels.sort(key=lambda x: x[1], reverse=True)
     for i in range(10):
         p_id = paper_tupels[i][0]
-        p_title = dataset.loc[dataset["id"] == p_id][0]["title"]
-        p_authors = dataset.loc[dataset["id"] == p_id][0]["authors"]
+        p_title = dataset.loc[dataset["id"] == p_id]["title"].tolist()[0] #list index out of range
+        p_authors = dataset.loc[dataset["id"] == p_id]["author"].tolist()[0]
+        p_id = str(p_id)
+        while len(p_id) < 9:
+            p_id += "0"
         papers.append((p_id, p_title, p_authors))
     return papers
 
@@ -45,10 +49,10 @@ def construct_relevance_metric(term_graph, query):
 
         Keyword arguments:
             term_graph:
-            query: Input of the user
+            query (string): Input of the user
 
         Return values:
-            relevance_dict: Dictionary that contains the term and a belonging relevance value
+            relevance_dict (dict): Dictionary that contains the term and a belonging relevance value
     """
     relevance_dict = {} # Keys are terms as strings, values are single integers representing the terms relevance rating
     relevance_dict[query] = MAX_RELEVANCE
@@ -89,11 +93,11 @@ def get_paper_relevance(relevance_list, paper: str):
         Function that calculates the relevance for a given paper based on the precomputed relevance_list
 
         Keyword arguments:
-            relevance_list: Precomputed list of relevances
-            paper: List of lists, each element in the list consists out of a name, author and ID of a paper
+            relevance_list (list): Precomputed list of relevances
+            paper(list): List of lists, each element in the list consists out of a name, author and ID of a paper
 
         Return values:
-            score: Integer, represents the relevance of a paper
+            score (int): Represents the relevance of a paper
     """
     # Score per word = relevance * (ln(amount of times it appears) + 1); except with 0 for 0 appearances
     # Rationale:  First appearance gives full relevance score, later appearances still benefit score but give diminishing returns
