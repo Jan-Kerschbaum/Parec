@@ -11,6 +11,17 @@ MODEL = None
 #Return values:
 #   term_graph: Dictionary, keys = terms, values = related terms found for corresponding key
 def get_term_graph(query: str, depth: int):
+    '''
+        Function that builds the term graph. It searches recursively up to depth times.
+
+        Keywords Arguments:
+            query (string) : Input by the user
+            depth (int): Number of execution times of the related-term-search
+
+        Return Values:
+            term_graph (dict): Dictionary; keys = terms, values = related terms found for the corresponding key
+
+    '''
     term_graph = {}
     term_graph[query] = find_related_terms_query(query)
     for i in range(depth):
@@ -27,6 +38,15 @@ def get_term_graph(query: str, depth: int):
 
 
 def find_related_terms_query(query: str):
+    '''
+        Function for finding related terms for a given query
+
+        Keyword Arguments:
+            query (string): Input
+
+        Return Values:
+            related_words (list): List of related terms found for query
+    '''
     load_model(False)
     related_words = []
     try:
@@ -42,14 +62,33 @@ def find_related_terms_query(query: str):
 #Return values:
 #   related_terms: List of terms found for source
 def find_related_terms(source: str):
+    '''
+        Function for finding related terms with a Top2Vec model
+
+        Keyword Arguments:
+            source (string): Input
+
+        Return Values:
+            related_words (list): List of terms found for source
+
+    '''
     load_model(False)
-    # Model is Top2Vec model used for clustering in preprcessing
+    # Model is Top2Vec model used for clustering in preprocessing
     related_words, _ = MODEL.similar_words(keywords=[source], num_words=WORDS_PER_SEARCH)
     #Todo: Set ef?
     return related_words
 
 
 def load_model(override: bool) -> None:
+    '''
+        Function for loading the Top2Vec model
+
+        Keyword Arguments:
+            override (bool):
+
+        Return Values:
+            none
+    '''
     global MODEL
     if MODEL == None or override:
         MODEL = Top2Vec.load(MODEL_FILE_PATH)

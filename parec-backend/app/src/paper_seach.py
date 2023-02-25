@@ -13,11 +13,11 @@ def run_paper_search(term_graph, query):
     '''
         Function that searches through all papers and calculates their relevance
 
-        Keyword arguments:
+        Keyword Arguments:
             term_graph:
             query: Key term given by the user
 
-        Return values:
+        Return Values:
             papers: List of lists, each element in the list contains a name, authors and id of a paper
     '''
     relevance_metric = construct_relevance_metric(term_graph, query)
