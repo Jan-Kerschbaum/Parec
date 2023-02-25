@@ -13,7 +13,7 @@ def load_to_ES(path_to_data):
     # index each document
     count = len(data["root"])
     indexname = "arxiv_data_modiefied"    #choose ES index name
-    url = "http://localhost:9200/{}/_doc".format(indexname)              #"es/{}/_doc".format(indexname)             
+    url = "es/{}/_doc".format(indexname)             #"http://localhost:9200/{}/_doc".format(indexname)              
     headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
     #cafile = 'ca.crt'
     #username = "elastic"
