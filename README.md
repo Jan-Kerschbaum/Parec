@@ -48,15 +48,13 @@ To run Parec, you need to have Docker and Docker Compose installed on your syste
 
 The main functionality of the backend is to handle the incoming user queries, retrieve data from Elasticsearch and provide it to the frontend in the desired format. It employs the FastApi and Python-Multipart modules for the frontend to interact with. 
 
-The code is organized into the following directories:
+The code in the main code for our application can be found in the [`app`](parec-backend/app) folder, including the endpoints that handle incoming requests and return the relevant responses. The code is further organized into the following directories:
 
-- [`app`](parec-backend/app): Here you can find the main code for our application, including the endpoints that handle incoming requests and return the relevant responses.
+- [`data`](parec-backend/app/data): This directory contains the scripts that are responsible for loading the data from Elasticsearch, transforming it as necessary, and returning it to the application.
 
-    - [`data`](parec-backend/app/data): This directory contains the scripts that are responsible for loading the data from Elasticsearch, transforming it as necessary, and returning it to the application.
+- [`src`](parec-backend/app/src): This directory contains the main components of the application, such as the paper recommender that searches through the papers, the file that finds related terms based on a user query and the controller that handles queries.
 
-    - [`src`](parec-backend/app/src): This directory contains the main components of the application, such as the paper recommender that searches through the papers, the file that finds related terms based on a user query and the controller that handles queries.
-
-    - [`tests/`](parec-backend/app/tests): This directory contains the test functions for the backend code.
+- [`tests/`](parec-backend/app/tests): This directory contains the test functions for the backend code.
 
 
 ### Frontend
