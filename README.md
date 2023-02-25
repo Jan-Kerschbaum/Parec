@@ -19,7 +19,8 @@ The application consists of a backend and a frontend. The backend is responsible
     1. [Backend](#backtranslation)
     2. [Frontend](#mixup)
 4. 🗃️ [Data](#data)
-5. 📑 [References](#references)
+5. 💻 [Pipeline](#pipeline)
+6. 📑 [References](#references)
 
 ***
 ## 🛠️ Set Up <a name="setup"></a>
@@ -32,7 +33,7 @@ To run Parec, you need to have Docker and Docker Compose installed on your syste
 
 1. Clone the repository: `git clone https://github.com/Jan-Kerschbaum/Parec.git`
 2. Navigate into the Parec directory: `cd Parec`
-3. Run the following command to start the application: `docker-compose build` ➡️ `docker-compose up`
+3. 🚀 Run the following command to start the application: `docker-compose build` ➡️ `docker-compose up`
 4. Open a web browser and go to http://localhost:9200. The frontend should now be running.
 
 ***
@@ -46,7 +47,7 @@ To run Parec, you need to have Docker and Docker Compose installed on your syste
 
 ### Backend
 
-The main functionality of the backend is to handle the incoming user queries, retrieve data from Elasticsearch and provide it to the frontend in the desired format. The backend is written in Python and uses the [Flask](https://flask.palletsprojects.com/en/2.2.x/) web framework and Elasticsearch. It provides a REST API for the frontend to interact with. 
+The main functionality of the backend is to handle the incoming user queries, retrieve data from Elasticsearch and provide it to the frontend in the desired format. The backend is written in Python and uses the [Flask](https://flask.palletsprojects.com/en/2.2.x/) web framework and Elasticsearch. It provides a employs the FastApi for the frontend to interact with. 
 
 The code is organized into the following directories:
 
@@ -59,7 +60,7 @@ The code is organized into the following directories:
 
 ### Frontend
 
-The Parec frontend is a web-based user interface for the Parec application. It allows users to input a query and receive a list of recommended research papers based on the query, as well as a visual representation of the relationships between topics related to the query. It is built using the [React](https://reactjs.org/) framework, with additional libraries for data visualization. It communicates with the backend using HTTP requests to receive search results and topic data.
+The Parec frontend is a web-based user interface for the Parec application. It allows users to input a query and receive a list of recommended research papers based on the query, as well as a visual representation of the relationships between topics related to the query. It is built using the [React](https://reactjs.org/) framework, with additional libraries for data visualization such as [Svelte](https://svelte.dev/), [JQuery](https://jquery.com/) and [Vis](https://visjs.org/). It communicates with the backend using HTTP requests to receive search results and topic data.
 
 The Parec frontend code is organized into several directories and files:
 
@@ -76,3 +77,27 @@ The Parec frontend code is organized into several directories and files:
 - `utils.js`: Helper functions used throughout the frontend code.
 
 - `package.json`: Contains metadata about the frontend, such as dependencies and scripts for building and running the application.
+
+ℹ️ All necessary dependencies are indicated in the [requirements.txt](parec-backend/requirements.txt) file.
+
+
+***
+## 🗃️ Data <a name="data"></a>
+
+The dataset we use is provided by [kaggle](https://www.kaggle.com/datasets/Cornell-University/arxiv?resource=download). It contains paper titles, paper abstracts, and their subject categories from [arXiv](https://arxiv.org/).
+
+### Preprocessing
+
+Due to resource reasons, we confine ourselves to papers from computer science [categories](parec-backend/app/data/cs_categories.json) from the years 2016-2022, resulting in 11932 documents. We do not apply further preprocessing of the abstracts, in order to keep subtextual relations between the words intact and because our topic model, Top2Vec, we will filter out stopwords by default. It further performs lemmatization to reduce words to their base form, which can help with topic modeling.
+
+***
+## 💻 Pipeline <a name="pipeline"></a>
+
+Our application clusters papers using [Top2Vec](https://github.com/ddangelov/Top2Vec)'s topic modeling to limit the search space. At runtime, when a user query is received, we search the dataset for related terms recursively, creating a graph of related terms. We assign a relevance metric to each term, declining as we move outwards from the node representing the user query. We then retrieve potentially relevant candidate papers from our reduced search space and rank them based on the relevance metric. The top candidate papers, along with their metadata, are sent to the frontend for visualization along with the graph defined by its edges. The application also handles error cases, such as empty queries, initialization errors, or no query being sent (in which case, example data is used).
+
+**Top2Vec:**
+
+Top2Vec is a topic modeling algorithm that uses word embeddings to generate topic vectors for a given corpus. It starts by training a word embedding model on the corpus and then clusters the word embeddings to generate topic vectors. The number of topics is not specified beforehand but is instead inferred from the data. Top2Vec is known for its ability to handle large datasets efficiently and is especially useful for document clustering and topic exploration tasks.
+
+**Elasticsearch:**
+
