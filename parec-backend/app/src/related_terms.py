@@ -2,7 +2,7 @@
 from top2vec import Top2Vec
 
 #Constants
-WORDS_PER_SEARCH = 5
+WORDS_PER_SEARCH = 3 # was 5
 MODEL_FILE_PATH = r"./app/data/t2v_model"
 MODEL = None
 

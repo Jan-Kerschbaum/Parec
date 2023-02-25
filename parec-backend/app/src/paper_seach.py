@@ -1,5 +1,6 @@
 #File to implement the search for papers based on found related terms
-from app.data.get_data_from_es import get_data_from_elastic as get_dataset
+#from app.data.get_data_from_es import get_data_from_elastic as get_dataset
+from app.data.dummy_load import load_data_dummy as get_dataset
 from math import log as ln
 
 # Constants
@@ -30,8 +31,8 @@ def run_paper_search(term_graph, query):
     paper_tupels.sort(key=lambda x: x[1], reverse=True)
     for i in range(10):
         p_id = paper_tupels[i][0]
-        p_title = dataset.loc[dataset["id"] == p_id][0]["title"]
-        p_authors = dataset.loc[dataset["id"] == p_id][0]["authors"]
+        p_title = dataset.loc[dataset["id"] == p_id]["title"].tolist()[0] #list index out of range
+        p_authors = dataset.loc[dataset["id"] == p_id]["author"].tolist()[0]
         papers.append((p_id, p_title, p_authors))
     return papers
 

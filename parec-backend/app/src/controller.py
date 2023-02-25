@@ -4,7 +4,7 @@ from app.src.paper_seach import run_paper_search
 import json
 
 #Constants
-SEARCH_DEPTH = 5
+SEARCH_DEPTH = 3 # was 5
 
 #Main control function for backend operation
 #Return values:
