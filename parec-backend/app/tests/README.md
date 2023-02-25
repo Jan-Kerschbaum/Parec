@@ -1,9 +1,11 @@
+***
 ℹ️ This folder contains test scripts for the Parec backend. These scripts can be executed to ensure the functionality and performance of the backend.
+***
 
 ## ⚙️ Prerequisites 
 
 - Python 3.x
-- Required packages are listed in requirements.txt
+- Required packages are listed in [requirements.txt](parec-backend/requirements.txt)
 - A running instance of the Parec backend
 
 ## ⚒️ Installation  
