@@ -47,7 +47,21 @@
       		nodes: nodes,
       		edges: edges,
     	};
-    	var options = {}
+    	var options = {
+			groups:{
+				"queryGroup": {
+					color:{
+						background:'#4f0d02',
+						border: "#6e180a"
+					},
+					font:{
+						multi: true,
+						color: "#ffffff"
+					},
+				"shape": "box",
+				}
+			}
+		}
     	network = new vis.Network(container, data, options)
 	})
 	/**
@@ -111,7 +125,11 @@
 					var to_node = String(val.to)
 					if(!found_nodes.includes(from_node)){
 						found_nodes.push(from_node)
-						nodesArray.push({id: current_node_num, label: from_node})
+						if(from_node == user_query){
+							nodesArray.push({id: current_node_num, group: "queryGroup", label: "<b>" + from_node + "</b>"})
+						}else{
+							nodesArray.push({id: current_node_num, label: from_node})
+						}
 						ids[from_node] = current_node_num
 						current_node_num += 1
 					}
