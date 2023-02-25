@@ -15,10 +15,10 @@ def run_paper_search(term_graph, query):
 
         Keyword Arguments:
             term_graph:
-            query: Key term given by the user
+            query (string): Key term given by the user
 
         Return Values:
-            papers: List of lists, each element in the list contains a name, authors and id of a paper
+            papers (list): List of lists, each element in the list contains a name, authors and id of a paper
     '''
     relevance_metric = construct_relevance_metric(term_graph, query)
     dataset = get_dataset()
@@ -49,10 +49,10 @@ def construct_relevance_metric(term_graph, query):
 
         Keyword arguments:
             term_graph:
-            query: Input of the user
+            query (string): Input of the user
 
         Return values:
-            relevance_dict: Dictionary that contains the term and a belonging relevance value
+            relevance_dict (dict): Dictionary that contains the term and a belonging relevance value
     """
     relevance_dict = {} # Keys are terms as strings, values are single integers representing the terms relevance rating
     relevance_dict[query] = MAX_RELEVANCE
@@ -93,11 +93,11 @@ def get_paper_relevance(relevance_list, paper: str):
         Function that calculates the relevance for a given paper based on the precomputed relevance_list
 
         Keyword arguments:
-            relevance_list: Precomputed list of relevances
-            paper: List of lists, each element in the list consists out of a name, author and ID of a paper
+            relevance_list (list): Precomputed list of relevances
+            paper(list): List of lists, each element in the list consists out of a name, author and ID of a paper
 
         Return values:
-            score: Integer, represents the relevance of a paper
+            score (int): Represents the relevance of a paper
     """
     # Score per word = relevance * (ln(amount of times it appears) + 1); except with 0 for 0 appearances
     # Rationale:  First appearance gives full relevance score, later appearances still benefit score but give diminishing returns
