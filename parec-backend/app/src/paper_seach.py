@@ -33,6 +33,9 @@ def run_paper_search(term_graph, query):
         p_id = paper_tupels[i][0]
         p_title = dataset.loc[dataset["id"] == p_id]["title"].tolist()[0] #list index out of range
         p_authors = dataset.loc[dataset["id"] == p_id]["author"].tolist()[0]
+        p_id = str(p_id)
+        while len(p_id) < 9:
+            p_id += "0"
         papers.append((p_id, p_title, p_authors))
     return papers
 
