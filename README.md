@@ -1,8 +1,6 @@
 # 💡 Parec
 
-Parec is a web application that offers a comprehensive solution for knowledge discovery and research recommendations. By taking in a user query on a particular topic, it quickly generates a knowledge graph of related concepts and recommends the top cientific articles from the [arXiv](https://arxiv.org/) database to match the user's interests. Parec streamlines the process of finding relevant information and provides an innovative solution for researchers and students alike.
-
-The application consists of a backend and a frontend. The backend is responsible for retrieving data from [Elasticsearch](https://www.elastic.co/de/) and providing it to the frontend via a REST API. The frontend is a web application that allows users to search and view recommended articles.
+This project is part of the *Data Science for Text Analytics* class of Heidelberg University. 
 
 ***
 ## Team Members
@@ -13,6 +11,7 @@ The application consists of a backend and a frontend. The backend is responsible
 
 ***
 ## Table of contents
+1. [Introduction](#introduction)
 1. 🛠️ [Set Up](#set-up)
 2. ⚙️  [Usage](#usage)
 3. 🏯 [Code Structure](#code-structure)
@@ -20,6 +19,14 @@ The application consists of a backend and a frontend. The backend is responsible
     2. [Frontend](#mixup)
 4. 🗃️ [Data](#data)
 5. 💻 [Pipeline](#pipeline)
+
+***
+## 🛠️ Introduction <a name="introduction"></a>
+
+Parec is a web application that offers a comprehensive solution for knowledge discovery and research recommendations. By taking in a user query on a particular topic, it quickly generates a knowledge graph of related concepts and recommends the top cientific articles from the [arXiv](https://arxiv.org/) database to match the user's interests. Parec streamlines the process of finding relevant information and provides an innovative solution for researchers and students alike.
+
+The application consists of a backend and a frontend. The backend is responsible for retrieving data from [Elasticsearch](https://www.elastic.co/de/) and providing it to the frontend via a REST API. The frontend is a web application that allows users to search and view recommended articles.
+
 
 ***
 ## 🛠️ Set Up <a name="setup"></a>
