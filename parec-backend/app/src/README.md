@@ -1,5 +1,5 @@
 ***
-ℹ️ This directory contains the main components of the Parec Backend Application, including the paper recommender, related term finder, and controller.
+ℹ️ This directory contains the main source components of the Parec Backend Application, including the paper recommender, related term finder, and controller.
 ***
 
 ## `controller.py`
