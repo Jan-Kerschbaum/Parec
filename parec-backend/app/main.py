@@ -34,7 +34,7 @@ app.add_middleware(
 
 # Initialize ES data
 try:
-    load_to_ES("/app/data/arxiv_reduced.json")
+    load_to_ES("parec-backend/app/data/arxiv_reduced_modified.json")
 except FileNotFoundError:
     print(f"File was not found at path {os.path.abspath(__file__)}")
 
