@@ -1,8 +1,6 @@
 # 💡 Parec
 
-Parec is a web application that offers a comprehensive solution for knowledge discovery and research recommendations. By taking in a user query on a particular topic, it quickly generates a knowledge graph of related concepts and recommends the top cientific articles from the [arXiv](https://arxiv.org/) database to match the user's interests. Parec streamlines the process of finding relevant information and provides an innovative solution for researchers and students alike.
-
-The application consists of a backend and a frontend. The backend is responsible for retrieving data from [Elasticsearch](https://www.elastic.co/de/) and providing it to the frontend via a REST API. The frontend is a web application that allows users to search and view recommended articles.
+This project is part of the *Data Science for Text Analytics* class of Heidelberg University. 
 
 ***
 ## Team Members
@@ -13,14 +11,22 @@ The application consists of a backend and a frontend. The backend is responsible
 
 ***
 ## Table of contents
+1. [Introduction](#introduction)
 1. 🛠️ [Set Up](#set-up)
 2. ⚙️  [Usage](#usage)
 3. 🏯 [Code Structure](#code-structure)
-    1. [Backend](#backtranslation)
-    2. [Frontend](#mixup)
+    1. [Backend](#backend)
+    2. [Frontend](#frontend)
 4. 🗃️ [Data](#data)
 5. 💻 [Pipeline](#pipeline)
-6. 📑 [References](#references)
+
+***
+## 🛠️ Introduction <a name="introduction"></a>
+
+Parec is a web application that offers a comprehensive solution for knowledge discovery and research recommendations. By taking in a user query on a particular topic, it quickly generates a knowledge graph of related concepts and recommends the top cientific articles from the [arXiv](https://arxiv.org/) database to match the user's interests. Parec streamlines the process of finding relevant information and provides an innovative solution for researchers and students alike.
+
+The application consists of a backend and a frontend. The backend is responsible for retrieving data from [Elasticsearch](https://www.elastic.co/de/) and providing it to the frontend via a REST API. The frontend is a web application that allows users to search and view recommended articles.
+
 
 ***
 ## 🛠️ Set Up <a name="setup"></a>
@@ -39,23 +45,24 @@ To run Parec, you need to have Docker and Docker Compose installed on your syste
 ***
 ## ⚙️ Usage <a name="usage"></a>
 
-1. Use the search bar to search for topics you are interested in. ℹ️ Note that the current version is restricted to topics related to computer science.
-2. Click on a link to view the paper on [arXiv](https://arxiv.org/).
+1. Use the search bar to enter a topic you are interested in. (ℹ️ Note that the current version is restricted to topics related to computer science.)
+2. Click the `Search` button.
+2. On the right, you find recommended papers based on your topic. Click on a link to view the paper on [arXiv](https://arxiv.org/).
 
 ***
 ## 🏯 Code-Structure <a name="code-structure"></a>
 
 ### Backend
 
-The main functionality of the backend is to handle the incoming user queries, retrieve data from Elasticsearch and provide it to the frontend in the desired format. The backend is written in Python and uses the [Flask](https://flask.palletsprojects.com/en/2.2.x/) web framework and Elasticsearch. It provides a employs the FastApi for the frontend to interact with. 
+The main functionality of the backend is to handle the incoming user queries, retrieve data from Elasticsearch and provide it to the frontend in the desired format. It employs the FastApi and Python-Multipart modules for the frontend to interact with. 
 
-The code is organized into the following directories:
+The code in the main code for our application can be found in the [`app`](parec-backend/app) folder, including the endpoints that handle incoming requests and return the relevant responses. The code is further organized into the following directories:
 
-- `app`: This directory contains the main Flask application code, including the endpoints that handle incoming requests and return the relevant responses.
+- [`data`](parec-backend/app/data): This directory contains the scripts that are responsible for loading the data from Elasticsearch, transforming it as necessary, and returning it to the application.
 
-- `data`: This directory contains the scripts that are responsible for loading the data from Elasticsearch, transforming it as necessary, and returning it to the application.
+- [`src`](parec-backend/app/src): This directory contains the main components of the application, such as the paper recommender that searches through the papers, the file that finds related terms based on a user query and the controller that handles queries.
 
-- `models`: This directory contains the definition of the models used by the backend, including the Elasticsearch mappings used to index the data.
+- [`tests/`](parec-backend/app/tests): This directory contains the test functions for the backend code.
 
 
 ### Frontend
