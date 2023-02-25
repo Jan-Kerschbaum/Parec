@@ -18,13 +18,16 @@ services:
   backend:
     build: ./parec-backend/.
     container_name: backend
+    ports: 
+      - 8000:8000
     networks:
       - backend_net
       - es_net
     depends_on:
       - es
     environment:
-      - ELASTICSEARCH_URL=http://es:9200
+      - ELASTICSEARCH_HOST=es
+      - ELASTICSEARCH_PORT=9200
 
   frontend:
     build: ./parec-frontend/.
