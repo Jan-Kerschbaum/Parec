@@ -45,8 +45,9 @@ To run Parec, you need to have Docker and Docker Compose installed on your syste
 ***
 ## ⚙️ Usage <a name="usage"></a>
 
-1. Use the search bar to search for topics you are interested in. ℹ️ Note that the current version is restricted to topics related to computer science.
-2. Click on a link to view the paper on [arXiv](https://arxiv.org/).
+1. Use the search bar to enter a topic you are interested in. (ℹ️ Note that the current version is restricted to topics related to computer science.)
+2. Click the `Search` button.
+2. On the right, you find recommended papers based on your topic. Click on a link to view the paper on [arXiv](https://arxiv.org/).
 
 ***
 ## 🏯 Code-Structure <a name="code-structure"></a>
