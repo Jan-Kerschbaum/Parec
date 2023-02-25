@@ -15,8 +15,8 @@ This project is part of the *Data Science for Text Analytics* class of Heidelber
 1. 🛠️ [Set Up](#set-up)
 2. ⚙️  [Usage](#usage)
 3. 🏯 [Code Structure](#code-structure)
-    1. [Backend](#backtranslation)
-    2. [Frontend](#mixup)
+    1. [Backend](#backend)
+    2. [Frontend](#frontend)
 4. 🗃️ [Data](#data)
 5. 💻 [Pipeline](#pipeline)
 
