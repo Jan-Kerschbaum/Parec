@@ -12,8 +12,8 @@ def load_to_ES(path_to_data):
 
     # index each document
     count = len(data["root"])
-    indexname = "arxiv_data_reduced"    #choose ES index name
-    url = "es/{}/_doc".format(indexname)    # container name "es" instead of url = "http://localhost:9200/{}/_doc".format(indexname)
+    indexname = "arxiv_data_modiefied"    #choose ES index name
+    url = "http://localhost:9200/{}/_doc".format(indexname)              #"es/{}/_doc".format(indexname)             
     headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
     #cafile = 'ca.crt'
     #username = "elastic"
@@ -30,4 +30,4 @@ def load_to_ES(path_to_data):
     print("Done!")
 
 
-#load_to_ES('parec-backend/app/data/arxiv_reduced.json')
+#load_to_ES('parec-backend/app/data/arxiv_reduced_modified.json')
