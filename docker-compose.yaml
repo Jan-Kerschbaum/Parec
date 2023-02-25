@@ -6,6 +6,8 @@ services:
     container_name: es
     ports:
       - 9200:9200
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
     networks:
       - es_net
 
@@ -17,6 +19,8 @@ services:
       - es_net
     depends_on:
       - es
+    environment:
+      - ELASTICSEARCH_URL=http://es:9200
 
   frontend:
     build: ./parec-frontend/.
@@ -31,3 +35,7 @@ services:
 networks:
   backend_net:
   es_net: 
+
+volumes:
+  esdata:
+    driver: local
