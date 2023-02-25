@@ -60,7 +60,7 @@ The code is organized into the following directories:
 
 ### Frontend
 
-The Parec frontend is a web-based user interface for the Parec application. It allows users to input a query and receive a list of recommended research papers based on the query, as well as a visual representation of the relationships between topics related to the query. It is built using the [React](https://reactjs.org/) framework, with additional libraries for data visualization such as [Svelte](https://svelte.dev/), [JQuery](https://jquery.com/) and [Vis](https://visjs.org/). It communicates with the backend using HTTP requests to receive search results and topic data.
+The Parec frontend is a web-based user interface for the Parec application. It allows users to input a query and receive a list of recommended research papers based on the query, as well as a visual representation of the relationships between topics related to the query. It is built using [Svelte](https://svelte.dev/), with additional libraries for data visualization such as [JQuery](https://jquery.com/) and [Vis](https://visjs.org/). It communicates with the backend using HTTP requests to receive search results and topic data.
 
 The Parec frontend code is organized into several directories and files:
 
