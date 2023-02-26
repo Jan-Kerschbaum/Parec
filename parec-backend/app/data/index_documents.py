@@ -7,7 +7,7 @@ import requests
 from elasticsearch import Elasticsearch
 
 
-def load_to_ES()                  #(path_to_data: str, index_name: str, es_url: str): "data/arxiv_reduced_modified.json", "arxiv_data_modified", "es"
+def load_to_ES(path_to_data: str, index_name: str, es_url: str):
     """
     Indexes a list of JSON documents to Elasticsearch.
 
@@ -20,10 +20,8 @@ def load_to_ES()                  #(path_to_data: str, index_name: str, es_url: 
         ConnectionError: If there is a problem connecting to Elasticsearch.
 
     """
-    es_url = "http://localhost:9200"
-    index_name = "arxiv_data_modified"
 
-    with open("arxiv_reduced_modified.json") as f:
+    with open(path_to_data) as f:
         data = json.load(f)
 
     # index each document
