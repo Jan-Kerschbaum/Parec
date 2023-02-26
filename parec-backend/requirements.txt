@@ -4,3 +4,5 @@ uvicorn>=0.15.0,<0.16.0
 python-multipart
 top2vec==1.0.27
 elasticsearch
+nltk
+stopwords
