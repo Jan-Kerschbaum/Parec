@@ -32,7 +32,7 @@ def load_to_ES(path_to_data: str, index_name: str, es_url: str):
     for each in range(count):
         try:
             doc = data['root'][each]
-            r = requests.post(index_url, data=json.dumps(doc), headers=headers)  #auth=(username, password), verify=cafile
+            r = requests.post(index_url, data=json.dumps(doc), headers=headers, auth=("elastic","changeme"))#, verify=cafile
         except requests.exceptions.RequestException as e:
             raise ConnectionError(f"Failed to index document: {doc}. {str(e)}")
         

@@ -16,7 +16,7 @@ def get_data_from_elastic(index_name: str, save_df=False):
         pd.DataFrame: A Pandas DataFrame containing the retrieved data.
     """
     # Instantiate a client instance
-    es = Elasticsearch("http://localhost:9200")
+    es = Elasticsearch("http://es:9200", http_auth=('elastic', 'changeme'))
 
     # Define the Elasticsearch query to retrieve all documents in the index
     query = {

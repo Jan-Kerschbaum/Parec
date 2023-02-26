@@ -33,10 +33,10 @@ app.add_middleware(
 
 # Initialize ES data
 try:
-    load_to_ES("data/arxiv_reduced_modified.json", "arxiv_data_modified", "http://es:9200")
+    load_to_ES("./app/data/arxiv_reduced_modified.json", "arxiv_data_modified", "http://es:9200")
 except FileNotFoundError:
     print(f"File was not found at path {os.path.abspath(__file__)}")
-
+#load_to_ES("data/arxiv_reduced_modified.json", "arxiv_data_modified", "es")
 
 class Data(BaseModel):
     query: str
@@ -57,6 +57,8 @@ def query_handler(query: str = Form(...)):
     Method to handle POST requests from frontend for main functionality. In the body, query should contain the search term.
     """
     function_result = test_function(query)
+
+    print(function_result)
 
     #edges = json.dumps({
     #    0: {"from": "t0", "to": "t1"},
