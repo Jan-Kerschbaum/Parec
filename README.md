@@ -43,6 +43,9 @@ To run Parec, you need to have Docker and Docker Compose installed on your syste
 3. 🚀 Run the following command to start the application: `docker-compose build` ➡️ `docker-compose up`
 4. Open a web browser and go to http://localhost:9200. The frontend should now be running.
 
+
+ℹ️ All necessary dependencies are indicated in the [requirements.txt](parec-backend/requirements.txt) file.
+
 ***
 ## ⚙️ Usage <a name="usage"></a>
 
@@ -72,7 +75,6 @@ The Parec frontend is a web-based user interface for the Parec application. It a
 
 The Parec frontend code is organized into several directories and files, a detailed description can be found in the [parec-frontend](parec-frontend) directory. Some important files are:
 
-%%%%%%%%- `public/`: This directory contains the public assets for the frontend, such as the index.html file and the favicon.
 
 - 🗂️ [`src/`](parec-frontend/src): This directory contains the source code for the Parec web application, including JavaScript, TypeScript, HTML, and CSS files that define the frontend logic, layout, and styling of the application, as well as additional assets such as images and fonts:
 
@@ -84,8 +86,6 @@ The Parec frontend code is organized into several directories and files, a detai
 
 - **🛳️ [`Dockerfile`](parec-frontend/Dockerfile):** This Dockerfile builds and deploys a frontend application using `Node.js` and `Nginx`, copying over the necessary files and configurations and installing required dependencies in the process.
 
-
-ℹ️ All necessary dependencies are indicated in the [requirements.txt](parec-backend/requirements.txt) file.
 
 ***
 ## 🗃️ Data <a name="data"></a>
