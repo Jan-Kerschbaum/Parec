@@ -3,7 +3,7 @@ from elasticsearch.helpers import scan
 import pandas as pd
 import os
 
-def get_data_from_elastic(save_df=False):
+def get_data_from_elastic(index_name: str, save_df=False):
     """
     Retrieve data from an Elasticsearch index and return as a Pandas DataFrame.
 
@@ -16,7 +16,6 @@ def get_data_from_elastic(save_df=False):
         pd.DataFrame: A Pandas DataFrame containing the retrieved data.
     """
     # Instantiate a client instance
-    index_name = "arxiv_data_modified"
     es = Elasticsearch("http://localhost:9200")
 
     # Define the Elasticsearch query to retrieve all documents in the index
