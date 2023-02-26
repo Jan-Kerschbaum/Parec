@@ -21,18 +21,18 @@ def run_paper_search(term_graph, query):
             papers (list): List of lists, each element in the list contains a name, authors and id of a paper
     '''
     relevance_metric = construct_relevance_metric(term_graph, query)
-    dataset = get_dataset("arxiv_data_modified")
+    dataset = get_dataset()
     paper_relevances = {}
     for index, datapoint in dataset.iterrows():
-        paper_relevances[datapoint["id"]] = get_paper_relevance(relevance_metric, datapoint["abstract"]) #Use ID for key?
+        paper_relevances[datapoint["paper_id"]] = get_paper_relevance(relevance_metric, datapoint["abstract"]) #Use ID for key?
     #Todo: Sort by values, return metadata of those papers
     papers = []
     paper_tupels = list(paper_relevances.items())
     paper_tupels.sort(key=lambda x: x[1], reverse=True)
     for i in range(10):
         p_id = paper_tupels[i][0]
-        p_title = dataset.loc[dataset["id"] == p_id]["title"].tolist()[0] #list index out of range
-        p_authors = dataset.loc[dataset["id"] == p_id]["author"].tolist()[0]
+        p_title = dataset.loc[dataset["paper_id"] == p_id]["title"].tolist()[0] #list index out of range
+        p_authors = dataset.loc[dataset["paper_id"] == p_id]["author"].tolist()[0]
         p_id = str(p_id)
         while len(p_id) < 9:
             p_id += "0"
