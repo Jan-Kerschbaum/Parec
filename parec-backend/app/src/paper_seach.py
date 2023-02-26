@@ -72,7 +72,7 @@ def construct_relevance_metric(term_graph, query):
             for key in term_graph.keys():
                 if term in term_graph[key]:
                     parent_relevances.append(relevance_dict[key])
-            new_relevance = max(parent_relevances) - 1
+            new_relevance = max(parent_relevances + [1]) - 1
             # We try to assign the highest possible relevance, representative of the shortest path through the graph from query to the term, to each term
             # Thus, relevances lower than the one we already have aren't relevant
             # (Realistically this probably shouldn't happen, but given the complecity of the function, this little check isn't relevant for time-complexity)
