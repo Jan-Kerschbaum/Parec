@@ -19,6 +19,7 @@ This project is part of the *Data Science for Text Analytics* class of Heidelber
     2. [Frontend](#frontend)
 4. 🗃️ [Data](#data)
 5. 💻 [Pipeline](#pipeline)
+6. 📝 [Contributions](#contributions)
 
 ***
 ## 🛠️ Introduction <a name="introduction"></a>
@@ -121,3 +122,8 @@ Our paper search algorithm utilizes Top2Vec's term graph to generate a comprehen
 
 Elasticsearch is a powerful search and analytics engine that is often used as a data store for applications. It is designed to store, search, and analyze large volumes of data quickly and in near real-time. Elasticsearch provides a RESTful API that enables you to search and retrieve data in a variety of ways.
 
+
+***
+## 📝 Contributions <a name="contributions"></a>
+
+Jan Kerschbaum was primarily involved in developing the frontend and backend of the Parec project, while Dilara Auykurth was responsible for setting up a Docker configuration for the project. Sandra Friebolin was in charge of data pre-processing and managing the Elasticsearch database, while Annalena Frey focused on testing. Additionally, all team members shared responsibilities for documentation of the project.
