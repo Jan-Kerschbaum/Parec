@@ -126,4 +126,4 @@ Elasticsearch is a powerful search and analytics engine that is often used as a 
 ***
 ## 📝 Contributions <a name="contributions"></a>
 
-Jan Kerschbaum was primarily involved in developing the frontend and backend of the Parec project, while Dilara Auykurth was responsible for setting up a Docker configuration for the project. Sandra Friebolin was in charge of data pre-processing and managing the Elasticsearch database, while Annalena Frey focused on testing. Additionally, all team members shared responsibilities for documentation of the project.
+Jan Kerschbaum was primarily involved in developing the frontend and backend of the Parec project, while Dilara Auykurth was responsible for setting up a Docker configuration. Sandra Friebolin was in charge of data pre-processing and managing the Elasticsearch database, while Annalena Frey focused on testing. Additionally, all team members shared responsibilities for documentation of the project.
