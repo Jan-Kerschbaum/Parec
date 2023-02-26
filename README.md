@@ -19,6 +19,7 @@ This project is part of the *Data Science for Text Analytics* class of Heidelber
     2. [Frontend](#frontend)
 4. 🗃️ [Data](#data)
 5. 💻 [Pipeline](#pipeline)
+6. 📝 [Contributions](#contributions)
 
 ***
 ## 🛠️ Introduction <a name="introduction"></a>
@@ -41,6 +42,9 @@ To run Parec, you need to have Docker and Docker Compose installed on your syste
 2. Navigate into the Parec directory: `cd Parec`
 3. 🚀 Run the following command to start the application: `docker-compose build` ➡️ `docker-compose up`
 4. Open a web browser and go to http://localhost:9200. The frontend should now be running.
+
+
+ℹ️ All necessary dependencies are indicated in the [requirements.txt](parec-backend/requirements.txt) file.
 
 ***
 ## ⚙️ Usage <a name="usage"></a>
@@ -69,23 +73,18 @@ The code in the main code for our application can be found in the [`app`](parec-
 
 The Parec frontend is a web-based user interface for the Parec application. It allows users to input a query and receive a list of recommended research papers based on the query, as well as a visual representation of the relationships between topics related to the query. It is built using [Svelte](https://svelte.dev/), with additional libraries for data visualization such as [JQuery](https://jquery.com/) and [Vis](https://visjs.org/). It communicates with the backend using HTTP requests to receive search results and topic data.
 
-The Parec frontend code is organized into several directories and files:
+The Parec frontend code is organized into several directories and files, a detailed description can be found in the [parec-frontend](parec-frontend) directory. Some important files are:
 
-- `public/`: This directory contains the public assets for the frontend, such as the index.html file and the favicon.
 
-- `src/`: This directory contains the source code for the frontend.
+- 🗂️ [`src/`](parec-frontend/src): This directory contains the source code for the Parec web application, including JavaScript, TypeScript, HTML, and CSS files that define the frontend logic, layout, and styling of the application, as well as additional assets such as images and fonts:
 
-- `App.js`: The main entry point for the frontend, which contains the UI elements for the query input and search results.
+    - **🌐 [`App.svelte`](parec-frontend/src/App.svelte):** This file is the main component of the Parec frontend web application, which contains the routing logic and renders other components.
 
-- `Graph.js`: The component responsible for rendering the topic graph visualization using D3.js.
+    - **🌐 [`main.js`](parec-frontend/src/main.js):** This file is the entry point for the Parec frontend web application, which initializes the root component and attaches it to the DOM.
+    
+    - **🌐 [`package.json`](parec-frontend/src/package.json):** Contains metadata about the frontend, such as dependencies and scripts for building and running the application.
 
-- `Search.js`: The component responsible for rendering the search results list and handling search requests.
-
-- `utils.js`: Helper functions used throughout the frontend code.
-
-- `package.json`: Contains metadata about the frontend, such as dependencies and scripts for building and running the application.
-
-ℹ️ All necessary dependencies are indicated in the [requirements.txt](parec-backend/requirements.txt) file.
+- **🛳️ [`Dockerfile`](parec-frontend/Dockerfile):** This Dockerfile builds and deploys a frontend application using `Node.js` and `Nginx`, copying over the necessary files and configurations and installing required dependencies in the process.
 
 
 ***
@@ -95,7 +94,11 @@ The dataset we use is provided by [kaggle](https://www.kaggle.com/datasets/Corne
 
 ### Preprocessing
 
-Due to resource reasons, we confine ourselves to papers from computer science [categories](parec-backend/app/data/cs_categories.json) from the years 2016-2022, resulting in 11932 documents. We further only use certain keys that are relevant for our task, namely `abstract`, `title`, `author`, `year`, `category` and `paper_id`. We do not apply further preprocessing of the abstracts, in order to keep subtextual relations between the words intact and because our topic model, Top2Vec, we will filter out stopwords by default. It further performs lemmatization to reduce words to their base form, which can help with topic modeling.
+Due to resource reasons, we confine ourselves to papers from computer science [categories](parec-backend/app/data/cs_categories.json) from the years 2016-2022, resulting in 11932 documents.
+
+<img src="parec-backend/app/data/computer_science_categories.png" width="90%" height="90%">
+
+We further only use certain keys that are relevant for our task, namely `abstract`, `title`, `author`, `year` `category` and `paper_id`. We do not apply further preprocessing of the abstracts, in order to keep subtextual relations between the words intact and because our topic model, Top2Vec, we will filter out stopwords by default. It further performs lemmatization to reduce words to their base form, which can help with topic modeling.
 
 ### Data Point Example
 
@@ -119,3 +122,8 @@ Our paper search algorithm utilizes Top2Vec's term graph to generate a comprehen
 
 Elasticsearch is a powerful search and analytics engine that is often used as a data store for applications. It is designed to store, search, and analyze large volumes of data quickly and in near real-time. Elasticsearch provides a RESTful API that enables you to search and retrieve data in a variety of ways.
 
+
+***
+## 📝 Contributions <a name="contributions"></a>
+
+Jan Kerschbaum was primarily involved in developing the frontend and backend of the Parec project, while Dilara Auykurth was responsible for setting up a Docker configuration for the project. Sandra Friebolin was in charge of data pre-processing and managing the Elasticsearch database, while Annalena Frey focused on testing. Additionally, all team members shared responsibilities for documentation of the project.
