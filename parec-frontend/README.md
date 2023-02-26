@@ -1,39 +1,20 @@
-# Parec Frontend
+***
+ℹ️ This directory contains the frontend code for the Parec application, which provides a web interface for users to interact with the Parec backend. It includes the following subdirectories and files:
+***
 
-## UX Components
+- **🗂️ [`public/`](parec-frontend/public):** Contains ...
 
-### Search bar
+- **🗂️ [`src/`](parec-frontend/src):** This directory contains the source code for the frontend application.
 
-Search bar + button that takes arbitrary input from user and passes it on to the backend as use query.
+- **🗂️ [`App.svelte`](parec-frontend/App.svelte):** The file is the main component of the Parec frontend web application, which contains the routing logic and renders other components.
 
-### Graph
 
-Graph representing the relationship between the terms found in the backend.
+- **🛳️ [`Dockerfile`](parec-frontend/Dockerfile):** This Dockerfile builds and deploys a frontend application using `Node.js` and `Nginx`, copying over the necessary files and configurations and installing required dependencies in the process.
 
-User query is central node, with each other node being child node to the node of the term that was searched to find the term of that node.
 
-Graph is rebuilt after every query.
-### Paper list
 
-List of papers from the database related to the user query and found relevant terms, as returned from the backend.
 
-Each paper is provided with its title, authors and link.
 
-### API value field
 
-Currently debugging field showing the vale returned from the API.
 
-To be refactored into general status field.
-
-## Design Decisions
-
-ToDO
-
-## Usage
-
-```
-npm install
-npm run dev 
-npm run build
-```
 
