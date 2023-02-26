@@ -72,7 +72,7 @@
 		let payload = {
 			"query": user_query,
 		}
-		jQuery.post('//localhost:8000/query', payload, function(data){
+		jQuery.post('api/query', payload, function(data){
 			data = JSON.parse(data)
 			let function_result = String(data.result)
 			result_text = function_result

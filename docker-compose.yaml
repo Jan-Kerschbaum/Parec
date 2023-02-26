@@ -11,8 +11,7 @@ services:
       - discovery.type=single-node
       #- xpack.security.enabled=false
       - ELASTIC_PASSWORD=changeme
-
-      # - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       # - node.name=es
       # - cluster.name=es-docker-cluster
       # - cluster.initial_master_nodes=es
@@ -26,6 +25,10 @@ services:
       interval: 30s
       timeout: 30s
       retries: 10
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
     networks:
       - es_net
 
@@ -34,6 +37,11 @@ services:
     container_name: backend
     ports:
       - 8000:8000
+    healthcheck:
+      test: curl --silent --fail --user elastic:changeme http://localhost:8000/health || exit 1
+      interval: 30s
+      timeout: 30s
+      retries: 20
     networks:
       - backend_net
       - es_net
@@ -52,7 +60,8 @@ services:
     networks:
       - backend_net
     depends_on:
-      - backend   #frontend only works if backend already deployed
+      backend:   #frontend only works if backend already deployed
+        condition: service_healthy
 
 networks:
   backend_net:

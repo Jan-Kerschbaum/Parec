@@ -50,6 +50,13 @@ def test_function(input: str):
         return "works"
     return "non-test input"
 
+@app.get('/health')
+def health_check():
+    """
+    Method to serve as healthcheck.
+    """
+
+    return {"status": "ok"}
 
 @app.post('/query')
 def query_handler(query: str = Form(...)):
@@ -57,8 +64,6 @@ def query_handler(query: str = Form(...)):
     Method to handle POST requests from frontend for main functionality. In the body, query should contain the search term.
     """
     function_result = test_function(query)
-
-    print(function_result)
 
     #edges = json.dumps({
     #    0: {"from": "t0", "to": "t1"},

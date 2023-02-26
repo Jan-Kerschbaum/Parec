@@ -12,6 +12,8 @@ lerna-debug.log*
 **/dist-ssr/*
 *.local
 
+**/es_data_volume/*
+
 #python
 __pycache__
 
