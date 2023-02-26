@@ -25,7 +25,7 @@ def run_paper_search(term_graph, query):
     paper_relevances = {}
     for index, datapoint in dataset.iterrows():
         paper_relevances[datapoint["paper_id"]] = get_paper_relevance(relevance_metric, datapoint["abstract"]) #Use ID for key?
-    #Todo: Sort by values, return metadata of those papers
+    #Sort by values, return metadata of those papers
     papers = []
     paper_tupels = list(paper_relevances.items())
     paper_tupels.sort(key=lambda x: x[1], reverse=True)
@@ -59,7 +59,6 @@ def construct_relevance_metric(term_graph, query):
     # Initialising, both so that each term is definitely in the dict, and so that we can track if a (non-negative) relevance has been assigned to each term  
     flattened_graph = list(term_graph.values())
     flattened_graph = [item for sublist in flattened_graph for item in sublist]
-    #for term in set(sum(term_graph.values(), [])):
     for term in flattened_graph:
         relevance_dict[term] = -1
     # Iterate over the dictionary until all terms have a relevance assigned to them

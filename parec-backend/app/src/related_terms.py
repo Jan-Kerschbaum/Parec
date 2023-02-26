@@ -53,7 +53,6 @@ def find_related_terms_query(query: str):
         related_words, _ = MODEL.similar_words(keywords=[query], num_words=WORDS_PER_SEARCH)
     except:
         topic_words, _, _, _ = MODEL.query_topics(query=query, num_topics=1)
-        #ToDo: Take topic words over several topics?
         related_words = topic_words[0][:WORDS_PER_SEARCH]
     return related_words
 
@@ -75,7 +74,6 @@ def find_related_terms(source: str):
     load_model(False)
     # Model is Top2Vec model used for clustering in preprocessing
     related_words, _ = MODEL.similar_words(keywords=[source], num_words=WORDS_PER_SEARCH)
-    #Todo: Set ef?
     return related_words
 
 

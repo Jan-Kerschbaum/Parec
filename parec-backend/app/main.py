@@ -21,7 +21,6 @@ from app.src.controller import run_backend
 from .data.index_documents import load_to_ES
 
 origins = ["http://frontend:80"]  # origin for deployment in docker
-# origins=["*", "http://localhost:5173"]  # origins for testing locally
 
 app = FastAPI()
 app.add_middleware(
@@ -58,9 +57,6 @@ def query_handler(query: str = Form(...)):
     Method to handle POST requests from frontend for main functionality. In the body, query should contain the search term.
     """
     function_result = test_function(query)
-
-    # Send query to ES
-    # reduced_data  = get_data_from_elastic(query)
 
     #edges = json.dumps({
     #    0: {"from": "t0", "to": "t1"},

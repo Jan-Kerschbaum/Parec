@@ -33,7 +33,6 @@
 	let PaperTenName = "Paper Ten"
 	let PaperTenAuthors = "Authors"
 	let PaperTenID = "id"
-	// role and aria-label are for screen reader accessibility
 	//Generate initial graph
 	let container
 	let nodes_array, nodes, edges_array, edges, network
@@ -152,7 +151,7 @@
 			result_text = "Empty Query Field"
 			nodes.clear()
 			edges.clear()
-			//ToDo: Set List Bindings to empty strings once we do that on success
+			//ToDo: Set List Bindings to empty strings
 		})
 	}
 </script>

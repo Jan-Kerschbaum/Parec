@@ -4,7 +4,7 @@ from app.src.paper_seach import run_paper_search
 import json
 
 #Constants
-SEARCH_DEPTH = 3 # was 5
+SEARCH_DEPTH = 3
 
 #Main control function for backend operation
 #Return values:
@@ -24,7 +24,7 @@ def run_backend(query: str):
     # Get term graph for query
     term_graph = get_term_graph(query, SEARCH_DEPTH)
     papers = run_paper_search(term_graph, query)
-    # ToDo: Construct edges from term graph
+    #Construct edges from term graph
     running_id = 0
     edges_dict = {}
     for key in term_graph.keys():
