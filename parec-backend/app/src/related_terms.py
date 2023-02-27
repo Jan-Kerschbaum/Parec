@@ -1,9 +1,11 @@
 #File to implement the search for terms related to a given starting term across the search space
 from top2vec import Top2Vec
+import nltk
+from nltk.corpus import stopwords
 
 #Constants
 WORDS_PER_SEARCH = 3 # was 5
-MODEL_FILE_PATH = r"./app/data/t2v_model"
+MODEL_FILE_PATH = r"./app/data/t2v_with_n_grams_and_args"
 MODEL = None
 
 #Function that takes in a string and an int. Performs seach recursively up to depth times.
@@ -56,8 +58,19 @@ def find_related_terms_query(query: str):
         related_words = topic_words[0][:WORDS_PER_SEARCH]
     return related_words
 
+    # load_model(False)
+    # related_topics = []
+    # try:
+    #     related_topics, _, _, _ = MODEL.search_topics(keywords=[query], num_topics=WORDS_PER_SEARCH)
+    # except:
+    #     topic_words, _, _, _ = MODEL.search_topics(keywords=[query], num_topics=1)
+    #     related_topics = topic_words[0][:WORDS_PER_SEARCH]
+    # #related_topics = [topic for topic in related_topics if topic.lower() not in stop_words]
+    # return related_topics
+
+
+
 #Function that finds terms related to source
-#BERTopic call needs to go here
 #Return values:
 #   related_terms: List of terms found for source
 def find_related_terms(source: str):
@@ -76,6 +89,12 @@ def find_related_terms(source: str):
     related_words, _ = MODEL.similar_words(keywords=[source], num_words=WORDS_PER_SEARCH)
     return related_words
 
+    # load_model(False)
+    # # Model is Top2Vec model used for clustering in preprocessing    
+    # related_topics, _, _, _ = MODEL.search_topics(keywords=[source], num_topics=WORDS_PER_SEARCH)
+    # return related_topics
+
+
 
 def load_model(override: bool) -> None:
     '''
@@ -90,3 +109,8 @@ def load_model(override: bool) -> None:
     global MODEL
     if MODEL == None or override:
         MODEL = Top2Vec.load(MODEL_FILE_PATH)
+
+    # global MODEL
+    # if MODEL is None or override:
+    #     stop_words = set(stopwords.words('english'))
+    #     MODEL = Top2Vec.load(MODEL_FILE_PATH, stop_words=stop_words)
