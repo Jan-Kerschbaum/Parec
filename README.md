@@ -118,8 +118,6 @@ The dataset we use is provided by [kaggle](https://www.kaggle.com/datasets/Corne
 
 Due to resource reasons, we confine ourselves to papers from computer science [categories](parec-backend/app/data/cs_categories.json) from the years 2016-2022, resulting in 11932 documents.
 
-<img src="parec-backend/app/data/computer_science_categories.png" width="90%" height="90%">
-
 We further only use certain keys that are relevant for our task, namely `abstract`, `title`, `author`, `year` `category` and `paper_id`. 
 
 ✂️ We filter out stopwords via [NLTK](https://www.nltk.org/search.html?q=stopwords&check_keywords=yes&area=default) and punctuation via the Python [string](https://docs.python.org/3/library/string.html) module. Lemmatization is not applied to maintain the expressiveness of terms and topics.
@@ -150,8 +148,9 @@ Our paper search algorithm utilizes Top2Vec's term graph to generate a comprehen
 
 ### 3. 🔎 Elasticsearch:
 
-Elasticsearch is a powerful search and analytics engine that is often used as a data store for applications. It is designed to store, search, and analyze large volumes of data quickly and in near real-time. Elasticsearch provides a RESTful API that enables you to search and retrieve data in a variety of ways.
+Elasticsearch is a powerful search and analytics engine that is often used as a data store for applications. It is designed to store, search, and analyze large volumes of data quickly and in near real-time. Elasticsearch provides a RESTful API that enables you to search and retrieve data in a variety of ways. We use it to store our data and use [Kibana](https://www.elastic.co/de/kibana/) for visualizations: 
 
+<img src="parec-backend/app/data/computer_science_categories.png" width="90%" height="90%">
 
 ### 4. 🌐 Svelte:
 
