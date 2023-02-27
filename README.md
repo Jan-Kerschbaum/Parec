@@ -140,7 +140,7 @@ We train Top2Vec on the abstracts in our dataset and set `ngram_vocab=True` in o
 
 <img src="parec-backend/app/data/visualizations/reinforcement_learning_terms.png" width="90%" height="90%">
 
-In total, Top2Vec clusters our abstracts into 119 topics.
+In total, Top2Vec clusters our abstracts into 133 topics.
 
 
 ### 2. 📃 Paper Recommender:
@@ -180,4 +180,4 @@ We perform two types of evaluation:
 ***
 ## 📝 Contributions <a name="contributions"></a>
 
-Jan Kerschbaum was primarily involved in the development of both the frontend and backend components of the Parec project, while Dilara Auykurth was responsible setting up a Docker configuration. Sandra Friebolin was in charge of managing the Elasticsearch database, pre-processing data, and writing README files, and Annalena Frey focused on testing. All team members shared responsibilities for evaluating and documenting the project, ensuring that the work is thoroughly and accurately documented for future reference.
+Jan Kerschbaum was primarily involved in the development of both the frontend and backend components of the Parec project, while Dilara Auykurth was responsible setting up a Docker configuration. Sandra Friebolin was in charge of managing the Elasticsearch database, pre-processing data, and writing README files, and Annalena Frey focused on testing and script writing for our video presentation. All team members shared responsibilities for evaluating and documenting the project, ensuring that the work is thoroughly and accurately documented for future reference.
