@@ -18,7 +18,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import json
 from app.src.controller import run_backend
-from .data.index_documents import load_to_ES
+from .data.runtime.index_documents import load_to_ES
 
 origins = ["http://frontend:80"]  # origin for deployment in docker
 
@@ -33,7 +33,7 @@ app.add_middleware(
 
 # Initialize ES data
 try:
-    load_to_ES("./app/data/arxiv_reduced_modified.json", "arxiv_data_modified", "http://es:9200")
+    load_to_ES("./app/data/runtime/arxiv_reduced_modified.json", "arxiv_data_modified", "http://es:9200")
 except FileNotFoundError:
     print(f"File was not found at path {os.path.abspath(__file__)}")
 #load_to_ES("data/arxiv_reduced_modified.json", "arxiv_data_modified", "es")

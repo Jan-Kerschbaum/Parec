@@ -1,6 +1,6 @@
 #File to implement the search for papers based on found related terms
-from app.data.get_data_from_es import get_data_from_elastic as get_dataset
-#from app.data.dummy_load import load_data_dummy as get_dataset
+from app.data.runtime.get_data_from_es import get_data_from_elastic as get_dataset
+#from app.data.runtime.dummy_load import load_data_dummy as get_dataset
 from math import log as ln
 
 # Constants
