@@ -18,7 +18,7 @@ This project is part of the *Data Science for Text Analytics* class of Heidelber
     1. [Backend](#backend)
     2. [Frontend](#frontend)
 4. 🗃️ [Data](#data)
-5. 💻 [Pipeline](#pipeline)
+5. 💻 [Model Components](#model-components)
 6. 📝 [Contributions](#contributions)
 
 ***
@@ -129,11 +129,11 @@ We further only use certain keys that are relevant for our task, namely `abstrac
 <img src="parec-backend/app/data/data_point_example.png" width="90%" height="90%">
 
 ***
-## 💻 Pipeline <a name="pipeline"></a>
+## 💻 Model-Components <a name="model-components"></a>
 
 Our application clusters papers using [Top2Vec](https://github.com/ddangelov/Top2Vec)'s topic modeling to limit the search space. At runtime, when a user query is received, we search the dataset for related terms recursively, creating a graph of related terms. We assign a relevance metric to each term, declining as we move outwards from the node representing the user query. We then retrieve potentially relevant candidate papers from our reduced search space and rank them based on the relevance metric. The top candidate papers, along with their metadata, are sent to the frontend for visualization along with the graph defined by its edges. The application also handles error cases, such as empty queries, initialization errors, or no query being sent (in which case, example data is used).
 
-**📈 Top2Vec:**
+### 1. 📈 Top2Vec:
 
 Top2Vec is a topic modeling algorithm that uses word embeddings to generate topic vectors for a given corpus. It starts by training a word embedding model on the corpus and then clusters the word embeddings to generate topic vectors. The number of topics is not specified beforehand but is instead inferred from the data. Top2Vec is known for its ability to handle large datasets efficiently and is especially useful for document clustering and topic exploration tasks.
 
@@ -144,13 +144,16 @@ We train Top2Vec on the abstracts in our dataset and set `ngram_vocab=True` in o
 In total, Top2Vec clusters our abstracts into 119 topics.
 
 
-**📃 Paper Recommender:**
+### 2. 📃 Paper Recommender:
 Our paper search algorithm utilizes Top2Vec's term graph to generate a comprehensive search of all papers. By calculating relevance based on a precomputed relevance metric, the algorithm efficiently returns the top 10 papers for a given search query.
 
 
-**🔎 Elasticsearch:**
+### 3. 🔎 Elasticsearch:
 
 Elasticsearch is a powerful search and analytics engine that is often used as a data store for applications. It is designed to store, search, and analyze large volumes of data quickly and in near real-time. Elasticsearch provides a RESTful API that enables you to search and retrieve data in a variety of ways.
+
+
+### 4. 🌐 Svelte:
 
 
 ***
