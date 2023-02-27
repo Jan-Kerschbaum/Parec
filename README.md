@@ -140,7 +140,7 @@ We train Top2Vec on the abstracts in our dataset and set `ngram_vocab=True` in o
 
 <img src="parec-backend/app/data/visualizations/reinforcement_learning_terms.png" width="90%" height="90%">
 
-In total, Top2Vec clusters our abstracts into 119 topics.
+In total, Top2Vec clusters our abstracts into 133 topics.
 
 
 ### 2. 📃 Paper Recommender:
