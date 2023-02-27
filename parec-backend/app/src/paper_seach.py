@@ -1,15 +1,12 @@
 #File to implement the search for papers based on found related terms
-from app.data.get_data_from_es import get_data_from_elastic as get_dataset
-#from app.data.dummy_load import load_data_dummy as get_dataset
+from app.data.runtime.get_data_from_es import get_data_from_elastic as get_dataset
+#from app.data.runtime.dummy_load import load_data_dummy as get_dataset
 from math import log as ln
-
-# Constants
-MAX_RELEVANCE = 10 #Placeholder, ToDo: Find good value experimentally
 
 #Main Function to run paper search based on term graph generated in related_terms.py
 #Return values:
 #   papers: List of lists, each element is a list containing the name, authors and id of a specific paper
-def run_paper_search(term_graph, query):
+def run_paper_search(term_graph, query, max_relevance):
     '''
         Function that searches through all papers and calculates their relevance
 
@@ -20,7 +17,7 @@ def run_paper_search(term_graph, query):
         Return Values:
             papers (list): List of lists, each element in the list contains a name, authors and id of a paper
     '''
-    relevance_metric = construct_relevance_metric(term_graph, query)
+    relevance_metric = construct_relevance_metric(term_graph, query, max_relevance)
     dataset = get_dataset("arxiv_data_modified")
     paper_relevances = {}
     for index, datapoint in dataset.iterrows():
@@ -43,7 +40,7 @@ def run_paper_search(term_graph, query):
 #Function to construct a relevance metric from term graph
 #Return values:
 #   relevance_dict: Dictionary, key = term (str), value = relevance value (int) for that term
-def construct_relevance_metric(term_graph, query):
+def construct_relevance_metric(term_graph, query, max_relevance):
     """
         Function to construct a relevance metric from the term graph and the user input
 
@@ -55,12 +52,12 @@ def construct_relevance_metric(term_graph, query):
             relevance_dict (dict): Dictionary that contains the term and a belonging relevance value
     """
     relevance_dict = {} # Keys are terms as strings, values are single integers representing the terms relevance rating
-    relevance_dict[query] = MAX_RELEVANCE
     # Initialising, both so that each term is definitely in the dict, and so that we can track if a (non-negative) relevance has been assigned to each term  
     flattened_graph = list(term_graph.values())
     flattened_graph = [item for sublist in flattened_graph for item in sublist]
     for term in flattened_graph:
         relevance_dict[term] = -1
+    relevance_dict[query] = max_relevance
     # Iterate over the dictionary until all terms have a relevance assigned to them
     # Note that this doesn't necessarily mean that we have found the lowest possible relevance (~ shortest possible path) for lower relevances,
     # though chances are good for higher ones

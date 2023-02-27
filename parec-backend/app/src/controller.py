@@ -2,9 +2,12 @@
 from app.src.related_terms import get_term_graph
 from app.src.paper_seach import run_paper_search
 import json
+import configparser
 
 #Constants
-SEARCH_DEPTH = 3
+#SEARCH_DEPTH = 3
+#MAX_RELEVANCE = 10
+#WORDS_PER_SEARCH = 3
 
 #Main control function for backend operation
 #Return values:
@@ -21,9 +24,14 @@ def run_backend(query: str):
             edges (JSON object): Represent the edge list of the term graph
             papers (list): List of lists, each element is a list containing the name, authors, and ID of a specific paper
     '''
+    config = configparser.ConfigParser()
+    config.read("./hyperparameters.ini")
+    search_depth = int(config["DEFAULT"]["SearchDepth"])
+    words_per_search = int(config["DEFAULT"]["WordsPerSearch"])
+    max_relevance = int(config["DEFAULT"]["MaxRelevance"])
     # Get term graph for query
-    term_graph = get_term_graph(query, SEARCH_DEPTH)
-    papers = run_paper_search(term_graph, query)
+    term_graph = get_term_graph(query, search_depth, words_per_search)
+    papers = run_paper_search(term_graph, query, max_relevance)
     #Construct edges from term graph
     running_id = 0
     edges_dict = {}

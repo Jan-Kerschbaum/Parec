@@ -18,8 +18,10 @@ This project is part of the *Data Science for Text Analytics* class of Heidelber
     1. [Backend](#backend)
     2. [Frontend](#frontend)
 4. 🗃️ [Data](#data)
-5. 💻 [Pipeline](#pipeline)
-6. 📝 [Contributions](#contributions)
+5. 💻 [Model Components](#model-components)
+6. 🎥 [Demo](#demo)
+7. 📊 [Evaluation](#evaluation)
+8. 📝 [Contributions](#contributions)
 
 ***
 ## 🛠️ Introduction <a name="introduction"></a>
@@ -34,14 +36,36 @@ The application consists of a backend and a frontend. The backend is responsible
 
 ### Prerequisites
 
-To run Parec, you need to have Docker and Docker Compose installed on your system.
+To run Parec, you need to have [Docker](https://www.docker.com) and [Docker Compose](https://docs.docker.com/compose/) installed on your system. Here are the necessary commands for Linux:
+
+```bash
+# Install Docker
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+
+# Install Docker Compose
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+# Apply executable permissions to the binary
+sudo chmod +x /usr/local/bin/docker-compose
+
+# Verify Docker Compose installation
+docker-compose --version
+```
 
 ### Running the Application
 
 1. Clone the repository: `git clone https://github.com/Jan-Kerschbaum/Parec.git`
 2. Navigate into the Parec directory: `cd Parec`
 3. 🚀 Run the following command to start the application: `docker-compose build` ➡️ `docker-compose up`
-4. Open a web browser and go to http://localhost:9200. The frontend should now be running.
+
+⚠️ Please wait before you go to the next step until you see the message:
+```bash
+frontend  | /docker-entrypoint.sh: Configuration complete; ready for start up
+```
+This can take some time ⏳
+
+4. Open a web browser and go to http://localhost:80. The frontend should now be running.
 
 
 ℹ️ All necessary dependencies are indicated in the [requirements.txt](parec-backend/requirements.txt) file.
@@ -70,8 +94,7 @@ The code in the main code for our application can be found in the [`app`](parec-
 
 
 ### Frontend
-
-The Parec frontend is a web-based user interface for the Parec application. It allows users to input a query and receive a list of recommended research papers based on the query, as well as a visual representation of the relationships between topics related to the query. It is built using [Svelte](https://svelte.dev/), with additional libraries for data visualization such as [JQuery](https://jquery.com/) and [Vis](https://visjs.org/). It communicates with the backend using HTTP requests to receive search results and topic data.
+The Parec frontend is a web-based user interface for the Parec application. It allows users to input a query and receive a list of recommended research papers based on the query, as well as a visual representation of the relationships between topics related to the query. It is built using the [Svelte](https://svelte.dev/) framework. Further, [Vis](https://visjs.org/) is used to generate the visual representation of the term graph, and [jQuery](https://jquery.com) for communication between the frontend and backend.
 
 The Parec frontend code is organized into several directories and files, a detailed description can be found in the [parec-frontend](parec-frontend) directory. Some important files are:
 
@@ -96,32 +119,63 @@ The dataset we use is provided by [kaggle](https://www.kaggle.com/datasets/Corne
 
 Due to resource reasons, we confine ourselves to papers from computer science [categories](parec-backend/app/data/cs_categories.json) from the years 2016-2022, resulting in 11932 documents.
 
-<img src="parec-backend/app/data/computer_science_categories.png" width="90%" height="90%">
+We further only use certain keys that are relevant for our task, namely `abstract`, `title`, `author`, `year` `category` and `paper_id`. 
 
-We further only use certain keys that are relevant for our task, namely `abstract`, `title`, `author`, `year` `category` and `paper_id`. We do not apply further preprocessing of the abstracts, in order to keep subtextual relations between the words intact and because our topic model, Top2Vec, we will filter out stopwords by default. It further performs lemmatization to reduce words to their base form, which can help with topic modeling.
+✂️ We filter out stopwords via [NLTK](https://www.nltk.org/search.html?q=stopwords&check_keywords=yes&area=default) and punctuation via the Python [string](https://docs.python.org/3/library/string.html) module. Lemmatization is not applied to maintain the expressiveness of terms and topics.
 
 ### Data Point Example
 
-<img src="parec-backend/app/data/data_point_example.png" width="90%" height="90%">
+<img src="parec-backend/app/data/visualizations/data_point_example.png" width="90%" height="90%">
 
 ***
-## 💻 Pipeline <a name="pipeline"></a>
+## 💻 Model-Components <a name="model-components"></a>
 
-Our application clusters papers using [Top2Vec](https://github.com/ddangelov/Top2Vec)'s topic modeling to limit the search space. At runtime, when a user query is received, we search the dataset for related terms recursively, creating a graph of related terms. We assign a relevance metric to each term, declining as we move outwards from the node representing the user query. We then retrieve potentially relevant candidate papers from our reduced search space and rank them based on the relevance metric. The top candidate papers, along with their metadata, are sent to the frontend for visualization along with the graph defined by its edges. The application also handles error cases, such as empty queries, initialization errors, or no query being sent (in which case, example data is used).
+Our application clusters papers using [Top2Vec](https://github.com/ddangelov/Top2Vec)'s topic modeling to limit the search space. At runtime, when a user query is received, we search the dataset for related terms recursively, creating a graph with the terms as nodes. We assign a relevance metric to the terms, with the relevance of a given term declining as we move outwards along the graphs edges from the node representing the user query. We then retrieve potentially relevant candidate papers from our reduced search space and rank them based on the relevance metric. The top candidate papers metadata is sent to the frontend for visualization along with the graph, as defined by its edges. The application also handles edge cases, such as empty queries, initialization errors, or no query being sent (in which case, example data is used).
 
-**📈 Top2Vec:**
+### 1. 📈 Top2Vec:
 
-Top2Vec is a topic modeling algorithm that uses word embeddings to generate topic vectors for a given corpus. It starts by training a word embedding model on the corpus and then clusters the word embeddings to generate topic vectors. The number of topics is not specified beforehand but is instead inferred from the data. Top2Vec is known for its ability to handle large datasets efficiently and is especially useful for document clustering and topic exploration tasks.
+Top2Vec is a topic modeling algorithm that uses a shared embedding for phrases and documents to generate topic vectors on a given corpus. It starts by training an embedding model on the corpus and then clusters the embedded vectors to generate topic vectors. The number of topics is not specified beforehand but is instead inferred from the data. Top2Vec is known for its ability to handle large datasets efficiently and is especially useful for document clustering and topic exploration tasks.
+
+We train Top2Vec on the abstracts in our dataset and set `ngram_vocab=True` in order to add phrases to our topic descriptions. E.g. related terms for the topic `reinfocement learning` are the following:
+
+<img src="parec-backend/app/data/visualizations/reinforcement_learning_terms.png" width="90%" height="90%">
+
+In total, Top2Vec clusters our abstracts into 133 topics.
 
 
-**📃 Paper Recommender:**
-Our paper search algorithm utilizes Top2Vec's term graph to generate a comprehensive search of all papers. By calculating relevance based on a precomputed relevance metric, the algorithm efficiently returns the top 10 papers for a given search query.
+### 2. 📃 Paper Recommender:
+Our paper search algorithm utilizes our term graph based on the Top2Vec model to generate a comprehensive search of all papers. By calculating relevance based on a precomputed relevance metric, the algorithm returns the top 10 papers for a given search query in a relatively efficient manner.
+
+
+### 3. 🔎 Elasticsearch:
+
+Elasticsearch is a powerful search and analytics engine that is often used as a data store for applications. It is designed to store, search, and analyze large volumes of data quickly and in near real-time. Elasticsearch provides a RESTful API that enables you to search and retrieve data in a variety of ways. We use it to store our data and use [Kibana](https://www.elastic.co/de/kibana/) for visualizations: 
+
+<img src="parec-backend/app/data/visualizations/computer_science_categories.png" width="90%" height="90%">
+
+### 4. 🌐 Svelte:
+
+The Parec application uses [Svelte](https://svelte.dev/) to create the user interface for the web application. Svelte is a front-end JavaScript framework that allows developers to create reactive and dynamic user interfaces by compiling the application code to highly optimized vanilla JavaScript code.
+
+***
+## 🎥 Demo <a name="demo"></a>
+
+<img src="parec-backend/app/data/visualizations/demo.png" width="90%" height="90%">
+
+
+***
+## 📊 Evaluation <a name="evaluation"></a>
+
+We perform two types of evaluation:
+
+1. We evaluate our model against a random baseline. 
+
+2. We also perform a qualitative evaluation where we subjectively assess our results. To do this, one team member entered 5 different search queries and sent the top three recommended abstract links to another team member. This team member then went through the abstracts and noted the most relevant terms. These terms were then compared to those provided by the Parec application in the knowledge graph for each query.
+
 
 During experimenting with the dataset, we included all papers which were published between 2011 and 2021, which resulted in 18015 papers
 
-**🔎 Elasticsearch:**
 
-Elasticsearch is a powerful search and analytics engine that is often used as a data store for applications. It is designed to store, search, and analyze large volumes of data quickly and in near real-time. Elasticsearch provides a RESTful API that enables you to search and retrieve data in a variety of ways.
 
 Example is taken as-is from data source (https://www.kaggle.com/datasets/Cornell-University/arxiv?resource=download), though we only use certain keys (id, authors, title and abstract), allowing us to de facto reduce the dataset to the data for those keys. Each datapoint is available as a JSON object in the following format.
 Unfortunaltely, due to the size of the dataset, we can not have a look at it directly, as when opening in it throws an error stating that it needs more memory to be opened.
@@ -130,3 +184,5 @@ Unfortunaltely, due to the size of the dataset, we can not have a look at it dir
 ## 📝 Contributions <a name="contributions"></a>
 
 Jan Kerschbaum was primarily involved in developing the frontend and backend of the Parec project, while Dilara Auykurth was responsible for setting up a Docker configuration for the project. Sandra Friebolin was in charge of data pre-processing and managing the Elasticsearch database, while Annalena Frey focused on testing. Additionally, all team members shared responsibilities for documentation of the project.
+
+Jan Kerschbaum was primarily involved in the development of both the frontend and backend components of the Parec project, while Dilara Auykurth was responsible setting up a Docker configuration. Sandra Friebolin was in charge of managing the Elasticsearch database, pre-processing data, and writing README files, and Annalena Frey focused on testing and script writing for our video presentation. All team members shared responsibilities for evaluating and documenting the project, ensuring that the work is thoroughly and accurately documented for future reference.
