@@ -129,11 +129,11 @@ We further only use certain keys that are relevant for our task, namely `abstrac
 ***
 ## 💻 Model-Components <a name="model-components"></a>
 
-Our application clusters papers using [Top2Vec](https://github.com/ddangelov/Top2Vec)'s topic modeling to limit the search space. At runtime, when a user query is received, we search the dataset for related terms recursively, creating a graph of related terms. We assign a relevance metric to each term, declining as we move outwards from the node representing the user query. We then retrieve potentially relevant candidate papers from our reduced search space and rank them based on the relevance metric. The top candidate papers, along with their metadata, are sent to the frontend for visualization along with the graph defined by its edges. The application also handles error cases, such as empty queries, initialization errors, or no query being sent (in which case, example data is used).
+Our application clusters papers using [Top2Vec](https://github.com/ddangelov/Top2Vec)'s topic modeling to limit the search space. At runtime, when a user query is received, we search the dataset for related terms recursively, creating a graph with the terms as nodes. We assign a relevance metric to the terms, with the relevance of a given term declining as we move outwards along the graphs edges from the node representing the user query. We then retrieve potentially relevant candidate papers from our reduced search space and rank them based on the relevance metric. The top candidate papers metadata is sent to the frontend for visualization along with the graph, as defined by its edges. The application also handles edge cases, such as empty queries, initialization errors, or no query being sent (in which case, example data is used).
 
 ### 1. 📈 Top2Vec:
 
-Top2Vec is a topic modeling algorithm that uses word embeddings to generate topic vectors for a given corpus. It starts by training a word embedding model on the corpus and then clusters the word embeddings to generate topic vectors. The number of topics is not specified beforehand but is instead inferred from the data. Top2Vec is known for its ability to handle large datasets efficiently and is especially useful for document clustering and topic exploration tasks.
+Top2Vec is a topic modeling algorithm that uses a shared embedding for phrases and documents to generate topic vectors on a given corpus. It starts by training an embedding model on the corpus and then clusters the embedded vectors to generate topic vectors. The number of topics is not specified beforehand but is instead inferred from the data. Top2Vec is known for its ability to handle large datasets efficiently and is especially useful for document clustering and topic exploration tasks.
 
 We train Top2Vec on the abstracts in our dataset and set `ngram_vocab=True` in order to add phrases to our topic descriptions. E.g. related terms for the topic `reinfocement learning` are the following:
 
@@ -143,7 +143,7 @@ In total, Top2Vec clusters our abstracts into 119 topics.
 
 
 ### 2. 📃 Paper Recommender:
-Our paper search algorithm utilizes Top2Vec's term graph to generate a comprehensive search of all papers. By calculating relevance based on a precomputed relevance metric, the algorithm efficiently returns the top 10 papers for a given search query.
+Our paper search algorithm utilizes our term graph based on the Top2Vec model to generate a comprehensive search of all papers. By calculating relevance based on a precomputed relevance metric, the algorithm returns the top 10 papers for a given search query in a relatively efficient manner.
 
 
 ### 3. 🔎 Elasticsearch:
