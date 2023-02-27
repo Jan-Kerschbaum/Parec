@@ -173,16 +173,7 @@ We perform two types of evaluation:
 2. We also perform a qualitative evaluation where we subjectively assess our results. To do this, one team member entered 5 different search queries and sent the top three recommended abstract links to another team member. This team member then went through the abstracts and noted the most relevant terms. These terms were then compared to those provided by the Parec application in the knowledge graph for each query.
 
 
-During experimenting with the dataset, we included all papers which were published between 2011 and 2021, which resulted in 18015 papers
-
-
-
-Example is taken as-is from data source (https://www.kaggle.com/datasets/Cornell-University/arxiv?resource=download), though we only use certain keys (id, authors, title and abstract), allowing us to de facto reduce the dataset to the data for those keys. Each datapoint is available as a JSON object in the following format.
-Unfortunaltely, due to the size of the dataset, we can not have a look at it directly, as when opening in it throws an error stating that it needs more memory to be opened.
-
 ***
 ## 📝 Contributions <a name="contributions"></a>
-
-Jan Kerschbaum was primarily involved in developing the frontend and backend of the Parec project, while Dilara Auykurth was responsible for setting up a Docker configuration for the project. Sandra Friebolin was in charge of data pre-processing and managing the Elasticsearch database, while Annalena Frey focused on testing. Additionally, all team members shared responsibilities for documentation of the project.
 
 Jan Kerschbaum was primarily involved in the development of both the frontend and backend components of the Parec project, while Dilara Auykurth was responsible setting up a Docker configuration. Sandra Friebolin was in charge of managing the Elasticsearch database, pre-processing data, and writing README files, and Annalena Frey focused on testing and script writing for our video presentation. All team members shared responsibilities for evaluating and documenting the project, ensuring that the work is thoroughly and accurately documented for future reference.
