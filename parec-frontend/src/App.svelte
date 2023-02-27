@@ -37,8 +37,8 @@
 	let container
 	let nodes_array, nodes, edges_array, edges, network
 	onMount(() => {
-		// ToDo: Do somthing with the initial graph to show it's a placeholder
-		nodes_array = [{ id: 0, label: "Node 0" }, { id: 1, label: "Node 1" }, { id: 2, label: "Node 2" }]
+		//Initial placeholder graph
+		nodes_array = [{ id: 0, label: "Example Query Node" }, { id: 1, label: "Example Child Node 1" }, { id: 2, label: "Example Child Node 2" }]
 		nodes = new vis.DataSet(nodes_array)
 		edges_array = [{ from: 0, to: 1 },{ from: 0, to: 2 }]
     	edges = new vis.DataSet(edges_array)
@@ -78,7 +78,6 @@
 			result_text = function_result
 			//Update paper list based on return from backend
 			var paper_response = JSON.parse(data.papers)
-			//TODO: This, as well as the define structure that required it above needs to be refactored
 			PaperOneName = String(paper_response[0].name)
 			PaperOneAuthors = String(paper_response[0].authors)
 			PaperOneID = String(paper_response[0].id)
@@ -151,7 +150,6 @@
 			result_text = "Empty Query Field"
 			nodes.clear()
 			edges.clear()
-			//ToDo: Set List Bindings to empty strings
 		})
 	}
 </script>
@@ -171,7 +169,7 @@
 	<!-- Third div has graph image and paper list-->
 	<div style="display:flex; flex-direction: row; justify-content: space-between">
 		<div id="graph" bind:this={container}></div>
-    <!-- Kind of hacky but it makes the spacing work for the minute. Might rework later -->
+    <!-- Kind of hacky but it makes the spacing work. -->
     <span style="display:inline-block; width: 2cm;"></span>
 		<dl class="dl-horizontal text-muted">
 			<dt>{PaperOneName}</dt>
