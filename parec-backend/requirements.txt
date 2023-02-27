@@ -6,3 +6,4 @@ top2vec==1.0.27
 elasticsearch
 nltk
 stopwords
+configparser
