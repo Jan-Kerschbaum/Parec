@@ -19,7 +19,8 @@ This project is part of the *Data Science for Text Analytics* class of Heidelber
     2. [Frontend](#frontend)
 4. 🗃️ [Data](#data)
 5. 💻 [Model Components](#model-components)
-6. 📝 [Contributions](#contributions)
+6. 🎥 [Demo](#demo)
+7. 📝 [Contributions](#contributions)
 
 ***
 ## 🛠️ Introduction <a name="introduction"></a>
@@ -92,8 +93,7 @@ The code in the main code for our application can be found in the [`app`](parec-
 
 
 ### Frontend
-
-The Parec frontend is a web-based user interface for the Parec application. It allows users to input a query and receive a list of recommended research papers based on the query, as well as a visual representation of the relationships between topics related to the query. It is built using [Svelte](https://svelte.dev/), with additional libraries for data visualization such as [JQuery](https://jquery.com/) and [Vis](https://visjs.org/). It communicates with the backend using HTTP requests to receive search results and topic data.
+The Parec frontend is a web-based user interface for the Parec application. It allows users to input a query and receive a list of recommended research papers based on the query, as well as a visual representation of the relationships between topics related to the query. It is built using the [Svelte](https://svelte.dev/) framework. Further, [Vis](https://visjs.org/) is used to generate the visual representation of the term graph, and [jQuery](https://jquery.com) for communication between the frontend and backend.
 
 The Parec frontend code is organized into several directories and files, a detailed description can be found in the [parec-frontend](parec-frontend) directory. Some important files are:
 
@@ -154,7 +154,13 @@ Elasticsearch is a powerful search and analytics engine that is often used as a 
 
 ### 4. 🌐 Svelte:
 
-The web-based frontend utilizes the Svelte framework. Further, Vis is used to generate the visual representation of the term graph, and jQuery for communication between the frontend and backend. The frontend also provides a list of the set of metadata returned from the backend, as well as the search bar to send a query to the backend. Both of these rely in part on the features of the framework.
+The Parec application uses [Svelte](https://svelte.dev/) to create the user interface for the web application. Svelte is a front-end JavaScript framework that allows developers to create reactive and dynamic user interfaces by compiling the application code to highly optimized vanilla JavaScript code.
+
+***
+## 🎥 Demo <a name="demo"></a>
+
+ADD SCREENSHOT OF DEMO
+
 
 ***
 ## 📝 Contributions <a name="contributions"></a>
