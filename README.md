@@ -57,7 +57,11 @@ docker-compose --version
 2. Navigate into the Parec directory: `cd Parec`
 3. 🚀 Run the following command to start the application: `docker-compose build` ➡️ `docker-compose up`
 
-⚠️ Please wait before you go to the next step until you see the message `Configuration complete; ready for start up`. This can take some time ⏳
+⚠️ Please wait before you go to the next step until you see the message:
+```bash
+frontend  | /docker-entrypoint.sh: Configuration complete; ready for start up
+```
+This can take some time ⏳
 
 4. Open a web browser and go to http://localhost:80. The frontend should now be running.
 
@@ -133,7 +137,11 @@ Our application clusters papers using [Top2Vec](https://github.com/ddangelov/Top
 
 Top2Vec is a topic modeling algorithm that uses word embeddings to generate topic vectors for a given corpus. It starts by training a word embedding model on the corpus and then clusters the word embeddings to generate topic vectors. The number of topics is not specified beforehand but is instead inferred from the data. Top2Vec is known for its ability to handle large datasets efficiently and is especially useful for document clustering and topic exploration tasks.
 
-We train Top2Vec on the abstracts in our dataset and set the `ngram_vocab` argument to `True` in order to add phrases to our topic descriptions.
+We train Top2Vec on the abstracts in our dataset and set `ngram_vocab=True` in order to add phrases to our topic descriptions. E.g. related terms for the topic `reinfocement learning` are the following:
+
+<img src="parec-backend/app/data/reinforcement_learning_terms.png" width="90%" height="90%">
+
+In total, Top2Vec clusters our abstracts into 119 topics.
 
 
 **📃 Paper Recommender:**
