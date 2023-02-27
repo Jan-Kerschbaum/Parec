@@ -154,6 +154,7 @@ Elasticsearch is a powerful search and analytics engine that is often used as a 
 
 ### 4. 🌐 Svelte:
 
+The web-based frontend utilizes the Svelte framework. Further, Vis is used to generate the visual representation of the term graph, and jQuery for communication between the frontend and backend. The frontend also provides a list of the set of metadata returned from the backend, as well as the search bar to send a query to the backend. Both of these rely in part on the features of the framework.
 
 ***
 ## 📝 Contributions <a name="contributions"></a>
