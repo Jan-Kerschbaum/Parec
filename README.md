@@ -34,7 +34,22 @@ The application consists of a backend and a frontend. The backend is responsible
 
 ### Prerequisites
 
-To run Parec, you need to have Docker and Docker Compose installed on your system.
+To run Parec, you need to have [Docker](https://www.docker.com) and [Docker Compose](https://docs.docker.com/compose/) installed on your system. Here are the necessary commands for Linux:
+
+```bash
+# Install Docker
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+
+# Install Docker Compose
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+# Apply executable permissions to the binary
+sudo chmod +x /usr/local/bin/docker-compose
+
+# Verify Docker Compose installation
+docker-compose --version
+```
 
 ### Running the Application
 
