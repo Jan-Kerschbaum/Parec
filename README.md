@@ -124,7 +124,7 @@ We further only use certain keys that are relevant for our task, namely `abstrac
 
 ### Data Point Example
 
-<img src="parec-backend/app/data/data_point_example.png" width="90%" height="90%">
+<img src="parec-backend/app/data/visualizations/data_point_example.png" width="90%" height="90%">
 
 ***
 ## 💻 Model-Components <a name="model-components"></a>
@@ -137,7 +137,7 @@ Top2Vec is a topic modeling algorithm that uses a shared embedding for phrases a
 
 We train Top2Vec on the abstracts in our dataset and set `ngram_vocab=True` in order to add phrases to our topic descriptions. E.g. related terms for the topic `reinfocement learning` are the following:
 
-<img src="parec-backend/app/data/reinforcement_learning_terms.png" width="90%" height="90%">
+<img src="parec-backend/app/data/visualizations/reinforcement_learning_terms.png" width="90%" height="90%">
 
 In total, Top2Vec clusters our abstracts into 119 topics.
 
@@ -150,7 +150,7 @@ Our paper search algorithm utilizes our term graph based on the Top2Vec model to
 
 Elasticsearch is a powerful search and analytics engine that is often used as a data store for applications. It is designed to store, search, and analyze large volumes of data quickly and in near real-time. Elasticsearch provides a RESTful API that enables you to search and retrieve data in a variety of ways. We use it to store our data and use [Kibana](https://www.elastic.co/de/kibana/) for visualizations: 
 
-<img src="parec-backend/app/data/computer_science_categories.png" width="90%" height="90%">
+<img src="parec-backend/app/data/visualizations/computer_science_categories.png" width="90%" height="90%">
 
 ### 4. 🌐 Svelte:
 
@@ -159,7 +159,7 @@ The Parec application uses [Svelte](https://svelte.dev/) to create the user inte
 ***
 ## 🎥 Demo <a name="demo"></a>
 
-ADD SCREENSHOT OF DEMO
+<img src="parec-backend/app/data/visualizations/test_demo.png" width="90%" height="90%">
 
 
 ***
