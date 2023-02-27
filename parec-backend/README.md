@@ -14,4 +14,4 @@
 
 - **⚙️ [`requirements.txt`](parec-backend/requirements.txt):** This file contains the list of dependencies required to run the backend code.
 
-- **🛳️ [`Dockerfile`](parec-backend/Dockerfile):** This Dockerfile installs the dependencies listed in `requirements.txt`](parec-backend/requirements.txt), copies the [`app/`](parec-backend/app/data) directory to the container, and then runs the `uvicorn` server.
+- **🛳️ [`Dockerfile`](parec-backend/Dockerfile):** This Dockerfile installs the dependencies listed in [`requirements.txt`](parec-backend/requirements.txt), copies the [`app/`](parec-backend/app/data) directory to the container, and then runs the `uvicorn` server.
