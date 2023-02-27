@@ -159,7 +159,7 @@ The Parec application uses [Svelte](https://svelte.dev/) to create the user inte
 ***
 ## 🎥 Demo <a name="demo"></a>
 
-<img src="parec-backend/app/data/visualizations/test_demo.png" width="90%" height="90%">
+<img src="parec-backend/app/data/visualizations/demo.png" width="90%" height="90%">
 
 
 ***
