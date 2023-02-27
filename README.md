@@ -20,7 +20,8 @@ This project is part of the *Data Science for Text Analytics* class of Heidelber
 4. 🗃️ [Data](#data)
 5. 💻 [Model Components](#model-components)
 6. 🎥 [Demo](#demo)
-7. 📝 [Contributions](#contributions)
+7. 📊 [Evaluation](#evaluation)
+8. 📝 [Contributions](#contributions)
 
 ***
 ## 🛠️ Introduction <a name="introduction"></a>
@@ -160,6 +161,20 @@ The Parec application uses [Svelte](https://svelte.dev/) to create the user inte
 ## 🎥 Demo <a name="demo"></a>
 
 <img src="parec-backend/app/data/visualizations/demo.png" width="90%" height="90%">
+
+
+***
+## 📊 Evaluation <a name="evaluation"></a>
+
+We perform two types of evaluation:
+
+1. We evaluate our model against a random baseline. 
+
+2. We also perform a qualitative evaluation where we subjectively assess our results. To do this, one team member entered 5 different search queries and sent the top three recommended abstract links to another team member. This team member then went through the abstracts and noted the most relevant terms. These terms were then compared to those provided by the Parec application in the knowledge graph for each query.
+
+
+
+
 
 
 ***
