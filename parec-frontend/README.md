@@ -4,16 +4,16 @@
 
 - **🗂️ [`public/`](parec-frontend/public):** Contains ...
 
-    - test-image?
-    - vite.svg?
+    - test-image: Placeholder image used during development before the graph was fully implemented.
+    - vite.svg: Tab-bar icon for the tab that came with the Svelte template.
 
 - **🗂️ [`src/`](parec-frontend/src):** This directory contains the source code for the frontend application:
 
     - **🗂️ [`assets/`](parec-frontend/src/assets):** This directory contains static files (such as images, fonts, and stylesheets) that are used in the frontend of the Parec application.
 
-    - **🗂️ [`lib/`](parec-frontend/src/lib):** This directory the contains third-party `Counter.svelte` component that implements a simple counter feature.
+    - **🗂️ [`lib/`](parec-frontend/src/lib):** This directory the contains third-party `Counter.svelte` component that implements a simple counter feature. This is part of the template, und not currently used in the project.
 
-    - **🌐 [`App.svelte`](parec-frontend/src/App.svelte):** The file is the main component of the Parec frontend web application, which contains the routing logic and renders other components.
+    - **🌐 [`App.svelte`](parec-frontend/src/App.svelte):** The file is the main component of the Parec frontend web application, which contains the routing logic, together with our custom HTML and CSS.
 
     - **🌐 [`app.css`](parec-frontend/src/app.css):** The file contains the global CSS styles for the Parec frontend application, which are applied to all components.
 
@@ -23,7 +23,7 @@
 
 
 
-- **🛳️ [`Dockerfile`](parec-frontend/Dockerfile):** This Dockerfile builds and deploys a frontend application using `Node.js` and `Nginx`, copying over the necessary files and configurations and installing required dependencies in the process.
+- **🛳️ [`Dockerfile`](parec-frontend/Dockerfile):** This Dockerfile builds and deploys a frontend application using a Node.js base image with a Nginx proxy, copying over the necessary files and configurations and installing required dependencies in the process.
 
 - **🌐 [`index.html`](parec-frontend/index.html):** This provides the entry point and basic layout for the Parec web application.
 
