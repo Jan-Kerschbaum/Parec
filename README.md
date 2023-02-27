@@ -165,4 +165,4 @@ The Parec application uses [Svelte](https://svelte.dev/) to create the user inte
 ***
 ## 📝 Contributions <a name="contributions"></a>
 
-Jan Kerschbaum was primarily involved in the development of both the frontend and backend components of the Parec project, while Dilara Auykurth was responsible setting up a Docker configuration. Sandra Friebolin was in charge of managing the Elasticsearch database, pre-processing data, and writing README files, and Annalena Frey focused on testing. All team members shared responsibilities for documenting the project, ensuring that the work is thoroughly and accurately documented for future reference.
+Jan Kerschbaum was primarily involved in the development of both the frontend and backend components of the Parec project, while Dilara Auykurth was responsible setting up a Docker configuration. Sandra Friebolin was in charge of managing the Elasticsearch database, pre-processing data, and writing README files, and Annalena Frey focused on testing. All team members shared responsibilities for evaluating and documenting the project, ensuring that the work is thoroughly and accurately documented for future reference.

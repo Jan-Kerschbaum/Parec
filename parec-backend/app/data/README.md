@@ -3,6 +3,9 @@
 
 ***
 
+- **🗂️ [`evaluation/`](parec-backend/app/data/evaluation):** This directory contains a random baseline we use for evaluation.
+
+
 - **🗂️ [`preprocessing/`](parec-backend/app/data/preprocessing):** This directory contains data pre-processing files and code for training our topic model.
 
     - **💽 [`cs_categories.json`](parec-backend/app/data/preprocessing/cs_categories.json):** Defines which paper categories we keep from the original [arxiv](https://www.kaggle.com/datasets/Cornell-University/arxiv) dataset.
