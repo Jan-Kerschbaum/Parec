@@ -1,141 +1,132 @@
-# Parec
-This project is part of the _Data Science for Text Analytics_ class of Heidelberg University. Its aim is the creation a tool which recommends different scientific papers based on an input term by the user. 
+# 💡 Parec
+
+This project is part of the *Data Science for Text Analytics* class of Heidelberg University. 
+
+***
+## Team Members
+- Jan Kerschbaum; ✉️ [jankerschbaum@web.de](mailto:jankerschbaum@web.de)
+- Sandra Friebolin; ✉️ [sandra_friebolin@web.de](mailto:sandra_friebolin@web.de)
+- Dilara Aykurt; ✉️ [d.aykurt@web.de](mailto:d.aykurt@web.de)
+- Annalena Frey; ✉️ [pf225@stud.uni-heidelberg.de](mailto:pf225@stud.uni-heidelberg.de)
+
+***
+## Table of contents
+1. [Introduction](#introduction)
+1. 🛠️ [Set Up](#set-up)
+2. ⚙️  [Usage](#usage)
+3. 🏯 [Code Structure](#code-structure)
+    1. [Backend](#backend)
+    2. [Frontend](#frontend)
+4. 🗃️ [Data](#data)
+5. 💻 [Pipeline](#pipeline)
+6. 📝 [Contributions](#contributions)
+
+***
+## 🛠️ Introduction <a name="introduction"></a>
+
+Parec is a web application that offers a comprehensive solution for knowledge discovery and research recommendations. By taking in a user query on a particular topic, it quickly generates a knowledge graph of related concepts and recommends the top cientific articles from the [arXiv](https://arxiv.org/) database to match the user's interests. Parec streamlines the process of finding relevant information and provides an innovative solution for researchers and students alike.
+
+The application consists of a backend and a frontend. The backend is responsible for retrieving data from [Elasticsearch](https://www.elastic.co/de/) and providing it to the frontend via a REST API. The frontend is a web application that allows users to search and view recommended articles.
 
 
-### Team Members
-- Jan Kerschbaum; jankerschbaum@web.de
-- Sandra Friebolin; sandra_friebolin@web.de
-- Dilara Aykurt; d.aykurt@web.de
-- Annalena Frey; pf225@stud.uni-heidelberg.de
+***
+## 🛠️ Set Up <a name="setup"></a>
 
-### Existing Code Fragment
+### Prerequisites
 
-Aside from the libraries indicated below, the project employs a pre-trained BERTopic model, as well as Svelte and one of its provided templates for the implementation of the frontend. No further pre-existing code is employed at this time.
+To run Parec, you need to have Docker and Docker Compose installed on your system.
 
-### Utilized libraries
+### Running the Application
 
-#### Frontend
+1. Clone the repository: `git clone https://github.com/Jan-Kerschbaum/Parec.git`
+2. Navigate into the Parec directory: `cd Parec`
+3. 🚀 Run the following command to start the application: `docker-compose build` ➡️ `docker-compose up`
+4. Open a web browser and go to http://localhost:9200. The frontend should now be running.
 
-The frontend depends on the JQuery and Vis packages. Additionally, Svelte, Vite, and the Svelte Vite plugin are required dev dependencies. 
 
-#### Backend
+ℹ️ All necessary dependencies are indicated in the [requirements.txt](parec-backend/requirements.txt) file.
 
-The current implementation of the backend on the main branch employs the FastApi, Pydantic, Uvicorn and Python-Multipart modules.
+***
+## ⚙️ Usage <a name="usage"></a>
 
-Certain branches, especially those where work is done on implementing the backend may have additional dependencies, as indicated by the requirements.txt file on the respective branch.
+1. Use the search bar to enter a topic you are interested in. (ℹ️ Note that the current version is restricted to topics related to computer science.)
+2. Click the `Search` button.
+2. On the right, you find recommended papers based on your topic. Click on a link to view the paper on [arXiv](https://arxiv.org/).
 
-### Contributions
-Jan Kerschbaum mainly focused on the implementation of the frontend 
-Dilara Auykurth set up a Docker for the project.
-Annalena Frey and Sandra Friebolin are working with the Dataset, currently figuring out how to preprocess the dataset before using BERt
+***
+## 🏯 Code-Structure <a name="code-structure"></a>
 
-## Project State
+### Backend
 
-### Planning State
-Docker containers have been set up.
+The main functionality of the backend is to handle the incoming user queries, retrieve data from Elasticsearch and provide it to the frontend in the desired format. It employs the FastApi and Python-Multipart modules for the frontend to interact with. 
 
-The frontend is largely finished, though it may be reworked should issues arise in practical operation.
+The code in the main code for our application can be found in the [`app`](parec-backend/app) folder, including the endpoints that handle incoming requests and return the relevant responses. The code is further organized into the following directories:
 
-The implementation of the backend has begun on other branches, but is in a partial stage. A structure for the backend has been established, and certain helper functions implemented, on other branches.
+- 🗂️ [`data`](parec-backend/app/data): This directory contains the scripts that are responsible for loading the data from Elasticsearch, transforming it as necessary, and returning it to the application.
 
-In terms of the dataset, test runs have been executed with the dataset without any preprocessing. The results clearly indicate that the data needs to be preprocessed, as the currently identified topics are full of stop words, and therefore unusable.
+- 🗂️ [`src`](parec-backend/app/src): This directory contains the main components of the application, such as the paper recommender that searches through the papers, the file that finds related terms based on a user query and the controller that handles queries.
 
-### Future Planning
+- 🗂️ [`tests/`](parec-backend/app/tests): This directory contains the test functions for the backend code.
 
-Immediate priorities include the implementation of the function to find terms related to a source term, which itself requires us to get the functionality to get the model (after fitting to the dataset) saved and later loaded in the same state running. Additionally, the implementation of helper functions to retieve the data from ElasticSearch and make it useable in the backend is a high priority, as is the implementation of the ElasticSearch container itself.
 
-We are currently planning to finish working with the dataset and creating a usable model by the end of december.
-The backend should be finished by mid/end of january.
-In mid february, we are planning to finish the implementation, so that we can create the video presentation between mid and end of february.
-The report should be finished by begin of march.
+### Frontend
 
-### High-level Architecture Description
+The Parec frontend is a web-based user interface for the Parec application. It allows users to input a query and receive a list of recommended research papers based on the query, as well as a visual representation of the relationships between topics related to the query. It is built using [Svelte](https://svelte.dev/), with additional libraries for data visualization such as [JQuery](https://jquery.com/) and [Vis](https://visjs.org/). It communicates with the backend using HTTP requests to receive search results and topic data.
 
-First, we want to filter stop words from the abstracts of the papers, and apply a lemmatizer to them. Unfortunately, this is still a work in process.
+The Parec frontend code is organized into several directories and files, a detailed description can be found in the [parec-frontend](parec-frontend) directory. Some important files are:
 
-Before runtime, the papers in the dataset are clustered using BERTopics topic modeling function in order to limit the search space later on.
 
-At runtime, a typical query is handeled as follows: It is sent from the frontend to the backend without alteration once the user presses the search button. There, we perform a search to find terms that are, in an abstract sense, related to the query, from those present in our dataset. We perfomr this search recursively, effectively creating a graph where the terms are nodes, and the relation of which terms search (first) found which other term defines edges (though despite implications, we do not use directional edges). We then construct a relevance metric on this graph, assigning to each term a relevance that declines as we move outwards from the node representing the user query. Finally, we get potentially relevant candidate papers from our reduced search space, and rank them on the basis of our relevance metric. The top candidate papers, together with their metadata (titles, authors, ARXIV IDs) are sent to the frontend, along with the graph defined through its list of edges, and visualised there.
+- 🗂️ [`src/`](parec-frontend/src): This directory contains the source code for the Parec web application, including JavaScript, TypeScript, HTML, and CSS files that define the frontend logic, layout, and styling of the application, as well as additional assets such as images and fonts:
 
-Major deviations include if the user sends an empty query (in which case we clear both the graph and the list and show an error message), if the backend is not initialised or unreachable due to some error (error message only), or the initial state of the application prior to any query being sent, which uses example data.
+    - **🌐 [`App.svelte`](parec-frontend/src/App.svelte):** This file is the main component of the Parec frontend web application, which contains the routing logic and renders other components.
 
-### Experiments
-As mentioned before, test runs with BERTtopic have been executed without preprocessed data.
-As a result, we got the following topics:
+    - **🌐 [`main.js`](parec-frontend/src/main.js):** This file is the entry point for the Parec frontend web application, which initializes the root component and attaches it to the DOM.
+    
+    - **🌐 [`package.json`](parec-frontend/src/package.json):** Contains metadata about the frontend, such as dependencies and scripts for building and running the application.
 
-|   | Topic | Count | Name |
-----|-------|------|-----  |
-| 0 | -1    | 7644  | -1_the_of_and_to |
-| 1 | 0     | 1920  | 0_the_of_and_channel |
-| 2 | 1     |882    | 1_security_the_and_of |
-| 3 | 2     |828    | 2_of_the_we_is |
-| 4 | 3     |667    | 3_software_of_and-to |
-| 5 | 4     |640    | 4_the_neural_of_deep |
-| 6 | 5     |601    | 5_language_word_translation_the |
-| 7 | 6     |402    | 6_robot_robots_the_control |
-| 8 | 7     |348    | 7_social_media_of_news |
-| 9 | 8     |308    | 8_workshop_volume_processings_international |
+- **🛳️ [`Dockerfile`](parec-frontend/Dockerfile):** This Dockerfile builds and deploys a frontend application using `Node.js` and `Nginx`, copying over the necessary files and configurations and installing required dependencies in the process.
 
-## Data Analysis
-### Data Sources
-The dataset that we use is provided by https://www.kaggle.com/datasets/Cornell-University/arxiv?resource=download 
+
+***
+## 🗃️ Data <a name="data"></a>
+
+The dataset we use is provided by [kaggle](https://www.kaggle.com/datasets/Cornell-University/arxiv?resource=download). It contains paper titles, paper abstracts, and their subject categories from [arXiv](https://arxiv.org/).
 
 ### Preprocessing
 
-The extent of our preprocessing is limited, since we rely in large part on the intrinsic structure of the abstracts in our dataset. We filter out stop words and lemmatize the abstracts in our dataset to enhance the quality of the result both when clustering the abstracts and when searching for related terms. We do not apply further preprocessing of the text, in order to keep the subtextual relations between the words intact, as well as because we employ a BERTopic model at several points, which, to some extent, implements its own preprocessing.
+Due to resource reasons, we confine ourselves to papers from computer science [categories](parec-backend/app/data/cs_categories.json) from the years 2016-2022, resulting in 11932 documents.
 
-### Basic Statistics
+<img src="parec-backend/app/data/computer_science_categories.png" width="90%" height="90%">
+
+We further only use certain keys that are relevant for our task, namely `abstract`, `title`, `author`, `year` `category` and `paper_id`. We do not apply further preprocessing of the abstracts, in order to keep subtextual relations between the words intact and because our topic model, Top2Vec, we will filter out stopwords by default. It further performs lemmatization to reduce words to their base form, which can help with topic modeling.
+
+### Data Point Example
+
+<img src="parec-backend/app/data/data_point_example.png" width="90%" height="90%">
+
+***
+## 💻 Pipeline <a name="pipeline"></a>
+
+Our application clusters papers using [Top2Vec](https://github.com/ddangelov/Top2Vec)'s topic modeling to limit the search space. At runtime, when a user query is received, we search the dataset for related terms recursively, creating a graph of related terms. We assign a relevance metric to each term, declining as we move outwards from the node representing the user query. We then retrieve potentially relevant candidate papers from our reduced search space and rank them based on the relevance metric. The top candidate papers, along with their metadata, are sent to the frontend for visualization along with the graph defined by its edges. The application also handles error cases, such as empty queries, initialization errors, or no query being sent (in which case, example data is used).
+
+**📈 Top2Vec:**
+
+Top2Vec is a topic modeling algorithm that uses word embeddings to generate topic vectors for a given corpus. It starts by training a word embedding model on the corpus and then clusters the word embeddings to generate topic vectors. The number of topics is not specified beforehand but is instead inferred from the data. Top2Vec is known for its ability to handle large datasets efficiently and is especially useful for document clustering and topic exploration tasks.
+
+
+**📃 Paper Recommender:**
+Our paper search algorithm utilizes Top2Vec's term graph to generate a comprehensive search of all papers. By calculating relevance based on a precomputed relevance metric, the algorithm efficiently returns the top 10 papers for a given search query.
 
 During experimenting with the dataset, we included all papers which were published between 2011 and 2021, which resulted in 18015 papers
 
-### Example
+**🔎 Elasticsearch:**
+
+Elasticsearch is a powerful search and analytics engine that is often used as a data store for applications. It is designed to store, search, and analyze large volumes of data quickly and in near real-time. Elasticsearch provides a RESTful API that enables you to search and retrieve data in a variety of ways.
 
 Example is taken as-is from data source (https://www.kaggle.com/datasets/Cornell-University/arxiv?resource=download), though we only use certain keys (id, authors, title and abstract), allowing us to de facto reduce the dataset to the data for those keys. Each datapoint is available as a JSON object in the following format.
 Unfortunaltely, due to the size of the dataset, we can not have a look at it directly, as when opening in it throws an error stating that it needs more memory to be opened.
 
-"root":{
-    "id":"0704.0001"
-    "submitter":"Pavel Nadolsky"
-    "authors":"C. Bal\'azs, E. L. Berger, P. M. Nadolsky, C.-P. Yuan"
-    "title":"Calculation of prompt diphoton production cross sections at Tevatron and LHC energies"
-    "comments":"37 pages, 15 figures; published version"
-    "journal-ref":"Phys.Rev.D76:013009,2007"
-    "doi":"10.1103/PhysRevD.76.013009"
-    "report-no":"ANL-HEP-PR-07-12"
-    "categories":"hep-ph"
-    "license":NULL
-    "abstract":" A fully differential calculation in perturbative quantum chromodynamics is presented for the production of massive photon pairs at hadron colliders. All next-to-leading order perturbative contributions from quark-antiquark, gluon-(anti)quark, and gluon-gluon subprocesses are included, as well as all-orders resummation of initial-state gluon radiation valid at next-to-next-to-leading logarithmic accuracy. The region of phase space is specified in which the calculation is most reliable. Good agreement is demonstrated with data from the Fermilab Tevatron, and predictions are made for more detailed tests with CDF and DO data. Predictions are shown for distributions of diphoton pairs produced at the energy of the Large Hadron Collider (LHC). Distributions of the diphoton pairs from the decay of a Higgs boson are contrasted with those produced from QCD processes at the LHC, showing that enhanced sensitivity to the signal can be obtained with judicious selection of events. "
-    "versions":[
-        0:{
-            "version":string"v1"
-            "created":string"Mon, 2 Apr 2007 19:18:42 GMT"
-        }
-        1:{
-            "version":string"v2"
-            "created":string"Tue, 24 Jul 2007 20:10:27 GMT"
-        }
-    ]
-    "update_date":"2008-11-26"
-    "authors_parsed":[
-        0:[
-            0:"Balázs"
-            1:"C."
-            2:""
-        ]
-        1:[
-            0:"Berger"
-            1:"E. L."
-            2:""
-        ]
-        2:[
-            0:"Nadolsky"
-            1:"P. M."
-            2:""
-        ]
-        3:[
-            0:"Yuan"
-            1:"C. -P."
-            2:""
-        ]
-    ]
-}
+***
+## 📝 Contributions <a name="contributions"></a>
+
+Jan Kerschbaum was primarily involved in developing the frontend and backend of the Parec project, while Dilara Auykurth was responsible for setting up a Docker configuration for the project. Sandra Friebolin was in charge of data pre-processing and managing the Elasticsearch database, while Annalena Frey focused on testing. Additionally, all team members shared responsibilities for documentation of the project.

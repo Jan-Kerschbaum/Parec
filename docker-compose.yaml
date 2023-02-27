@@ -1,24 +1,72 @@
 version: "3.9"
 
 services:
+  es:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.6.1
+    container_name: es
+    ports:
+      - 9200:9200
+    environment:
+      #- node.name=es
+      - discovery.type=single-node
+      #- xpack.security.enabled=false
+      - ELASTIC_PASSWORD=changeme
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      # - node.name=es
+      # - cluster.name=es-docker-cluster
+      # - cluster.initial_master_nodes=es
+      # - MAX_LOCKED_MEMORY=unlimited      
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+      # - ./es_data_volume:/usr/share/elasticsearch/data
+      # - ./elasticsearch.yml:/etc/elasticsearch/elasticsearch.yml
+    healthcheck:
+      test: curl --silent --fail --user elastic:changeme http://localhost:9200/_cluster/health?wait_for_status=green&timeout=1s || exit 1
+      interval: 30s
+      timeout: 30s
+      retries: 10
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    networks:
+      - es_net
+
   backend:
-    build: /parec-backend/.
+    build: ./parec-backend/.
     container_name: backend
+    ports:
+      - 8000:8000
+    healthcheck:
+      test: curl --silent --fail --user elastic:changeme http://localhost:8000/health || exit 1
+      interval: 30s
+      timeout: 30s
+      retries: 20
     networks:
       - backend_net
+      - es_net
+    depends_on:
+      es:
+        condition: service_healthy
+    environment:
+      - ELASTICSEARCH_HOST=es
+      - ELASTICSEARCH_PORT=9200
 
   frontend:
-    build: /parec-frontend/.
+    build: ./parec-frontend/.
     container_name: frontend
     ports:
       - 80:80
     networks:
       - backend_net
     depends_on:
-      - backend   #frontend only works if backend already deployed
+      backend:   #frontend only works if backend already deployed
+        condition: service_healthy
 
 networks:
   backend_net:
-    
- 
-  
+  es_net: 
+
+volumes:
+  esdata:
+

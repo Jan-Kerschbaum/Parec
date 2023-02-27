@@ -3,6 +3,36 @@
     import vis from "vis"
 	import { onMount } from 'svelte'
 	let result_text = "None"
+	let PaperOneName = "Paper One"
+	let PaperOneAuthors = "Authors"
+	let PaperOneID = "id"
+	let PaperTwoName = "Paper Two"
+	let PaperTwoAuthors = "Author"
+	let PaperTwoID = "id"
+	let PaperThreeName = "Paper Three"
+	let PaperThreeAuthors = "Authors"
+	let PaperThreeID = "id"
+	let PaperFourName = "Paper Four"
+	let PaperFourAuthors = "Authors"
+	let PaperFourID = "id"
+	let PaperFiveName = "Paper Five"
+	let PaperFiveAuthors = "Authors"
+	let PaperFiveID = "id"
+	let PaperSixName = "Paper Six"
+	let PaperSixAuthors = "Authors"
+	let PaperSixID = "id"
+	let PaperSevenName = "Paper Seven"
+	let PaperSevenAuthors = "Authors"
+	let PaperSevenID = "id"
+	let PaperEightName = "Paper Eight"
+	let PaperEightAuthors = "Authors"
+	let PaperEightID ="id"
+	let PaperNineName = "Paper Nine"
+	let PaperNineAuthors = "Authors"
+	let PaperNineID = "id"
+	let PaperTenName = "Paper Ten"
+	let PaperTenAuthors = "Authors"
+	let PaperTenID = "id"
 	//Generate initial graph
 	//Note: Variables are declared outside the context like this because they need to be accessible later for rebuilding the network
 	let container
@@ -17,7 +47,21 @@
       		nodes: nodes,
       		edges: edges,
     	};
-    	var options = {}
+    	var options = {
+			groups:{
+				"queryGroup": {
+					color:{
+						background:'#4f0d02',
+						border: "#6e180a"
+					},
+					font:{
+						multi: true,
+						color: "#ffffff"
+					},
+				"shape": "box",
+				}
+			}
+		}
     	network = new vis.Network(container, data, options)
 	})
 	/**
@@ -33,6 +77,39 @@
 			data = JSON.parse(data)
 			let function_result = String(data.result)
 			result_text = function_result
+			//Update paper list based on return from backend
+			var paper_response = JSON.parse(data.papers)
+			//TODO: This, as well as the define structure that required it above needs to be refactored
+			PaperOneName = String(paper_response[0].name)
+			PaperOneAuthors = String(paper_response[0].authors)
+			PaperOneID = String(paper_response[0].id)
+			PaperTwoName = String(paper_response[1].name)
+			PaperTwoAuthors = String(paper_response[1].authors)
+			PaperTwoID = String(paper_response[1].id)
+			PaperThreeName = String(paper_response[2].name)
+			PaperThreeAuthors = String(paper_response[2].authors)
+			PaperThreeID = String(paper_response[2].id)
+			PaperFourName = String(paper_response[3].name)
+			PaperFourAuthors = String(paper_response[3].authors)
+			PaperFourID = String(paper_response[3].id)
+			PaperFiveName = String(paper_response[4].name)
+			PaperFiveAuthors = String(paper_response[4].authors)
+			PaperFiveID = String(paper_response[4].id)
+			PaperSixName = String(paper_response[5].name)
+			PaperSixAuthors = String(paper_response[5].authors)
+			PaperSixID = String(paper_response[5].id)
+			PaperSevenName = String(paper_response[6].name)
+			PaperSevenAuthors = String(paper_response[6].authors)
+			PaperSevenID = String(paper_response[6].id)
+			PaperEightName = String(paper_response[7].name)
+			PaperEightAuthors = String(paper_response[7].authors)
+			PaperEightID = String(paper_response[7].id)
+			PaperNineName = String(paper_response[8].name)
+			PaperNineAuthors = String(paper_response[8].authors)
+			PaperNineID = String(paper_response[8].id)
+			PaperTenName = String(paper_response[9].name)
+			PaperTenAuthors = String(paper_response[9].authors)
+			PaperTenID = String(paper_response[9].id)
 			// Update graph based on edge list returned from backend
 			var graph_response = JSON.parse(data.graph)
 			var nodesArray = []
@@ -49,7 +126,11 @@
 					// If the from_node of this particular edge is not one we've seen before, we'll add it to the list of nodes
 					if(!found_nodes.includes(from_node)){
 						found_nodes.push(from_node)
-						nodesArray.push({id: current_node_num, label: from_node})
+						if(from_node == user_query){
+							nodesArray.push({id: current_node_num, group: "queryGroup", label: "<b>" + from_node + "</b>"})
+						}else{
+							nodesArray.push({id: current_node_num, label: from_node})
+						}
 						ids[from_node] = current_node_num
 						current_node_num += 1
 					}
@@ -74,7 +155,7 @@
 			result_text = "Empty Query Field"
 			nodes.clear()
 			edges.clear()
-			//ToDo: Set List Bindings to empty strings (once we do that) on success
+			//ToDo: Set List Bindings to empty strings
 		})
 	}
 </script>
@@ -98,55 +179,55 @@
     <span style="display:inline-block; width: 2cm;"></span>
 	<!-- As of current, none of these are tied to the data returned from the backend. Once that is set up, we just bind to str vars here -->
 		<dl class="dl-horizontal text-muted">
-			<dt>Paper one</dt>
-			<dd class="authors">Authors</dd>
+			<dt>{PaperOneName}</dt>
+			<dd class="authors">{PaperOneAuthors}</dd>
 			<dd class="link">
-				<a href="https://arxiv.org/abs/id">Link</a>
+				<a href="https://arxiv.org/abs/{PaperOneID}">Link</a>
 			</dd>
-			<dt>Paper two</dt>
-			<dd class="authors">Authors</dd>
+			<dt>{PaperTwoName}</dt>
+			<dd class="authors">{PaperTwoAuthors}</dd>
 			<dd class="link">
-				<a href="https://arxiv.org/abs/id">Link</a>
+				<a href="https://arxiv.org/abs/{PaperTwoID}">Link</a>
 			</dd>
-			<dt>Paper three</dt>
-			<dd class="authors">Authors</dd>
+			<dt>{PaperThreeName}</dt>
+			<dd class="authors">{PaperThreeAuthors}</dd>
 			<dd class="link">
-				<a href="https://arxiv.org/abs/id">Link</a>
+				<a href="https://arxiv.org/abs/{PaperThreeID}">Link</a>
 			</dd>
-			<dt>Paper four</dt>
-			<dd class="authors">Authors</dd>
+			<dt>{PaperFourName}</dt>
+			<dd class="authors">{PaperFourAuthors}</dd>
 			<dd class="link">
-				<a href="https://arxiv.org/abs/id">Link</a>
+				<a href="https://arxiv.org/abs/{PaperFourID}">Link</a>
 			</dd>
-			<dt>Paper five (very long title)</dt>
-			<dd class="authors">Authors</dd>
+			<dt>{PaperFiveName}</dt>
+			<dd class="authors">{PaperFiveAuthors}</dd>
 			<dd class="link">
-				<a href="https://arxiv.org/abs/id">Link</a>
+				<a href="https://arxiv.org/abs/{PaperFiveID}">Link</a>
 			</dd>
-			<dt>Paper six</dt>
-			<dd class="authors">Authors</dd>
+			<dt>{PaperSixName}</dt>
+			<dd class="authors">{PaperSixAuthors}</dd>
 			<dd class="link">
-				<a href="https://arxiv.org/abs/id">Link</a>
+				<a href="https://arxiv.org/abs/{PaperSixID}">Link</a>
 			</dd>
-			<dt>Paper seven</dt>
-			<dd class="authors">Authors</dd>
+			<dt>{PaperSevenName}</dt>
+			<dd class="authors">{PaperSevenAuthors}</dd>
 			<dd class="link">
-				<a href="https://arxiv.org/abs/id">Link</a>
+				<a href="https://arxiv.org/abs/{PaperSevenID}">Link</a>
 			</dd>
-			<dt>Paper eight</dt>
-			<dd class="authors">Authors</dd>
+			<dt>{PaperEightName}</dt>
+			<dd class="authors">{PaperEightAuthors}</dd>
 			<dd class="link">
-				<a href="https://arxiv.org/abs/id">Link</a>
+				<a href="https://arxiv.org/abs/{PaperEightID}">Link</a>
 			</dd>
-			<dt>Paper nine</dt>
-			<dd class="authors">Authors</dd>
+			<dt>{PaperNineName}</dt>
+			<dd class="authors">{PaperNineAuthors}</dd>
 			<dd class="link">
-				<a href="https://arxiv.org/abs/id">Link</a>
+				<a href="https://arxiv.org/abs/{PaperNineID}">Link</a>
 			</dd>
-			<dt>Paper ten</dt>
-			<dd class="authors">Authors</dd>
+			<dt>{PaperTenName}</dt>
+			<dd class="authors">{PaperTenAuthors}</dd>
 			<dd class="link">
-				<a href="https://arxiv.org/abs/id">Link</a>
+				<a href="https://arxiv.org/abs/{PaperTenID}">Link</a>
 			</dd>
 		</dl>
 	</div>
