@@ -12,16 +12,16 @@ This project is part of the *Data Science for Text Analytics* class of Heidelber
 ***
 ## Table of contents
 1. [Introduction](#introduction)
-1. 🛠️ [Set Up](#set-up)
-2. ⚙️  [Usage](#usage)
-3. 🏯 [Code Structure](#code-structure)
+2. 🛠️ [Set Up](#set-up)
+3. ⚙️  [Usage](#usage)
+4. 🏯 [Code Structure](#code-structure)
     1. [Backend](#backend)
     2. [Frontend](#frontend)
-4. 🗃️ [Data](#data)
-5. 💻 [Model Components](#model-components)
-6. 🎥 [Demo](#demo)
-7. 📊 [Evaluation](#evaluation)
-8. 📝 [Contributions](#contributions)
+5. 🗃️ [Data](#data)
+6. 💻 [Model Components](#model-components)
+7. 🎥 [Demo](#demo)
+8. 📊 [Evaluation](#evaluation)
+9. 📝 [Contributions](#contributions)
 
 ***
 ## 🛠️ Introduction <a name="introduction"></a>
