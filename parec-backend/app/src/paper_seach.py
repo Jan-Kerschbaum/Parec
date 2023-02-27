@@ -55,12 +55,12 @@ def construct_relevance_metric(term_graph, query):
             relevance_dict (dict): Dictionary that contains the term and a belonging relevance value
     """
     relevance_dict = {} # Keys are terms as strings, values are single integers representing the terms relevance rating
-    relevance_dict[query] = MAX_RELEVANCE
     # Initialising, both so that each term is definitely in the dict, and so that we can track if a (non-negative) relevance has been assigned to each term  
     flattened_graph = list(term_graph.values())
     flattened_graph = [item for sublist in flattened_graph for item in sublist]
     for term in flattened_graph:
         relevance_dict[term] = -1
+    relevance_dict[query] = MAX_RELEVANCE
     # Iterate over the dictionary until all terms have a relevance assigned to them
     # Note that this doesn't necessarily mean that we have found the lowest possible relevance (~ shortest possible path) for lower relevances,
     # though chances are good for higher ones
