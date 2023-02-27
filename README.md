@@ -80,7 +80,7 @@ This can take some time ⏳
 ***
 ## 🏯 Code-Structure <a name="code-structure"></a>
 
-### Backend
+### Backend <a name="backend"></a>
 
 The main functionality of the backend is to handle the incoming user queries, retrieve data from Elasticsearch and provide it to the frontend in the desired format. It employs the FastApi and Python-Multipart modules for the frontend to interact with. 
 
@@ -93,7 +93,7 @@ The code in the main code for our application can be found in the [`app`](parec-
 - 🗂️ [`tests/`](parec-backend/app/tests): This directory contains the test functions for the backend code.
 
 
-### Frontend
+### Frontend <a name="frontend"></a>
 The Parec frontend is a web-based user interface for the Parec application. It allows users to input a query and receive a list of recommended research papers based on the query, as well as a visual representation of the relationships between topics related to the query. It is built using the [Svelte](https://svelte.dev/) framework. Further, [Vis](https://visjs.org/) is used to generate the visual representation of the term graph, and [jQuery](https://jquery.com) for communication between the frontend and backend.
 
 The Parec frontend code is organized into several directories and files, a detailed description can be found in the [parec-frontend](parec-frontend) directory. Some important files are:
