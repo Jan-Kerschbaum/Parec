@@ -14,12 +14,12 @@ This project is part of the *Data Science for Text Analytics* class of Heidelber
 1. [Introduction](#introduction)
 1. 🛠️ [Set Up](#set-up)
 2. ⚙️  [Usage](#usage)
-3. 🏯 [Code Structure](#code-structure)
+3. 🎥 [Demo](#demo)
+4. 🏯 [Code Structure](#code-structure)
     1. [Backend](#backend)
     2. [Frontend](#frontend)
-4. 🗃️ [Data](#data)
-5. 💻 [Model Components](#model-components)
-6. 🎥 [Demo](#demo)
+5. 🗃️ [Data](#data)
+6. 💻 [Model Components](#model-components)
 7. 📊 [Evaluation](#evaluation)
 8. 📝 [Contributions](#contributions)
 
@@ -75,7 +75,18 @@ This can take some time ⏳
 
 1. Use the search bar to enter a topic you are interested in. (ℹ️ Note that the current version is restricted to topics related to computer science.)
 2. Click the `Search` button.
-2. On the right, you find recommended papers based on your topic. Click on a link to view the paper on [arXiv](https://arxiv.org/).
+
+➡️ On the left you'll find a graph of topics and terms related to the one you entered.
+➡️ On the right, you find your personal list of recommended papers based on the topic. Click on a link to view the paper on [arXiv](https://arxiv.org/).
+
+
+***
+## 🎥 Demo <a name="demo"></a>
+
+<img src="parec-backend/app/data/visualizations/demo.png" width="90%" height="90%">
+
+
+
 
 ***
 ## 🏯 Code-Structure <a name="code-structure"></a>
@@ -156,11 +167,6 @@ Elasticsearch is a powerful search and analytics engine that is often used as a 
 ### 4. 🌐 Svelte:
 
 The Parec application uses [Svelte](https://svelte.dev/) to create the user interface for the web application. Svelte is a front-end JavaScript framework that allows developers to create reactive and dynamic user interfaces by compiling the application code to highly optimized vanilla JavaScript code.
-
-***
-## 🎥 Demo <a name="demo"></a>
-
-<img src="parec-backend/app/data/visualizations/demo.png" width="90%" height="90%">
 
 
 ***
