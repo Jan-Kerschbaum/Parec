@@ -12,17 +12,30 @@ from gensim.models.phrases import ENGLISH_CONNECTOR_WORDS
 
 
 # Load the DataFrame
-df = pd.read_csv('parec-backend/app/data/reduced_data.csv')
+df = pd.read_csv('parec-backend/app/data/preprocessing/large_data.csv')
+
+
+# Join title and abstract columns
+df["merged"] = df.apply(lambda row: row["title"] + " " + row["abstract"], axis=1)
+
 
 # Create a list of stop words and define punctuation
 nltk.download('stopwords')
 stop_words = set(stopwords.words('english')) 
+
+# Add additional function words that are not contained in NLTK stopwords:
+new_words = ['would', 'like', 'thus', 'then']
+stop_words.update(new_words)
+
 punctuation = set(string.punctuation)
 
-# Preprocess the text data by tokenizing, removing stop words, and lowercasing
-documents = df['abstract'].tolist()
 
-# Iterate through each string in the documents list
+# Preprocess the text data by tokenizing, removing stop words, and lowercasing
+documents = df['merged'].tolist()
+# print(df["title"].iloc[0])
+# print(df["abstract"].iloc[0])
+# print(documents[:1])
+
 for i, doc in enumerate(documents):
     # Tokenize the string into individual words
     words = nltk.word_tokenize(doc)
@@ -33,10 +46,12 @@ for i, doc in enumerate(documents):
     # Replace the original string with the filtered string in the documents list
     documents[i] = doc_filtered
 
+
 # Train the Top2Vec model
 min_count = 5
 model = Top2Vec(documents, ngram_vocab=True, ngram_vocab_args = {'min_count': min_count, 'connector_words': phrases.ENGLISH_CONNECTOR_WORDS}, speed='deep-learn', workers=8)
 
+
 # Save the model to a file
-model.save('parec-backend/app/data/t2v_with_n_grams_and_args')
+model.save('parec-backend/app/data/preprocessing/t2v_large')
 

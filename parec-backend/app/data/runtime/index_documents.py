@@ -20,19 +20,21 @@ def load_to_ES(path_to_data: str, index_name: str, es_url: str):
         ConnectionError: If there is a problem connecting to Elasticsearch.
 
     """
-
+    # open data set
     with open(path_to_data) as f:
         data = json.load(f)
 
     # index each document
-    count = len(data["root"]) 
-    index_url = f"{es_url}/{index_name}/_doc"          #"http://localhost:9200/{}/_doc".format(indexname) 
+    index_url = f"{es_url}/{index_name}/_doc"       
     headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
 
+    # iterate over each doc and post to ES
+    count = len(data["root"]) 
     for each in range(count):
         try:
             doc = data['root'][each]
-            r = requests.post(index_url, data=json.dumps(doc), headers=headers, auth=("elastic","changeme"))#, verify=cafile
+            #r = requests.post(index_url, data=json.dumps(doc), headers=headers)
+            r = requests.post(index_url, data=json.dumps(doc), headers=headers, auth=("elastic","changeme"))
         except requests.exceptions.RequestException as e:
             raise ConnectionError(f"Failed to index document: {doc}. {str(e)}")
         
@@ -40,4 +42,4 @@ def load_to_ES(path_to_data: str, index_name: str, es_url: str):
     print("Done!")
 
 
-#load_to_ES("parec-backend/app/data/arxiv_reduced_modified.json", "testmodified", "http://localhost:9200")
+#load_to_ES("parec-backend/app/data/runtime/arxiv_large.json", "arxiv_large", "http://localhost:9200")
