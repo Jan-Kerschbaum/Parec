@@ -42,4 +42,4 @@ def load_to_ES(path_to_data: str, index_name: str, es_url: str):
     print("Done!")
 
 
-#load_to_ES("parec-backend/app/data/runtime/arxiv_large.json", "arxiv_large", "http://localhost:9200")
+#load_to_ES("parec-backend/app/data/runtime/arxiv_with_stats.json", "arxiv_with_stats", "http://localhost:9200")

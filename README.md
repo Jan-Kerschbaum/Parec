@@ -87,7 +87,6 @@ This can take some time ⏳
 
 
 
-
 ***
 ## 🏯 Code-Structure <a name="code-structure"></a>
 
@@ -128,11 +127,11 @@ The dataset we use is provided by [kaggle](https://www.kaggle.com/datasets/Corne
 
 ### Preprocessing
 
-Due to resource reasons, we confine ourselves to papers from computer science [categories](parec-backend/app/data/cs_categories.json) from the years 2016-2022, resulting in 11932 documents.
+We confine ourselves to papers from the two arxiv computer science and statistics [categories](parec-backend/app/data/preprocessing/categories.json). Due to resource reasons, but also to ensure an up-to-date database for our paper recommender, we only keep papers from the years 2013-2023, resulting in 16127 documents in total.
 
 We further only use certain keys that are relevant for our task, namely `abstract`, `title`, `author`, `year` `category` and `paper_id`. 
 
-✂️ We filter out stopwords via [NLTK](https://www.nltk.org/search.html?q=stopwords&check_keywords=yes&area=default) and punctuation via the Python [string](https://docs.python.org/3/library/string.html) module. Lemmatization is not applied to maintain the expressiveness of terms and topics.
+✂️ We apply lemmatization and filter out stopwords via [NLTK](https://www.nltk.org/search.html?q=stopwords&check_keywords=yes&area=default) and punctuation via the Python [string](https://docs.python.org/3/library/string.html) module. This helps us improve the quality of our dataset by standardizing the representation of words, reducing the complexity and redundancy of the data, and simplifying the analysis process by reducing the number of unique words.
 
 ### Data Point Example
 

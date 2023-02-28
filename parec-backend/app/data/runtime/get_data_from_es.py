@@ -48,12 +48,12 @@ def get_data_from_elastic(index_name: str, save_df=False):
 
     if save_df:
         directory = 'parec-backend/app/data/preprocessing'
-        filename = 'large_data.csv'
+        filename = 'lemmatized_with_stats.csv'
         if not os.path.exists(directory):
             os.makedirs(directory)
         df.to_csv(os.path.join(directory, filename), index=False)
 
     return df
 
-# df = get_data_from_elastic("arxiv_large", save_df=True)
+# df = get_data_from_elastic("arxiv_with_stats", save_df=True)
 # print(df.head())
