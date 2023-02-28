@@ -18,7 +18,7 @@ def run_paper_search(term_graph, query, max_relevance):
             papers (list): List of lists, each element in the list contains a name, authors and id of a paper
     '''
     relevance_metric = construct_relevance_metric(term_graph, query, max_relevance)
-    dataset = get_dataset("arxiv_data_modified")
+    dataset = get_dataset("arxiv_large")
     paper_relevances = {}
     for index, datapoint in dataset.iterrows():
         paper_relevances[datapoint["paper_id"]] = get_paper_relevance(relevance_metric, datapoint["abstract"]) #Use ID for key?

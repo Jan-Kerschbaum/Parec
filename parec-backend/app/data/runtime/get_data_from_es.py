@@ -15,20 +15,21 @@ def get_data_from_elastic(index_name: str, save_df=False):
     Returns:
         pd.DataFrame: A Pandas DataFrame containing the retrieved data.
     """
-    # Instantiate a client instance
+    # instantiate a client instance
+    #es = Elasticsearch("http://localhost:9200")
     es = Elasticsearch("http://es:9200", http_auth=('elastic', 'changeme'))
 
-    # Define the Elasticsearch query to retrieve all documents in the index
+    # define the Elasticsearch query to retrieve all documents in the index
     query = {
         "query": {
             "match_all": {}
         }
     }
 
-    # Use the Elasticsearch scan API to retrieve all documents in the index
+    # use the Elasticsearch scan API to retrieve all documents in the index
     docs = scan(client=es, query=query, index=index_name, scroll="1m")
 
-    # Create a list of dictionaries containing only the desired fields
+    # create a list of dictionaries containing only the desired fields
     data = []
     for doc in docs:
         source = doc["_source"]
@@ -46,13 +47,13 @@ def get_data_from_elastic(index_name: str, save_df=False):
     df = pd.DataFrame(data)
 
     if save_df:
-        directory = 'data'
-        filename = 'elasticsearch_data.csv'
+        directory = 'parec-backend/app/data/preprocessing'
+        filename = 'large_data.csv'
         if not os.path.exists(directory):
             os.makedirs(directory)
         df.to_csv(os.path.join(directory, filename), index=False)
 
     return df
 
-# df = get_data_from_elastic()
+# df = get_data_from_elastic("arxiv_large", save_df=True)
 # print(df.head())

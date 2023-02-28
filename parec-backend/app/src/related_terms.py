@@ -4,7 +4,7 @@ import nltk
 from nltk.corpus import stopwords
 
 #Constants
-MODEL_FILE_PATH = r"./app/data/preprocessing/t2v_with_n_grams_and_args"
+MODEL_FILE_PATH = r"./app/data/preprocessing/t2v_large"
 MODEL = None
 
 #Function that takes in a string and an int. Performs seach recursively up to depth times.
