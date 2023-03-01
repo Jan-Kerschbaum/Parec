@@ -19,6 +19,7 @@ from pydantic import BaseModel
 import json
 from app.src.controller import run_backend
 from .data.runtime.index_documents import load_to_ES
+from time import time
 
 origins = ["http://frontend:80"]  # origin for deployment in docker
 
@@ -62,7 +63,8 @@ def query_handler(query: str = Form(...)):
     """
     Method to handle POST requests from frontend for main functionality. In the body, query should contain the search term.
     """
-    function_result = test_function(query)
+
+    begin_time = time()
 
     edges, papers = run_backend(query)
 
@@ -73,7 +75,10 @@ def query_handler(query: str = Form(...)):
 
     papers_json = json.dumps(papers_json)
 
-    return Response(content=json.dumps({"result": function_result, "graph": edges, "papers": papers_json}), status_code=200)
+    time_delta = time() - begin_time
+    timer_text = "Query took {0:3.2f}s".format(time_delta) 
+
+    return Response(content=json.dumps({"result": timer_text, "graph": edges, "papers": papers_json}), status_code=200)
 
 
 @app.get('/')
