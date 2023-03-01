@@ -147,7 +147,7 @@
 			
 		}).fail(function(data){
 			//Should only fail from API implementation on a 422 code (unprocessable entity)
-			result_text = "Empty Query Field"
+			result_text = "The query field is empty or an error occured."
 			nodes.clear()
 			edges.clear()
 		})

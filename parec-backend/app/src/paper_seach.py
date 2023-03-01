@@ -21,7 +21,7 @@ def run_paper_search(term_graph, query, max_relevance):
     dataset = get_dataset("arxiv_with_stats")
     paper_relevances = {}
     for index, datapoint in dataset.iterrows():
-        paper_relevances[datapoint["paper_id"]] = get_paper_relevance(relevance_metric, datapoint["abstract"]) #Use ID for key?
+        paper_relevances[datapoint["paper_id"]] = get_paper_relevance(relevance_metric, datapoint["abstract"])
     #Sort by values, return metadata of those papers
     papers = []
     paper_tupels = list(paper_relevances.items())
@@ -100,11 +100,9 @@ def get_paper_relevance(relevance_list, paper: str):
     # Especially, the discount from the nth appearance to the (n+1)th grows with n
     # So we have a big score difference between the term being mentioned 2 (~1.7 * relevance) and 5 (~2.6 * relevance), but less between 102 (~5.62 * r) and 105 (5.65 * r)
     # This seems a reasonable compromise between giving a higher score for a term being mentioned more often, and potentially overvaluing a single term 
-    #
-    # Consider using bases other than e for the logarithm to scale score for repeats fo the word
     score = 0
     for term in relevance_list.keys():
-        # We're only counting exact matches here, we'll either have to adjust this later or preprocess papers
+        # We're only counting exact matches here
         appearances = paper.count(term)
         if appearances == 0:
             continue

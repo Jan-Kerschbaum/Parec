@@ -4,11 +4,6 @@ from app.src.paper_seach import run_paper_search
 import json
 import configparser
 
-#Constants
-#SEARCH_DEPTH = 3
-#MAX_RELEVANCE = 10
-#WORDS_PER_SEARCH = 3
-
 #Main control function for backend operation
 #Return values:
 #   edges: JSON object representing edge list of term graph
