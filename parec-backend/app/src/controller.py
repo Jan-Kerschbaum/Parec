@@ -1,6 +1,6 @@
 #File to implement the main controller function for backend operation, to be called from main.py
 from app.src.related_terms import get_term_graph
-from app.src.paper_seach import run_paper_search
+from app.src.paper_search import run_paper_search
 import json
 import configparser
 
