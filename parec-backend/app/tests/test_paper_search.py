@@ -1,5 +1,5 @@
 import unittest
-from src.paper_seach import run_paper_search, get_paper_relevance, construct_relevance_metric
+from src.paper_search import run_paper_search, get_paper_relevance, construct_relevance_metric
 from math import log as ln
 
 class TestCases(unittest.TestCase):
