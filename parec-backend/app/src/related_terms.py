@@ -34,7 +34,6 @@ def get_term_graph(query: str, depth: int, words_per_search, wps_decay):
         for term in candidate_terms:
             # No need to search for terms whose results we already have
             if not term in term_graph.keys():
-                #term_graph[term] = find_related_terms(term, words_per_search)
                 found_terms = find_related_terms(term)
                 known_terms = term_graph.keys()
                 found_terms = found_terms.tolist()
@@ -63,8 +62,6 @@ def find_related_terms_query(query: str, words_per_search):
     try:
         related_words, _ = MODEL.similar_words(keywords=[query], num_words=words_per_search)
     except:
-        #topic_words, _, _, _ = MODEL.query_topics(query=query, num_topics=1)
-        #related_words = topic_words[0][:words_per_search]
         topics_to_query = 4
         topic_words, word_scores, topic_scores, _ = MODEL.query_topics(query=query, num_topics=topics_to_query)
         tuples = []
@@ -75,16 +72,6 @@ def find_related_terms_query(query: str, words_per_search):
         tuples = tuples[:words_per_search]
         related_words = [t[0] for t in tuples]
     return related_words
-
-    # load_model(False)
-    # related_topics = []
-    # try:
-    #     related_topics, _, _, _ = MODEL.search_topics(keywords=[query], num_topics=WORDS_PER_SEARCH)
-    # except:
-    #     topic_words, _, _, _ = MODEL.search_topics(keywords=[query], num_topics=1)
-    #     related_topics = topic_words[0][:WORDS_PER_SEARCH]
-    # #related_topics = [topic for topic in related_topics if topic.lower() not in stop_words]
-    # return related_topics
 
 
 
@@ -103,14 +90,9 @@ def find_related_terms(source: str):
 
     '''
     load_model(False)
-    # Model is Top2Vec model used for clustering in preprocessing
     related_words, _ = MODEL.similar_words(keywords=[source], num_words=50)
     return related_words
 
-    # load_model(False)
-    # # Model is Top2Vec model used for clustering in preprocessing    
-    # related_topics, _, _, _ = MODEL.search_topics(keywords=[source], num_topics=WORDS_PER_SEARCH)
-    # return related_topics
 
 
 
@@ -127,8 +109,3 @@ def load_model(override: bool) -> None:
     global MODEL
     if MODEL == None or override:
         MODEL = Top2Vec.load(MODEL_FILE_PATH)
-
-    # global MODEL
-    # if MODEL is None or override:
-    #     stop_words = set(stopwords.words('english'))
-    #     MODEL = Top2Vec.load(MODEL_FILE_PATH, stop_words=stop_words)
