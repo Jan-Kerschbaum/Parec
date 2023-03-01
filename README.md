@@ -11,22 +11,22 @@ This project is part of the *Data Science for Text Analytics* class of Heidelber
 
 ***
 ## Table of contents
-1. [Introduction](#introduction)
-2. 🛠️ [Set Up](#set-up)
-3. ⚙️  [Usage](#usage)
+1. ➡️ [Introduction](#introduction)
+1. 🛠️ [Set Up](#set-up)
+2. ⚙️  [Usage](#usage)
+3. 🎥 [Demo](#demo)
 4. 🏯 [Code Structure](#code-structure)
     1. [Backend](#backend)
     2. [Frontend](#frontend)
 5. 🗃️ [Data](#data)
 6. 💻 [Model Components](#model-components)
-7. 🎥 [Demo](#demo)
-8. 📊 [Evaluation](#evaluation)
-9. 📝 [Contributions](#contributions)
+7. 📊 [Evaluation](#evaluation)
+8. 📝 [Contributions](#contributions)
 
 ***
-## 🛠️ Introduction <a name="introduction"></a>
+## ➡️ Introduction <a name="introduction"></a>
 
-Parec is a web application that offers a comprehensive solution for knowledge discovery and research recommendations. By taking in a user query on a particular topic, it quickly generates a knowledge graph of related concepts and recommends the top cientific articles from the [arXiv](https://arxiv.org/) database to match the user's interests. Parec streamlines the process of finding relevant information and provides an innovative solution for researchers and students alike.
+Parec is a web application that offers a comprehensive solution for knowledge discovery and research recommendations. By taking in a user query on a particular topic, it quickly generates a knowledge graph of related concepts and recommends the top scientific articles from the [arXiv](https://arxiv.org/) database to match the user's interests. Parec streamlines the process of finding relevant information and provides an innovative solution for researchers and students alike.
 
 The application consists of a backend and a frontend. The backend is responsible for retrieving data from [Elasticsearch](https://www.elastic.co/de/) and providing it to the frontend via a REST API. The frontend is a web application that allows users to search and view recommended articles.
 
@@ -75,7 +75,19 @@ This can take some time ⏳
 
 1. Use the search bar to enter a topic you are interested in. (ℹ️ Note that the current version is restricted to topics related to computer science.)
 2. Click the `Search` button.
-2. On the right, you find recommended papers based on your topic. Click on a link to view the paper on [arXiv](https://arxiv.org/).
+
+➡️ On the left you'll find a graph of topics and terms related to the one you entered.
+➡️ On the right, you find your personal list of recommended papers based on the topic. Click on a link to view the paper on [arXiv](https://arxiv.org/).
+
+⚠️ Please re-load your page before you enter a new search query.
+
+
+***
+## 🎥 Demo <a name="demo"></a>
+
+<img src="parec-backend/app/data/visualizations/demo.png" width="90%" height="90%">
+
+
 
 ***
 ## 🏯 Code-Structure <a name="code-structure"></a>
@@ -117,11 +129,11 @@ The dataset we use is provided by [kaggle](https://www.kaggle.com/datasets/Corne
 
 ### Preprocessing
 
-Due to resource reasons, we confine ourselves to papers from computer science [categories](parec-backend/app/data/cs_categories.json) from the years 2016-2022, resulting in 11932 documents.
+We confine ourselves to papers from the two arxiv computer science and statistics [categories](parec-backend/app/data/preprocessing/categories.json). Due to resource reasons, but also to ensure an up-to-date database for our paper recommender, we only keep papers from the years 2013-2023, resulting in 16127 documents in total.
 
 We further only use certain keys that are relevant for our task, namely `abstract`, `title`, `author`, `year` `category` and `paper_id`. 
 
-✂️ We filter out stopwords via [NLTK](https://www.nltk.org/search.html?q=stopwords&check_keywords=yes&area=default) and punctuation via the Python [string](https://docs.python.org/3/library/string.html) module. Lemmatization is not applied to maintain the expressiveness of terms and topics.
+✂️ We apply lemmatization and filter out stopwords via [NLTK](https://www.nltk.org/search.html?q=stopwords&check_keywords=yes&area=default) and punctuation via the Python [string](https://docs.python.org/3/library/string.html) module. This helps us improve the quality of our dataset by standardizing the representation of words, reducing the complexity and redundancy of the data, and simplifying the analysis process by reducing the number of unique words.
 
 ### Data Point Example
 
@@ -134,7 +146,7 @@ Our application clusters papers using [Top2Vec](https://github.com/ddangelov/Top
 
 ### 1. 📈 Top2Vec:
 
-Top2Vec is a topic modeling algorithm that uses a shared embedding for phrases and documents to generate topic vectors on a given corpus. It starts by training an embedding model on the corpus and then clusters the embedded vectors to generate topic vectors. The number of topics is not specified beforehand but is instead inferred from the data. Top2Vec is known for its ability to handle large datasets efficiently and is especially useful for document clustering and topic exploration tasks.
+[Top2Vec](https://github.com/ddangelov/Top2Vec) is a topic modeling algorithm that uses a shared embedding for phrases and documents to generate topic vectors on a given corpus. It starts by training an embedding model on the corpus and then clusters the embedded vectors to generate topic vectors. The number of topics is not specified beforehand but is instead inferred from the data. Top2Vec is known for its ability to handle large datasets efficiently and is especially useful for document clustering and topic exploration tasks.
 
 We train Top2Vec on the abstracts in our dataset and set `ngram_vocab=True` in order to add phrases to our topic descriptions. E.g. related terms for the topic `reinfocement learning` are the following:
 
@@ -151,16 +163,11 @@ Our paper search algorithm utilizes our term graph based on the Top2Vec model to
 
 Elasticsearch is a powerful search and analytics engine that is often used as a data store for applications. It is designed to store, search, and analyze large volumes of data quickly and in near real-time. Elasticsearch provides a RESTful API that enables you to search and retrieve data in a variety of ways. We use it to store our data and use [Kibana](https://www.elastic.co/de/kibana/) for visualizations: 
 
-<img src="parec-backend/app/data/visualizations/computer_science_categories.png" width="90%" height="90%">
+<img src="parec-backend/app/data/visualizations/abstract_categories.png" width="90%" height="90%">
 
 ### 4. 🌐 Svelte:
 
 The Parec application uses [Svelte](https://svelte.dev/) to create the user interface for the web application. Svelte is a front-end JavaScript framework that allows developers to create reactive and dynamic user interfaces by compiling the application code to highly optimized vanilla JavaScript code.
-
-***
-## 🎥 Demo <a name="demo"></a>
-
-<img src="parec-backend/app/data/visualizations/demo.png" width="90%" height="90%">
 
 
 ***
@@ -171,6 +178,8 @@ We perform two types of evaluation:
 1. We evaluate our model against a random baseline. 
 
 2. We also perform a qualitative evaluation where we subjectively assess our results. To do this, one team member entered 5 different search queries and sent the top three recommended abstract links to another team member. This team member then went through the abstracts and noted the most relevant terms. These terms were then compared to those provided by the Parec application in the knowledge graph for each query.
+
+💡 Find detailed evaluation results in the [evaluation](parec-backend/app/data/evaluation/Evaluation.md) directory.
 
 
 ***

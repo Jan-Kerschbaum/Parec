@@ -10,8 +10,10 @@
     
     - **🗂️ [`tests/`](parec-backend/app/tests):** This directory contains the test functions for the backend code.
 
-- **📱 [`main.py`](parec-backend/main.py):** This file defines the FastAPI application and its routes, which specify the URL endpoints that the application can respond to and the corresponding actions it should take when those endpoints are requested.
+    - **📱 [`main.py`](parec-backend/app/main.py):** This file defines the FastAPI application and its routes, which specify the URL endpoints that the application can respond to and the corresponding actions it should take when those endpoints are requested.
 
 - **⚙️ [`requirements.txt`](parec-backend/requirements.txt):** This file contains the list of dependencies required to run the backend code.
 
-- **🛳️ [`Dockerfile`](parec-backend/Dockerfile):** This Dockerfile installs the dependencies listed in [`requirements.txt`](parec-backend/requirements.txt), copies the [`app/`](parec-backend/app/data) directory to the container, and then runs the `uvicorn` server.
+- **🛳️ [`Dockerfile`](parec-backend/Dockerfile):** This Dockerfile installs the dependencies listed in `requirements.txt`](parec-backend/requirements.txt), copies the [`app/`](parec-backend/app/data) directory to the container, and then runs the `uvicorn` server.
+
+- **⚙️ [`hyperparameters.ini`](parec-backend/hyperparameters.ini):** This file contains hyperparameters for our related term graph.

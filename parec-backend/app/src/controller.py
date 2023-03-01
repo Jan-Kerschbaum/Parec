@@ -4,11 +4,6 @@ from app.src.paper_seach import run_paper_search
 import json
 import configparser
 
-#Constants
-#SEARCH_DEPTH = 3
-#MAX_RELEVANCE = 10
-#WORDS_PER_SEARCH = 3
-
 #Main control function for backend operation
 #Return values:
 #   edges: JSON object representing edge list of term graph
@@ -29,8 +24,9 @@ def run_backend(query: str):
     search_depth = int(config["DEFAULT"]["SearchDepth"])
     words_per_search = int(config["DEFAULT"]["WordsPerSearch"])
     max_relevance = int(config["DEFAULT"]["MaxRelevance"])
+    wps_decay = int(config["DEFAULT"]["WPS_Decay"])
     # Get term graph for query
-    term_graph = get_term_graph(query, search_depth, words_per_search)
+    term_graph = get_term_graph(query, search_depth, words_per_search, wps_decay)
     papers = run_paper_search(term_graph, query, max_relevance)
     #Construct edges from term graph
     running_id = 0
