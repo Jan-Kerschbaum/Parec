@@ -45,7 +45,7 @@ for i, doc in enumerate(documents):
     # Lemmatize words
     lemmatized_words = [lemmatizer.lemmatize(word) for word in words_filtered]
     # Re-join the filtered words into a single string
-    doc_filtered = ' '.join(words_filtered)
+    doc_filtered = ' '.join(lemmatized_words)
     # Replace the original string with the filtered string in the documents list
     documents[i] = doc_filtered
 
@@ -55,5 +55,5 @@ min_count = 5
 model = Top2Vec(documents, ngram_vocab=True, ngram_vocab_args = {'min_count': min_count, 'connector_words': phrases.ENGLISH_CONNECTOR_WORDS}, speed='deep-learn', workers=8)
 
 # Save the model to a file
-model.save('parec-backend/app/data/preprocessing/t2v_large_lemmatized_with_stats')
+model.save('parec-backend/app/data/preprocessing/t2v_lemmatized_with_stats')
 

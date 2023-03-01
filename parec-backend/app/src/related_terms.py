@@ -8,7 +8,7 @@ import numpy as np
 MODEL_FILE_PATH = r"./app/data/preprocessing/t2v_lemmatized_with_stats"
 MODEL = None
 
-#Function that takes in a string and an int. Performs seach recursively up to depth times.
+#Function that takes in a string and an int. Performs search recursively up to depth times.
 #To be called from controller
 #Return values:
 #   term_graph: Dictionary, keys = terms, values = related terms found for corresponding key
@@ -27,7 +27,7 @@ def get_term_graph(query: str, depth: int, words_per_search, wps_decay):
     term_graph = {}
     term_graph[query] = find_related_terms_query(query, words_per_search)
     for i in range(depth):
-        # Flattening the list of values in the dicitonary for all keys. Each present term is a candidate for a potential search
+        # Flattening the list of values in the dictionary for all keys. Each present term is a candidate for a potential search
         #candidate_terms = set(sum(term_graph.values(), []))
         candidate_terms = list(term_graph.values())
         candidate_terms = [item for sublist in candidate_terms for item in sublist]
