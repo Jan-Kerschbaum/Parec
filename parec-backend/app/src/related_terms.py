@@ -53,8 +53,17 @@ def find_related_terms_query(query: str, words_per_search):
     try:
         related_words, _ = MODEL.similar_words(keywords=[query], num_words=words_per_search)
     except:
-        topic_words, _, _, _ = MODEL.query_topics(query=query, num_topics=1)
-        related_words = topic_words[0][:words_per_search]
+        #topic_words, _, _, _ = MODEL.query_topics(query=query, num_topics=1)
+        #related_words = topic_words[0][:words_per_search]
+        topics_to_query = 4
+        topic_words, word_scores, topic_scores, _ = MODEL.query_topics(query=query, num_topics=topics_to_query)
+        tuples = []
+        for i in range(len(topic_words)):
+            for j in range(len(topic_words[i])):
+                tuples.append((topic_words[i][j], word_scores[i][j] * topic_scores[i])) # Assumes that ws * ts is a good approximation for similarity between query and word
+        tuples.sort(key=lambda x: x[1], reverse=True)
+        tuples = tuples[:words_per_search]
+        related_words = [t[0] for t in tuples]
     return related_words
 
     # load_model(False)
