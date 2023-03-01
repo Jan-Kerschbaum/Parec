@@ -2,6 +2,7 @@
 from top2vec import Top2Vec
 import nltk
 from nltk.corpus import stopwords
+import numpy as np
 
 #Constants
 MODEL_FILE_PATH = r"./app/data/preprocessing/t2v_large"
@@ -11,7 +12,7 @@ MODEL = None
 #To be called from controller
 #Return values:
 #   term_graph: Dictionary, keys = terms, values = related terms found for corresponding key
-def get_term_graph(query: str, depth: int, words_per_search):
+def get_term_graph(query: str, depth: int, words_per_search, wps_decay):
     '''
         Function that builds the term graph. It searches recursively up to depth times.
 
@@ -33,8 +34,17 @@ def get_term_graph(query: str, depth: int, words_per_search):
         for term in candidate_terms:
             # No need to search for terms whose results we already have
             if not term in term_graph.keys():
-                term_graph[term] = find_related_terms(term, words_per_search)
-    # ToDo: Remove duplicate terms?
+                #term_graph[term] = find_related_terms(term, words_per_search)
+                found_terms = find_related_terms(term)
+                known_terms = term_graph.keys()
+                found_terms = found_terms.tolist()
+                for known_term in known_terms:
+                    if known_term in found_terms:
+                        found_terms.remove(known_term)
+                found_terms = found_terms[:words_per_search]
+                term_graph[term] = found_terms
+        # ToDo: Remove duplicate terms?
+        words_per_search -= wps_decay
     return term_graph
 
 
@@ -81,7 +91,7 @@ def find_related_terms_query(query: str, words_per_search):
 #Function that finds terms related to source
 #Return values:
 #   related_terms: List of terms found for source
-def find_related_terms(source: str, words_per_search):
+def find_related_terms(source: str):
     '''
         Function for finding related terms with a Top2Vec model
 
@@ -94,7 +104,7 @@ def find_related_terms(source: str, words_per_search):
     '''
     load_model(False)
     # Model is Top2Vec model used for clustering in preprocessing
-    related_words, _ = MODEL.similar_words(keywords=[source], num_words=words_per_search)
+    related_words, _ = MODEL.similar_words(keywords=[source], num_words=50)
     return related_words
 
     # load_model(False)
