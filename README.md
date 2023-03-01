@@ -87,7 +87,6 @@ This can take some time ⏳
 
 
 
-
 ***
 ## 🏯 Code-Structure <a name="code-structure"></a>
 
@@ -128,11 +127,11 @@ The dataset we use is provided by [kaggle](https://www.kaggle.com/datasets/Corne
 
 ### Preprocessing
 
-Due to resource reasons, we confine ourselves to papers from computer science [categories](parec-backend/app/data/cs_categories.json) from the years 2016-2022, resulting in 11932 documents.
+We confine ourselves to papers from the two arxiv computer science and statistics [categories](parec-backend/app/data/preprocessing/categories.json). Due to resource reasons, but also to ensure an up-to-date database for our paper recommender, we only keep papers from the years 2013-2023, resulting in 16127 documents in total.
 
 We further only use certain keys that are relevant for our task, namely `abstract`, `title`, `author`, `year` `category` and `paper_id`. 
 
-✂️ We filter out stopwords via [NLTK](https://www.nltk.org/search.html?q=stopwords&check_keywords=yes&area=default) and punctuation via the Python [string](https://docs.python.org/3/library/string.html) module. Lemmatization is not applied to maintain the expressiveness of terms and topics.
+✂️ We apply lemmatization and filter out stopwords via [NLTK](https://www.nltk.org/search.html?q=stopwords&check_keywords=yes&area=default) and punctuation via the Python [string](https://docs.python.org/3/library/string.html) module. This helps us improve the quality of our dataset by standardizing the representation of words, reducing the complexity and redundancy of the data, and simplifying the analysis process by reducing the number of unique words.
 
 ### Data Point Example
 
@@ -145,7 +144,7 @@ Our application clusters papers using [Top2Vec](https://github.com/ddangelov/Top
 
 ### 1. 📈 Top2Vec:
 
-Top2Vec is a topic modeling algorithm that uses a shared embedding for phrases and documents to generate topic vectors on a given corpus. It starts by training an embedding model on the corpus and then clusters the embedded vectors to generate topic vectors. The number of topics is not specified beforehand but is instead inferred from the data. Top2Vec is known for its ability to handle large datasets efficiently and is especially useful for document clustering and topic exploration tasks.
+[Top2Vec](https://github.com/ddangelov/Top2Vec) is a topic modeling algorithm that uses a shared embedding for phrases and documents to generate topic vectors on a given corpus. It starts by training an embedding model on the corpus and then clusters the embedded vectors to generate topic vectors. The number of topics is not specified beforehand but is instead inferred from the data. Top2Vec is known for its ability to handle large datasets efficiently and is especially useful for document clustering and topic exploration tasks.
 
 We train Top2Vec on the abstracts in our dataset and set `ngram_vocab=True` in order to add phrases to our topic descriptions. E.g. related terms for the topic `reinfocement learning` are the following:
 

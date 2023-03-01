@@ -33,7 +33,7 @@ app.add_middleware(
 
 # Initialize ES data
 try:
-    load_to_ES("./app/data/runtime/arxiv_large.json", "arxiv_large", "http://es:9200")
+    load_to_ES("./app/data/runtime/arxiv_with_stats.json", "arxiv_with_stats", "http://es:9200")
 except FileNotFoundError:
     print(f"File was not found at path {os.path.abspath(__file__)}")
 
