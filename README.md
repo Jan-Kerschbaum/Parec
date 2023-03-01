@@ -11,7 +11,7 @@ This project is part of the *Data Science for Text Analytics* class of Heidelber
 
 ***
 ## Table of contents
-1. [Introduction](#introduction)
+1. ➡️ [Introduction](#introduction)
 1. 🛠️ [Set Up](#set-up)
 2. ⚙️  [Usage](#usage)
 3. 🎥 [Demo](#demo)
@@ -24,7 +24,7 @@ This project is part of the *Data Science for Text Analytics* class of Heidelber
 8. 📝 [Contributions](#contributions)
 
 ***
-## 🛠️ Introduction <a name="introduction"></a>
+## ➡️ Introduction <a name="introduction"></a>
 
 Parec is a web application that offers a comprehensive solution for knowledge discovery and research recommendations. By taking in a user query on a particular topic, it quickly generates a knowledge graph of related concepts and recommends the top scientific articles from the [arXiv](https://arxiv.org/) database to match the user's interests. Parec streamlines the process of finding relevant information and provides an innovative solution for researchers and students alike.
 
@@ -78,6 +78,8 @@ This can take some time ⏳
 
 ➡️ On the left you'll find a graph of topics and terms related to the one you entered.
 ➡️ On the right, you find your personal list of recommended papers based on the topic. Click on a link to view the paper on [arXiv](https://arxiv.org/).
+
+⚠️ Please re-load your page before you enter a new search query.
 
 
 ***
@@ -161,7 +163,7 @@ Our paper search algorithm utilizes our term graph based on the Top2Vec model to
 
 Elasticsearch is a powerful search and analytics engine that is often used as a data store for applications. It is designed to store, search, and analyze large volumes of data quickly and in near real-time. Elasticsearch provides a RESTful API that enables you to search and retrieve data in a variety of ways. We use it to store our data and use [Kibana](https://www.elastic.co/de/kibana/) for visualizations: 
 
-<img src="parec-backend/app/data/visualizations/computer_science_categories.png" width="90%" height="90%">
+<img src="parec-backend/app/data/visualizations/abstract_categories.png" width="90%" height="90%">
 
 ### 4. 🌐 Svelte:
 
@@ -176,6 +178,8 @@ We perform two types of evaluation:
 1. We evaluate our model against a random baseline. 
 
 2. We also perform a qualitative evaluation where we subjectively assess our results. To do this, one team member entered 5 different search queries and sent the top three recommended abstract links to another team member. This team member then went through the abstracts and noted the most relevant terms. These terms were then compared to those provided by the Parec application in the knowledge graph for each query.
+
+💡 Find detailed evaluation results in the [evaluation](parec-backend/app/data/evaluation/Evaluation.md) directory.
 
 
 ***
