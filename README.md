@@ -148,7 +148,7 @@ Our application clusters papers using [Top2Vec](https://github.com/ddangelov/Top
 
 [Top2Vec](https://github.com/ddangelov/Top2Vec) is a topic modeling algorithm that uses a shared embedding for phrases and documents to generate topic vectors on a given corpus. It starts by training an embedding model on the corpus and then clusters the embedded vectors to generate topic vectors. The number of topics is not specified beforehand but is instead inferred from the data. Top2Vec is known for its ability to handle large datasets efficiently and is especially useful for document clustering and topic exploration tasks.
 
-We train Top2Vec on the abstracts in our dataset and set `ngram_vocab=True` in order to add phrases to our topic descriptions. E.g. related terms for the topic `reinfocement learning` are the following:
+We train Top2Vec on the merged abstracts and titles of our dataset and set `ngram_vocab=True` in order to add phrases to our topic descriptions. The wordcloud below shows for example the related terms found for the topic `reinforcement learning`:
 
 <img src="parec-backend/app/data/visualizations/reinforcement_learning_terms.png" width="90%" height="90%">
 
