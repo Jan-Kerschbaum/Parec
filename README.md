@@ -79,8 +79,6 @@ This can take some time ⏳
 ➡️ On the left you'll find a graph of topics and terms related to the one you entered.
 ➡️ On the right, you find your personal list of recommended papers based on the topic. Click on a link to view the paper on [arXiv](https://arxiv.org/).
 
-⚠️ Please re-load your page before you enter a new search query.
-
 
 ***
 ## 🎥 Demo <a name="demo"></a>
